@@ -5,7 +5,11 @@ public class Player {
     int id, specieId, energy;
     String name;
 
+    public Player() {
 
+    }
+
+    //CONSTRUTOR
 
     int getId(){
         return id;
@@ -24,12 +28,5 @@ public class Player {
     }
 
     //FUNCOES PARA OBTER QUALQUER INFO DO PLAYER
-
-
-
-
-    public Player() {
-
-    }
 
 }
