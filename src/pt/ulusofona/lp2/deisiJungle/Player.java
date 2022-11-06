@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 public class Player {
 
     int id, specieId, energy;
+
     String name;
 
     public Player() {
@@ -28,5 +29,13 @@ public class Player {
     }
 
     //FUNCOES PARA OBTER QUALQUER INFO DO PLAYER
+
+
+
+
+
+
+
+
 
 }

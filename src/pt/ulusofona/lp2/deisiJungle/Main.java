@@ -1,12 +1,15 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Hello world!");
+        GameManager game = new GameManager();
 
 
-        System.out.println("adeus");
-        System.out.println("ola");
+        System.out.println(Arrays.deepToString(game.getSpecies()));
+
+
     }
 }
