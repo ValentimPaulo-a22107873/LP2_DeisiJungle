@@ -13,4 +13,16 @@ public class Specie {
         this.image = image;
         this.specieIdentifier = specieIdentifier;
     }
+
+    String getName(){
+        return name;
+    }
+
+    String getImage(){
+        return image;
+    }
+
+    char getIdentifier(){
+        return specieIdentifier;
+    }
 }

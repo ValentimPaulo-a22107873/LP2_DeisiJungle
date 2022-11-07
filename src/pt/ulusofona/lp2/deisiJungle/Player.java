@@ -2,12 +2,18 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Player {
 
-    int id, specieId, energy, position;
-
+    int id, energy, position;
+    char specieId;
     String name;
 
     public Player() {
+    }
 
+    public Player(int id, char specieId, int energy, String name) {
+        this.id = id;
+        this.specieId = specieId;
+        this.energy = energy;
+        this.name = name;
     }
 
     //CONSTRUTORES
@@ -17,7 +23,7 @@ public class Player {
         return id;
     }
 
-    int getSpecieId(){
+    char getSpecieId(){
         return specieId;
     }
 
