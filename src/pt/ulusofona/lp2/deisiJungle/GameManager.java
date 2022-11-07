@@ -14,7 +14,16 @@ public class GameManager {
     Specie tarzan = new Specie("Tarzan", "tarzan.png", 'Z');
     Specie turtle = new Specie("Tartaruga", "turtle.png",'T');
     Specie bird = new Specie("Pássaro", "bird.png",'P');
-    ArrayList<Specie> species = new ArrayList<>(Arrays.asList(elephant,lion,tarzan,turtle,bird));
+    ArrayList<Specie> species = new ArrayList<>()
+    {
+        {
+            add(elephant);
+            add(lion);
+            add(tarzan);
+            add(turtle);
+            add(bird);
+        }
+    };
 
     //PLAYERS
     ArrayList<Player> players = new ArrayList<>();
