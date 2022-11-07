@@ -6,6 +6,9 @@ public class Map {
 
     ArrayList<Square> map;
 
+    public Map(){
+    }
+
     ArrayList<Square> generateMap(int squares){
 
         for(int i=1; i<=squares; i++){

@@ -47,4 +47,8 @@ public class Square {
         return result;
     }
 
+    void addPlayer(Player player){
+        players.add(player);
+    }
+
 }

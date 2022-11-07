@@ -2,8 +2,9 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Player {
 
-    int id, energy, position;
+    int id, energy, position=1;
     char specieId;
+    Specie specie;
     String name;
 
     public Player() {
@@ -16,8 +17,19 @@ public class Player {
         this.name = name;
     }
 
+    public Player(int id, int energy, Specie specie, String name) {
+        this.id = id;
+        this.energy = energy;
+        this.specie = specie;
+        this.name = name;
+    }
+
+
     //CONSTRUTORES
 
+    Specie getSpecie(){
+        return specie;
+    }
 
     int getId(){
         return id;

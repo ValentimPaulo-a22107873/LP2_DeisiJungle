@@ -21,7 +21,7 @@ public class GameManager {
     HashMap<Integer, Player> playersById = new HashMap<>();
 
     //OTHERS
-    Map map;
+    Map map = new Map();
     int dice;
 
 
@@ -45,43 +45,60 @@ public class GameManager {
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
 
-        //check if tuhe players name are null or empty Strings
-        for(int i = 0; i < playersInfo.length; i++){
-            if(playersInfo[i][1] == "" || playersInfo[i][1] == null){
-                return false;
-            }
-        }
-
         //O número de jogadores.
         if(playersInfo.length < 2 || playersInfo.length > 4){
             return false;
         }
 
         //O mapa tem de ter, pelo menos, duas posições por cada jogador que esteja em jogo.
-        if (playersInfo.length*2 < jungleSize){
+        if (playersInfo.length*2 > jungleSize){
             return false;
         }
 
+        ArrayList<Integer> playerIds = new ArrayList<>();
+
+        for(int i=0; i<playersInfo.length; i++){
+
+            try{
+                if(!playerIds.contains(Integer.parseInt(playersInfo[i][0]))){
+                    playerIds.add(Integer.parseInt(playersInfo[i][0]));
+                }else{
+                    return false;
+                }
+            }catch (NumberFormatException e){
+                return false;
+            }
+
+            //Verifica se a espécie existe
+            for(Specie specie : species){
+                if(specie.getIdentifier() == playersInfo[i][2].charAt(0)){
+                    break;
+                }else{
+                    return false;
+                }
+            }
+
+            //Verifica se o nome e valido
+            if (playersInfo[i][1] == null || playersInfo[i][1].equals("")) {
+                return false;
+            }
 
 
 
-
-
-
-
-        //ASSUMINDO QUE JA PASSOU NAS VERIFICAÇOES TODAS
-        //guardar os players num arraylist para utilizar ao longo do programa
-        for(int i = 0; i < playersInfo.length; i++){
-
+            //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
             int id=Integer.parseInt(playersInfo[i][0]);
             String name=playersInfo[i][1];
             char specieIdentifier=playersInfo[i][2].charAt(0);
 
-            players.add(new Player(id, specieIdentifier,initialEnergy,name));
-            playersById.put(id, new Player(id, specieIdentifier,initialEnergy,name));
+            players.add(new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
+            playersById.put(id, new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
         }
-
         map.generateMap(jungleSize);
+
+        //Preenche a 1 casa
+        for(Player player : players){
+            map.getSquare(1).addPlayer(player);
+        }
 
         return true;
     }
@@ -92,6 +109,7 @@ public class GameManager {
 
         ArrayList<Player> playersInSquare = new ArrayList<>(map.getSquare(squareNr).getPlayers());
         int[] playerIDs = new int[playersInSquare.size()];
+
 
         if(playersInSquare.size()==0 || !map.isSquareValid(squareNr)){
             return new int[]{};
@@ -197,5 +215,14 @@ public class GameManager {
         int random = ThreadLocalRandom.current().nextInt(1,7);
 
         return dice=random;
+    }
+
+    Specie getSpicieById(char id){
+        for(Specie specie : species){
+            if(specie.getIdentifier() == id){
+                return specie;
+            }
+        }
+        return null;
     }
 }
