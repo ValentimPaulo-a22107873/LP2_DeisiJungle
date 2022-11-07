@@ -7,9 +7,6 @@ public class Main {
 
         GameManager game = new GameManager();
 
-
         System.out.println(Arrays.deepToString(game.getSpecies()));
-
-
     }
 }

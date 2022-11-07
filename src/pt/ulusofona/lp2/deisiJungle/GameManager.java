@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -13,7 +14,7 @@ public class GameManager {
 
     ArrayList<Specie> species = new ArrayList<>(Arrays.asList(elephant,lion,tarzan,turtle,bird));
 
-
+    Map map;
 
 
 
@@ -55,19 +56,66 @@ public class GameManager {
 
 
 
+        map.generateMap(jungleSize);
 
         return true;
     }
 
 
-    /*public String[] getPlayerInfo(int playerId){
-
-        String[] result = new String[4];
-
-        result[0] =
-    }*/
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public int[] getPlayerIds(int squareNr){
+        return null;
+    }
+
+    public String[] getSquareInfo(int squareNr){
+        return null;
+    }
+
+    public String[] getPlayerInfo(int playerId){
+        return null;
+    }
+
+    public String[] getCurrentPlayerInfo(){
+        return null;
+    }
+
+    public String[][] getPlayersInfo(){
+        return null;
+    }
+
+    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+        return true;
+    }
+
+    public String[] getWinnerInfo(){
+        return null;
+    }
+
+    public ArrayList<String> getGameResults(){
+        return new ArrayList<>();
+    }
+
+    public JPanel getAuthorsPanel(){
+        return null;
+    }
+
+    public String whoIsTaborda(){
+        return "Wrestling";
+    }
 }
