@@ -70,12 +70,17 @@ public class GameManager {
             }
 
             //Verifica se a espécie existe
+            boolean validSpecie=false;
+
             for(Specie specie : species){
                 if(specie.getIdentifier() == playersInfo[i][2].charAt(0)){
+                    validSpecie=true;
                     break;
-                }else{
-                    return false;
                 }
+            }
+
+            if(!validSpecie){
+                return false;
             }
 
             //Verifica se o nome e valido
