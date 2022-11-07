@@ -81,7 +81,6 @@ public class GameManager {
             playersById.put(id, new Player(id, specieIdentifier,initialEnergy,name));
         }
 
-        map.size=jungleSize;
         map.generateMap(jungleSize);
 
         return true;
@@ -94,7 +93,7 @@ public class GameManager {
         ArrayList<Player> playersInSquare = new ArrayList<>(map.getSquare(squareNr).getPlayers());
         int[] playerIDs = new int[playersInSquare.size()];
 
-        if(playersInSquare.size()==0 || (squareNr<1 || squareNr>map.getSize())){
+        if(playersInSquare.size()==0 || !map.isSquareValid(squareNr)){
             return new int[]{};
         }
 
@@ -109,18 +108,14 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr){
 
-        if(squareNr<1 || squareNr>map.getSize()){
+        if(!map.isSquareValid(squareNr)){
             return null;
         }
 
         Square square = map.getSquare(squareNr);
         String[] squareInfo = new String[3];
 
-        if(square.type=="Meta"){
-            squareInfo[0] = "finish.png";
-        }
-        squareInfo[0] = "blank.png";
-
+        squareInfo[0] = square.getImage();
         squareInfo[1] = square.getType();
         squareInfo[2] = square.getIdPlayersInString();
 

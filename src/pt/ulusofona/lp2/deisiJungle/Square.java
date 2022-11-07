@@ -5,15 +5,16 @@ import java.util.ArrayList;
 public class Square {
 
     int number;
-    String type;
+    String type, image;
     ArrayList<Player> players;
 
     public Square(){
     }
 
-    public Square(int number, String type) {
+    public Square(int number, String type, String image) {
         this.number = number;
         this.type = type;
+        this.image = image;
     }
 
     int getNumber(){
@@ -22,6 +23,10 @@ public class Square {
 
     String getType(){
         return type;
+    }
+
+    String getImage(){
+        return image;
     }
 
     ArrayList<Player> getPlayers(){

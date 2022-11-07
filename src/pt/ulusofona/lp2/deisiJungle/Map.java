@@ -5,16 +5,15 @@ import java.util.ArrayList;
 public class Map {
 
     ArrayList<Square> map;
-    int size;
 
     ArrayList<Square> generateMap(int squares){
 
         for(int i=1; i<=squares; i++){
             if(i==squares) {
-                map.add(new Square(i, "Meta"));
+                map.add(new Square(i, "Meta", "finish.png"));
             }
             else{
-                map.add(new Square(i, "Vazio"));
+                map.add(new Square(i, "Vazio", "blank.png"));
             }
         }
 
@@ -22,10 +21,17 @@ public class Map {
     }
 
     Square getSquare(int number){
-        return map.get(number);
+        return map.get(number-1);
     }
 
     int getSize(){
-        return size;
+        return map.size();
+    }
+
+    boolean isSquareValid(int number){
+        if(number<1 || number>map.size()){
+            return false;
+        }
+        return true;
     }
 }
