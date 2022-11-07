@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GameManager {
 
@@ -19,13 +20,13 @@ public class GameManager {
     ArrayList<Player> players = new ArrayList<>();
     HashMap<Integer, Player> playersById = new HashMap<>();
 
-
-
+    //OTHERS
     Map map;
+    int dice;
 
 
 
-    //FUNCTIONS
+    //MANDITORY FUNCTIONS
 
     public String[][] getSpecies(){
         String[][] result = new String[species.size()][3];
@@ -145,6 +146,8 @@ public class GameManager {
     public String[] getCurrentPlayerInfo(){
         return null;
     }
+    //ON GOING
+
 
     public String[][] getPlayersInfo(){
 
@@ -180,5 +183,24 @@ public class GameManager {
 
     public String whoIsTaborda(){
         return "Wrestling";
+    }
+    //DONE
+
+
+
+
+
+
+
+
+
+
+
+
+    //ADDITIONAL FUNCTIONS
+    int spinDice(){
+        int random = ThreadLocalRandom.current().nextInt(1,7);
+
+        return dice=random;
     }
 }
