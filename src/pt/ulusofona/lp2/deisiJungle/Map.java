@@ -6,7 +6,8 @@ public class Map {
 
     ArrayList<Square> map;
 
-    public Map(){
+    public Map(int size){
+        generateMap(size);
     }
 
     ArrayList<Square> generateMap(int squares){

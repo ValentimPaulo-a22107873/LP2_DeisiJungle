@@ -21,7 +21,7 @@ public class GameManager {
     HashMap<Integer, Player> playersById = new HashMap<>();
 
     //OTHERS
-    Map map = new Map();
+    Map map;
     int dice;
 
 
@@ -89,7 +89,7 @@ public class GameManager {
             }
 
 
-
+            /*
             //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
             int id=Integer.parseInt(playersInfo[i][0]);
             String name=playersInfo[i][1];
@@ -97,13 +97,16 @@ public class GameManager {
 
             players.add(new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
             playersById.put(id, new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
+             */
         }
-        map.generateMap(jungleSize);
+        map = new Map(jungleSize);
 
+        /*
         //Preenche a 1 casa
         for(Player player : players){
             map.getSquare(1).addPlayer(player);
         }
+         */
 
         return true;
     }
