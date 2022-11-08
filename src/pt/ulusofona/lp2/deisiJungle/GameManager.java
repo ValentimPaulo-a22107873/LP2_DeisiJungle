@@ -9,8 +9,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GameManager {
 
-    int _turn;
-
     //SPECIES
     Specie elephant = new Specie("Elefante","elephant.png", 'E');
     Specie lion = new Specie("Leão", "lion.png",'L' );
@@ -36,6 +34,7 @@ public class GameManager {
     //OTHERS
     Map map;
     int dice;
+    int _turn;
 
 
 
@@ -184,7 +183,15 @@ public class GameManager {
 
 
     public String[] getCurrentPlayerInfo(){
-        return null;
+
+        String[] playerInfo = new String[4];
+
+        playerInfo[0] = players.get(_turn).getId()+"";
+        playerInfo[1] = players.get(_turn).getName();
+        playerInfo[2] = players.get(_turn).getSpecieId()+"";
+        playerInfo[3] = players.get(_turn).getEnergy()+"";
+
+        return playerInfo;
     }
     //ON GOING
 
