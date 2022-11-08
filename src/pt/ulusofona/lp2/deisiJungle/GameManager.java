@@ -221,6 +221,7 @@ public class GameManager {
         if(bypassValidations){
 
             if(currentPlayer.getEnergy()<2){
+                nextTurn();
                 return false;
             }
 
@@ -238,6 +239,7 @@ public class GameManager {
             initialSquare.removePlayer(currentPlayer);
             desiredSquare.addPlayer(currentPlayer);
             currentPlayer.energy -= 2;
+            currentPlayer.position += nrSquares;
 
             nextTurn();
             return true;
@@ -247,6 +249,7 @@ public class GameManager {
             return false;
         }
         if(currentPlayer.getEnergy()<2){
+            nextTurn();
             return false;
         }
 
@@ -264,6 +267,7 @@ public class GameManager {
         initialSquare.removePlayer(currentPlayer);
         desiredSquare.addPlayer(currentPlayer);
         currentPlayer.energy -= 2;
+        currentPlayer.position += nrSquares;
 
         nextTurn();
         return true;
