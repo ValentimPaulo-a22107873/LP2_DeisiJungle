@@ -342,8 +342,10 @@ public class GameManager {
         if(_turn == players.size()-1){
             _turn = 0;
             //System.out.println(_turn);
+        }else {
+            _turn++;
         }
-        _turn++;
+
         //System.out.println(_turn);
     }
 }
