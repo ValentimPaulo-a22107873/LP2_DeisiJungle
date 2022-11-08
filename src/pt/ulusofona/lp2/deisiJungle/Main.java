@@ -41,5 +41,10 @@ public class Main {
             System.out.println(player.getId());
         }
 
+
+        for(int i = 0; i !=8; i++){
+            game.nextTurn();
+        }
+
     }
 }

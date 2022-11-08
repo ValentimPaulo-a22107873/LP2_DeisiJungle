@@ -271,4 +271,14 @@ public class GameManager {
             }
         }
     }
+
+
+    void nextTurn(){
+        if(_turn == players.size()-1){
+            _turn = 0;
+            //System.out.println(_turn);
+        }
+        _turn++;
+        //System.out.println(_turn);
+    }
 }
