@@ -108,7 +108,7 @@ public class GameManager {
             playersById.put(id, new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
              */
         }
-        map = new Map(jungleSize);
+        //map = new Map(jungleSize);
 
         /*
         //Preenche a 1 casa
