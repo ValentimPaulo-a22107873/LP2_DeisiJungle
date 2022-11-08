@@ -25,4 +25,5 @@ public class Specie {
     char getIdentifier(){
         return specieIdentifier;
     }
+
 }

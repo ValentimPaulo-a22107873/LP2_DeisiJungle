@@ -174,7 +174,7 @@ public class GameManager {
 
         playerInfo[0] = playersById.get(playerId).getId()+"";
         playerInfo[1] = playersById.get(playerId).getName();
-        playerInfo[2] = playersById.get(playerId).getSpecieId()+"";
+        playerInfo[2] = playersById.get(playerId).getSpecie().getIdentifier()+"";
         playerInfo[3] = playersById.get(playerId).getEnergy()+"";
 
         return playerInfo;
@@ -188,7 +188,7 @@ public class GameManager {
 
         playerInfo[0] = players.get(_turn).getId()+"";
         playerInfo[1] = players.get(_turn).getName();
-        playerInfo[2] = players.get(_turn).getSpecieId()+"";
+        playerInfo[2] = players.get(_turn).getSpecie().getIdentifier()+"";
         playerInfo[3] = players.get(_turn).getEnergy()+"";
 
         return playerInfo;
@@ -204,7 +204,7 @@ public class GameManager {
 
             playersInfo[i][0] = players.get(i).getId()+"";
             playersInfo[i][1] = players.get(i).getName();
-            playersInfo[i][2] = players.get(i).getSpecieId()+"";
+            playersInfo[i][2] = players.get(i).getSpecie().getIdentifier()+"";
             playersInfo[i][3] = players.get(i).getEnergy()+"";
         }
 
@@ -213,7 +213,61 @@ public class GameManager {
     //DONE
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+
+        Player currentPlayer = players.get(_turn);
+        Square initialSquare = map.getSquare(currentPlayer.getPosition());
+        Square desiredSquare;
+
+        if(bypassValidations){
+
+            if(currentPlayer.getEnergy()<2){
+                return false;
+            }
+
+            if(currentPlayer.getPosition()+nrSquares >= map.getSize()){
+                desiredSquare = map.getSquare(map.getSize());
+
+                initialSquare.removePlayer(currentPlayer);
+                desiredSquare.addPlayer(currentPlayer);
+
+                return true;
+            }
+
+            desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
+
+            initialSquare.removePlayer(currentPlayer);
+            desiredSquare.addPlayer(currentPlayer);
+            currentPlayer.energy -= 2;
+
+            nextTurn();
+            return true;
+        }
+
+        if(nrSquares<1 || nrSquares>6){
+            return false;
+        }
+        if(currentPlayer.getEnergy()<2){
+            return false;
+        }
+
+        if(currentPlayer.getPosition()+nrSquares >= map.getSize()){
+            desiredSquare = map.getSquare(map.getSize());
+
+            initialSquare.removePlayer(currentPlayer);
+            desiredSquare.addPlayer(currentPlayer);
+
+            return true;
+        }
+
+        desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
+
+        initialSquare.removePlayer(currentPlayer);
+        desiredSquare.addPlayer(currentPlayer);
+        currentPlayer.energy -= 2;
+
+        nextTurn();
         return true;
+
     }
 
     public String[] getWinnerInfo(){

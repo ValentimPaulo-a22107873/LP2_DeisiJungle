@@ -51,4 +51,8 @@ public class Square {
         players.add(player);
     }
 
+    void removePlayer(Player player){
+        players.remove(player);
+    }
+
 }
