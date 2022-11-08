@@ -5,6 +5,8 @@ import org.w3c.dom.ls.LSOutput;
 import java.util.Arrays;
 
 public class Main {
+
+
     public static void main(String[] args) {
 
 
@@ -14,15 +16,15 @@ public class Main {
         //- [1] => O Nome do jogador
         //- [2] => O ID da espécie
 
-        players[0][0]="1";
+        players[0][0]="62";
         players[0][1]="Pedro";
         players[0][2]="E";
 
-        players[1][0]="2";
+        players[1][0]="1";
         players[1][1]="Paulinho";
         players[1][2]="Z";
 
-        players[2][0]="3";
+        players[2][0]="23";
         players[2][1]="Joao";
         players[2][2]="P";
 
@@ -34,6 +36,10 @@ public class Main {
         else
             System.out.println("falso");
 
+
+        for(Player player : game.players){
+            System.out.println(player.getId());
+        }
 
     }
 }

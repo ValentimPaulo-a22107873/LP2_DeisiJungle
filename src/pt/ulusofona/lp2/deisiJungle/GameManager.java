@@ -3,10 +3,13 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameManager {
+
+    int _turn;
 
     //SPECIES
     Specie elephant = new Specie("Elefante","elephant.png", 'E');
@@ -33,6 +36,7 @@ public class GameManager {
     //OTHERS
     Map map;
     int dice;
+
 
 
 
@@ -110,7 +114,9 @@ public class GameManager {
 
         }
         map = new Map(jungleSize);
+        sortPlayersById();
 
+        //System.out.println(players);
 
         //Preenche a 1 casa
         for(Player player : players){
@@ -245,5 +251,24 @@ public class GameManager {
             }
         }
         return null;
+    }
+
+    void sortPlayersById(){
+        for (int i = 0; i < players.size(); i++) {
+
+            // Inner nested loop pointing 1 index ahead
+            for (int j = i + 1; j < players.size(); j++) {
+
+                // Checking elements
+                Player temp;
+                if (players.get(j).getId() < players.get(i).getId()) {
+
+                    // Swapping
+                    temp = players.get(i);
+                    players.set(i, players.get(j));
+                    players.set(j, temp);
+                }
+            }
+        }
     }
 }
