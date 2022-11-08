@@ -6,7 +6,7 @@ public class Square {
 
     int number;
     String type, image;
-    ArrayList<Player> players;
+    ArrayList<Player> players = new ArrayList<>();
 
     public Square(){
     }

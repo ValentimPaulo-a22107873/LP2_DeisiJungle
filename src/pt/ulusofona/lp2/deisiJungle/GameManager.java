@@ -99,7 +99,7 @@ public class GameManager {
             }
 
 
-            /*
+
             //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
             int id=Integer.parseInt(playersInfo[i][0]);
             String name=playersInfo[i][1];
@@ -107,7 +107,7 @@ public class GameManager {
 
             players.add(new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
             playersById.put(id, new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
-             */
+
         }
         map = new Map(jungleSize);
 
@@ -126,7 +126,10 @@ public class GameManager {
     public int[] getPlayerIds(int squareNr){
 
         ArrayList<Player> playersInSquare = new ArrayList<>(map.getSquare(squareNr).getPlayers());
+
         int[] playerIDs = new int[playersInSquare.size()];
+
+
 
 
         if(playersInSquare.size()==0 || !map.isSquareValid(squareNr)){
