@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Map {
 
-    ArrayList<Square> map;
+    ArrayList<Square> map = new ArrayList<>();
 
     public Map(int size){
         generateMap(size);

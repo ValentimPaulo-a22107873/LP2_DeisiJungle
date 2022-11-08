@@ -14,7 +14,7 @@ public class Main {
         //- [1] => O Nome do jogador
         //- [2] => O ID da espécie
 
-        /*players[0][0]="1";
+        players[0][0]="1";
         players[0][1]="Pedro";
         players[0][2]="E";
 
@@ -24,13 +24,15 @@ public class Main {
 
         players[2][0]="3";
         players[2][1]="Joao";
-        players[2][2]="P";*/
+        players[2][2]="P";
 
 
 
         GameManager game = new GameManager();
 
-        if(game.createInitialJungle(9,0,players)) System.out.println("deu true");
+        if(game.createInitialJungle(6,0,players)) System.out.println("deu true");
+        else
+            System.out.println("falso");
 
 
     }

@@ -14,6 +14,7 @@ public class GameManager {
     Specie tarzan = new Specie("Tarzan", "tarzan.png", 'Z');
     Specie turtle = new Specie("Tartaruga", "turtle.png",'T');
     Specie bird = new Specie("Pássaro", "bird.png",'P');
+
     ArrayList<Specie> species = new ArrayList<>()
     {
         {
@@ -71,7 +72,7 @@ public class GameManager {
             try{
                 if(!playerIds.contains(Integer.parseInt(playersInfo[i][0]))){
                     playerIds.add(Integer.parseInt(playersInfo[i][0]));
-                }else{
+                }else {
                     return false;
                 }
             }catch (NumberFormatException e){
@@ -108,14 +109,14 @@ public class GameManager {
             playersById.put(id, new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
              */
         }
-        //map = new Map(jungleSize);
+        map = new Map(jungleSize);
 
-        /*
+
         //Preenche a 1 casa
         for(Player player : players){
             map.getSquare(1).addPlayer(player);
         }
-         */
+
 
         return true;
     }
