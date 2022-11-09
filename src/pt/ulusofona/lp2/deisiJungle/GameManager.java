@@ -134,9 +134,6 @@ public class GameManager {
 
         int[] playerIDs = new int[playersInSquare.size()];
 
-
-
-
         if(playersInSquare.size()==0 || !map.isSquareValid(squareNr)){
             return new int[]{};
         }

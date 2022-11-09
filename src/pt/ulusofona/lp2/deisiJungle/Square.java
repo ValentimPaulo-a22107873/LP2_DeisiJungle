@@ -40,8 +40,9 @@ public class Square {
 
             if(i== players.size()-1){
                 result += ""+players.get(i).id;
+            }else{
+                result+= ""+players.get(i).id+",";
             }
-            result+= ""+players.get(i).id+",";
         }
 
         return result;
