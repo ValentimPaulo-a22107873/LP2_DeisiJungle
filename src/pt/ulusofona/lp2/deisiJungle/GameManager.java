@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -322,13 +323,13 @@ public class GameManager {
                 sortPlayersById(map.getSquare(i).getPlayers());
 
                 for(Player player : map.getSquare(i).getPlayers()){
-                    result.add("#"+counter + " " + player.getName()+ ", " + player.getSpecie() + ", " + player.getPosition());
+                    result.add("#"+counter + " " + player.getName()+ ", " + player.getSpecie().getName() + ", " + player.getPosition());
                     counter++;
                 }
             }
             if(map.getSquare(i).getPlayers().size() == 1){
                 Player player = map.getSquare(i).getPlayers().get(0);
-                result.add("#"+counter + " " + player.getName()+ ", " + player.getSpecie() + ", " + player.getPosition());
+                result.add("#"+counter + " " + player.getName()+ ", " + player.getSpecie().getName() + ", " + player.getPosition());
                 counter++;
             }
         }
@@ -337,6 +338,13 @@ public class GameManager {
     }
 
     public JPanel getAuthorsPanel(){
+
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createEmptyBorder(300,300,300,300));
+
+        JButton button = new JButton("PNG - Tenis da Nike");
+
+        panel.add(button, BorderLayout.CENTER);
         return null;
     }
 
