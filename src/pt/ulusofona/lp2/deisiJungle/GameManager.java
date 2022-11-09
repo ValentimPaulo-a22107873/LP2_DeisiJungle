@@ -310,7 +310,30 @@ public class GameManager {
     }
 
     public ArrayList<String> getGameResults(){
-        return new ArrayList<>();
+
+        ArrayList<String> result =  new ArrayList<>();
+
+        int counter = 1;
+
+
+        for(int i = map.getSize() ; i >= 1; i--){
+
+            if(map.getSquare(i).getPlayers().size() > 1){
+                sortPlayersById(map.getSquare(i).getPlayers());
+
+                for(Player player : map.getSquare(i).getPlayers()){
+                    result.add("#"+counter + " " + player.getName()+ ", " + player.getSpecie() + ", " + player.getPosition());
+                    counter++;
+                }
+            }
+            if(map.getSquare(i).getPlayers().size() == 1){
+                Player player = map.getSquare(i).getPlayers().get(0);
+                result.add("#"+counter + " " + player.getName()+ ", " + player.getSpecie() + ", " + player.getPosition());
+                counter++;
+            }
+        }
+
+        return result;
     }
 
     public JPanel getAuthorsPanel(){
