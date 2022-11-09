@@ -124,10 +124,8 @@ public class GameManager {
         //Preenche a 1 casa
         for(Player player : players){
             map.getSquare(1).addPlayer(player);
-
         }
-
-
+        
         return true;
     }
     //ON GOING
@@ -216,9 +214,7 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
-       if( checkIfGameEnded()){
-            return false;
-        }
+
 
         Player currentPlayer = players.get(_turn);
         Square initialSquare = map.getSquare(currentPlayer.getPosition());
