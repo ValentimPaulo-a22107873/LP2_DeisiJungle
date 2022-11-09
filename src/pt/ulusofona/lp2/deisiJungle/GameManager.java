@@ -58,6 +58,9 @@ public class GameManager {
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
 
+        players = new ArrayList<>();
+        playersById = new HashMap<>();
+
         //O número de jogadores.
         if(playersInfo.length < 2 || playersInfo.length > 4){
             return false;
@@ -113,13 +116,14 @@ public class GameManager {
 
         }
         map = new Map(jungleSize);
-        sortPlayersById();
+        sortPlayersById(players);
 
         //System.out.println(players);
 
         //Preenche a 1 casa
         for(Player player : players){
             map.getSquare(1).addPlayer(player);
+
         }
 
 
@@ -211,6 +215,10 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
+       if( checkIfGameEnded()){
+            return false;
+        }
+
         Player currentPlayer = players.get(_turn);
         Square initialSquare = map.getSquare(currentPlayer.getPosition());
         Square desiredSquare;
@@ -272,7 +280,33 @@ public class GameManager {
     }
 
     public String[] getWinnerInfo(){
-        return null;
+
+        if(!checkIfGameEnded()){
+            return null;
+        }
+
+        sortPlayersByPocision();
+
+        int nbrPlayersSamePosition = 0;
+        int positionOfFitstPlace = players.get(0).getPosition();
+
+        for(int i = 1; i < players.size(); i++){
+            if(players.get(i).getPosition() == positionOfFitstPlace){
+                nbrPlayersSamePosition++;
+            }
+        }
+
+        ArrayList<Player> helper = new ArrayList<>();
+
+        if(nbrPlayersSamePosition >= 1){
+            for(int x = 0 ; x <  nbrPlayersSamePosition; x++){
+                helper.add(players.get(x));
+            }
+            sortPlayersById(helper);
+
+            return getPlayerInfo(helper.get(0).getId());
+        }
+        return getPlayerInfo(players.get(0).getId());
     }
 
     public ArrayList<String> getGameResults(){
@@ -300,11 +334,6 @@ public class GameManager {
 
 
     //ADDITIONAL FUNCTIONS
-    int spinDice(){
-        int random = ThreadLocalRandom.current().nextInt(1,7);
-
-        return dice=random;
-    }
 
     Specie getSpicieById(char id){
         for(Specie specie : species){
@@ -315,7 +344,7 @@ public class GameManager {
         return null;
     }
 
-    void sortPlayersById(){
+    ArrayList<Player> sortPlayersById(ArrayList<Player> players){
         for (int i = 0; i < players.size(); i++) {
 
             // Inner nested loop pointing 1 index ahead
@@ -332,6 +361,7 @@ public class GameManager {
                 }
             }
         }
+        return players;
     }
 
 
@@ -345,4 +375,49 @@ public class GameManager {
 
         //System.out.println(_turn);
     }
+
+
+
+
+    boolean checkIfGameEnded(){
+
+        //o jogo acaba se todos estiverem sem energia
+
+        boolean resultA = true;
+        boolean resultB = true;
+
+        for(Player player : players){
+            if(player.getEnergy() >= 2){
+                resultA = false;
+            }
+        }
+
+        // chek if someone ios on the last
+        if(map.getSquare(map.getSize()).getPlayers().size() < 1){
+            resultB = false;
+        }
+
+        return resultA || resultB;
+    }
+
+    void sortPlayersByPocision(){
+        for (int i = 0; i < players.size(); i++) {
+
+            // Inner nested loop pointing 1 index ahead
+            for (int j = i + 1; j < players.size(); j++) {
+
+                // Checking elements
+                Player temp;
+                if (players.get(j).getPosition() > players.get(i).getPosition()) {
+
+                    // Swapping
+                    temp = players.get(i);
+                    players.set(i, players.get(j));
+                    players.set(j, temp);
+                }
+            }
+        }
+    }
+
+
 }

@@ -44,7 +44,6 @@ public class Square {
                 result+= ""+players.get(i).id+",";
             }
         }
-
         return result;
     }
 

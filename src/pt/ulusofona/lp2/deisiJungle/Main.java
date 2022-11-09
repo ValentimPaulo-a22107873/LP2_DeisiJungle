@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
 
@@ -32,9 +33,24 @@ public class Main {
 
         GameManager game = new GameManager();
 
-        if(game.createInitialJungle(6,0,players)) System.out.println("deu true");
-        else
+        if(game.createInitialJungle(6,0,players)){
+            System.out.println("deu true");
+        }
+        else{
             System.out.println("falso");
+        }
+
+        game.players.get(0).position = 10;
+        game.players.get(1).position = 1;
+        game.players.get(2).position = 3;
+
+
+        game.sortPlayersByPocision();
+
+        for(Player player : game.players){
+            System.out.println(player.getPosition());
+            System.out.println(player.getName());
+        }
 
 
         for(Player player : game.players){
