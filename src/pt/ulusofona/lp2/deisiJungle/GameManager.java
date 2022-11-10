@@ -125,7 +125,7 @@ public class GameManager {
         for(Player player : players){
             map.getSquare(1).addPlayer(player);
         }
-        
+
         return true;
     }
     //ON GOING
@@ -232,6 +232,8 @@ public class GameManager {
 
                 initialSquare.removePlayer(currentPlayer);
                 desiredSquare.addPlayer(currentPlayer);
+                currentPlayer.energy -= 2;
+                currentPlayer.position += nrSquares;
 
                 return true;
             }
