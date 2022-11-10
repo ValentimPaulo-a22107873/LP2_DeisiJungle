@@ -262,6 +262,8 @@ public class GameManager {
 
             initialSquare.removePlayer(currentPlayer);
             desiredSquare.addPlayer(currentPlayer);
+            currentPlayer.energy -= 2;
+            currentPlayer.position += nrSquares;
 
             return true;
         }
