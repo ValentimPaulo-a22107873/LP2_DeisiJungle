@@ -213,7 +213,46 @@ public class Test {
 
         Assert.assertArrayEquals(expected,game.getPlayerInfo(1));
         Assert.assertFalse(expected == game.getPlayerInfo(2) );
+    }
 
+
+    @org.junit.Test
+    public void testGetSquareInfo(){
+        GameManager game = new GameManager();
+
+        String[][] helper = new String[2][3];
+        //- [0] => O ID do jogador
+        //- [1] => O Nome do jogador
+        //- [2] => O ID da espécie
+        helper[0][0] = "1";
+        helper[0][1] = "Pedro";
+        helper[0][2] = "E";
+
+        helper[1][0] = "2";
+        helper[1][1] = "Joao";
+        helper[1][2] = "L";
+
+        game.createInitialJungle(10,10, helper);
+
+        game.map.getSquare(5).players.add(game.players.get(0));
+
+        //- [0] => Nome do ficheiro com a
+        //imagem a colocar nesse posição
+        //- [1] => Uma descrição textual do que
+        //existe nessa posição (nesta fase
+        //pode ser apenas “Vazio” ou “Meta”)
+        //- [2] => Uma String contendo os
+        //identificadores dos jogadores que
+        //estão nessa posição, separados por
+        //vírgula (ex: “3,5” - estão lá os
+        //jogadores 3 e 5). blank.png
+
+        String[] expected = new String[3];
+        expected[0] = "blank.png";
+        expected[1] = "Vazio";
+        expected[2] = "1";
+
+        Assert.assertArrayEquals(expected,game.getSquareInfo(5));
 
     }
 

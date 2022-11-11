@@ -435,6 +435,7 @@ public class GameManager {
     }
 
     void sortPlayersByPocision(){
+        //https://www.geeksforgeeks.org/sorting-in-java/--
         for (int i = 0; i < players.size(); i++) {
 
             // Inner nested loop pointing 1 index ahead
