@@ -217,7 +217,7 @@ public class GameManager {
 
         Player currentPlayer = players.get(turn);
         Square initialSquare = map.getSquare(currentPlayer.getPosition());
-        Square desiredSquare;
+
 
         if(bypassValidations){
 
@@ -227,7 +227,7 @@ public class GameManager {
             }
 
             if(currentPlayer.getPosition()+nrSquares >= map.getSize()){
-                desiredSquare = map.getSquare(map.getSize());
+                Square desiredSquare = map.getSquare(map.getSize());
 
                 initialSquare.removePlayer(currentPlayer);
                 desiredSquare.addPlayer(currentPlayer);
@@ -238,7 +238,7 @@ public class GameManager {
                 return true;
             }
 
-            desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
+            Square desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
 
             initialSquare.removePlayer(currentPlayer);
             desiredSquare.addPlayer(currentPlayer);
@@ -259,7 +259,7 @@ public class GameManager {
         }
 
         if(currentPlayer.getPosition()+nrSquares >= map.getSize()){
-            desiredSquare = map.getSquare(map.getSize());
+            Square desiredSquare = map.getSquare(map.getSize());
 
             initialSquare.removePlayer(currentPlayer);
             desiredSquare.addPlayer(currentPlayer);
@@ -270,7 +270,7 @@ public class GameManager {
             return true;
         }
 
-        desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
+        Square desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
 
         initialSquare.removePlayer(currentPlayer);
         desiredSquare.addPlayer(currentPlayer);
