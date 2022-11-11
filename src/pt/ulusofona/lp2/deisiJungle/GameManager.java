@@ -133,11 +133,15 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr){
 
+        if(!map.isSquareValid(squareNr)){
+            return new int[]{};
+        }
+
         ArrayList<Player> playersInSquare = map.getSquare(squareNr).getPlayers();
 
         int[] playerIDs = new int[playersInSquare.size()];
 
-        if(playersInSquare.size()==0 || !map.isSquareValid(squareNr)){
+        if(playersInSquare.size()==0){
             return new int[]{};
         }
 
