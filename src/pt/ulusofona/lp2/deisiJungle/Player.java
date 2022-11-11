@@ -51,14 +51,11 @@ public class Player {
         return name;
     }
 
-    //FUNCOES PARA OBTER QUALQUER INFO DO PLAYER
+    void removeEnergy(){
+        energy -= 2;
+    }
 
-
-
-
-
-
-
-
-
+    void updatePosition(int numberOfSquares){
+        position+=numberOfSquares;
+    }
 }

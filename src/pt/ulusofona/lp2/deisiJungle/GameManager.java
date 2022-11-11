@@ -231,8 +231,8 @@ public class GameManager {
 
                 initialSquare.removePlayer(currentPlayer);
                 desiredSquare.addPlayer(currentPlayer);
-                currentPlayer.energy -= 2;
-                currentPlayer.position += nrSquares;
+                currentPlayer.removeEnergy();
+                currentPlayer.updatePosition(nrSquares);
 
                 nextTurn();
                 return true;
@@ -242,8 +242,8 @@ public class GameManager {
 
             initialSquare.removePlayer(currentPlayer);
             desiredSquare.addPlayer(currentPlayer);
-            currentPlayer.energy -= 2;
-            currentPlayer.position += nrSquares;
+            currentPlayer.removeEnergy();
+            currentPlayer.updatePosition(nrSquares);
 
             nextTurn();
             return true;
@@ -263,8 +263,8 @@ public class GameManager {
 
             initialSquare.removePlayer(currentPlayer);
             desiredSquare.addPlayer(currentPlayer);
-            currentPlayer.energy -= 2;
-            currentPlayer.position += nrSquares;
+            currentPlayer.removeEnergy();
+            currentPlayer.updatePosition(nrSquares);
 
             nextTurn();
             return true;
@@ -274,8 +274,8 @@ public class GameManager {
 
         initialSquare.removePlayer(currentPlayer);
         desiredSquare.addPlayer(currentPlayer);
-        currentPlayer.energy -= 2;
-        currentPlayer.position += nrSquares;
+        currentPlayer.removeEnergy();
+        currentPlayer.updatePosition(nrSquares);
 
         nextTurn();
         return true;
