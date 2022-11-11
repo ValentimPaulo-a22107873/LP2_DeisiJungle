@@ -8,10 +8,7 @@ import java.util.Random;
 public class Main {
 
 
-    public static void main(String[] args) {
-
-
-
+    public void main(String[] args) {
         String[][] players = new String[3][3];
         //- [0] => O ID do jogador
         //- [1] => O Nome do jogador

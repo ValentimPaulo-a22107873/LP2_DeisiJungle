@@ -34,8 +34,7 @@ public class GameManager {
 
     //OTHERS
     Map map;
-    int dice;
-    int _turn;
+    int turn;
 
 
 
@@ -104,8 +103,6 @@ public class GameManager {
             if (playersInfo[i][1] == null || playersInfo[i][1].equals("")) {
                 return false;
             }
-
-
 
             //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
             int id=Integer.parseInt(playersInfo[i][0]);
@@ -190,10 +187,10 @@ public class GameManager {
 
         String[] playerInfo = new String[4];
 
-        playerInfo[0] = players.get(_turn).getId()+"";
-        playerInfo[1] = players.get(_turn).getName();
-        playerInfo[2] = players.get(_turn).getSpecie().getIdentifier()+"";
-        playerInfo[3] = players.get(_turn).getEnergy()+"";
+        playerInfo[0] = players.get(turn).getId()+"";
+        playerInfo[1] = players.get(turn).getName();
+        playerInfo[2] = players.get(turn).getSpecie().getIdentifier()+"";
+        playerInfo[3] = players.get(turn).getEnergy()+"";
 
         return playerInfo;
     }
@@ -218,9 +215,7 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
-
-
-        Player currentPlayer = players.get(_turn);
+        Player currentPlayer = players.get(turn);
         Square initialSquare = map.getSquare(currentPlayer.getPosition());
         Square desiredSquare;
 
@@ -404,14 +399,14 @@ public class GameManager {
 
 
     void nextTurn(){
-        if(_turn == players.size()-1){
-            _turn = 0;
-            //System.out.println(_turn);
+        if(turn == players.size()-1){
+            turn = 0;
+            //System.out.println(turn);
         }else {
-            _turn++;
+            turn++;
         }
 
-        //System.out.println(_turn);
+        //System.out.println(turn);
     }
 
 
