@@ -133,7 +133,7 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr){
 
-        ArrayList<Player> playersInSquare = new ArrayList<>(map.getSquare(squareNr).getPlayers());
+        ArrayList<Player> playersInSquare = map.getSquare(squareNr).getPlayers();
 
         int[] playerIDs = new int[playersInSquare.size()];
 
