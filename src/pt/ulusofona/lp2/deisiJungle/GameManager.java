@@ -235,6 +235,7 @@ public class GameManager {
                 currentPlayer.energy -= 2;
                 currentPlayer.position += nrSquares;
 
+                nextTurn();
                 return true;
             }
 
@@ -250,6 +251,7 @@ public class GameManager {
         }
 
         if(nrSquares<1 || nrSquares>6){
+            nextTurn();
             return false;
         }
         if(currentPlayer.getEnergy()<2){
@@ -265,6 +267,7 @@ public class GameManager {
             currentPlayer.energy -= 2;
             currentPlayer.position += nrSquares;
 
+            nextTurn();
             return true;
         }
 

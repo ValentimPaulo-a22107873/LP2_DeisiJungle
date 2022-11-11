@@ -39,9 +39,9 @@ public class Square {
         for(int i=0; i<players.size(); i++){
 
             if(i== players.size()-1){
-                result += ""+players.get(i).id;
+                result += ""+players.get(i).getId();
             }else{
-                result+= ""+players.get(i).id+",";
+                result+= ""+players.get(i).getId()+",";
             }
         }
         return result;
