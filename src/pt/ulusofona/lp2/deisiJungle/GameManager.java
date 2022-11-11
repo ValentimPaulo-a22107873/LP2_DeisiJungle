@@ -151,6 +151,7 @@ public class GameManager {
     //DONE
 
 
+
     public String[] getSquareInfo(int squareNr){
 
         if(!map.isSquareValid(squareNr)){

@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.runners.JUnit4;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Test {
@@ -18,11 +19,7 @@ public class Test {
         ArrayList<Player> playersTest = new ArrayList<>();
 
 
-        //int id, int energy, Specie specie, String name
-        playersTest.add(new Player(0, 10, new Specie("leao", "leao.png", 'L'),
-                "Pedro"));
-        playersTest.add(new Player(1,10,new Specie("elephant", "elephant.png", 'E'),
-                "Joao"));
+
 
         game.players = playersTest;*/
 
@@ -41,6 +38,20 @@ public class Test {
         players[2][0]="23";
         players[2][1]="Joao";
         players[2][2]="P";
+
+        return players;
+    }
+
+    public String[][] create2Players(){
+        String[][] players = new String[2][3];
+
+        players[0][0]="62";
+        players[0][1]="Pedro";
+        players[0][2]="E";
+
+        players[1][0]="1";
+        players[1][1]="Paulinho";
+        players[1][2]="Z";
 
         return players;
     }
@@ -164,8 +175,47 @@ public class Test {
     }
 
 
+    @org.junit.Test
+    public void testGetPlayerInfo(){
+
+        GameManager game = new GameManager();
+
+        // [0] => O ID do jogador
+        //- [1] => O Nome do jogador
+        //- [2] => O ID da espécie associada ao
+        //jogador.
+        //- [3] => A energia atual do jogador,
+        //medida em unidades de energia
+
+        //public Player(int id, char specieId, int energy, String name) {
+        game.players.add(new Player(1,'E',30, "Pedro"));
+        game.players.add(new Player(2,'L',30, "Joao"));
+
+        String[] expected = new String[4];
+        expected[0] = "1";
+        expected[1] = "Pedro";
+        expected[2] = "E";
+        expected[3] = "30";
+
+        String[][] helper = new String[2][3];
+        //- [0] => O ID do jogador
+        //- [1] => O Nome do jogador
+        //- [2] => O ID da espécie
+        helper[0][0] = "1";
+        helper[0][1] = "Pedro";
+        helper[0][2] = "E";
+
+        helper[1][0] = "2";
+        helper[1][1] = "Joao";
+        helper[1][2] = "L";
+
+        game.createInitialJungle(40,30,helper);
+
+        Assert.assertArrayEquals(expected,game.getPlayerInfo(1));
+        Assert.assertFalse(expected == game.getPlayerInfo(2) );
 
 
+    }
 
 
 }
