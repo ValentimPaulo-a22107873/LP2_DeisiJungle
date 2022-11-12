@@ -220,44 +220,13 @@ public class GameManager {
         Square initialSquare = map.getSquare(currentPlayer.getPosition());
 
 
-        if(bypassValidations){
-
-            if(currentPlayer.getEnergy()<2){
+        if(!bypassValidations){
+            if(nrSquares<1 || nrSquares>6){
                 nextTurn();
                 return false;
             }
-
-            if(currentPlayer.getPosition()+nrSquares >= map.getSize()){
-                Square desiredSquare = map.getSquare(map.getSize());
-
-                initialSquare.removePlayer(currentPlayer);
-                desiredSquare.addPlayer(currentPlayer);
-                currentPlayer.removeEnergy();
-                currentPlayer.updatePosition(nrSquares);
-
-                nextTurn();
-                return true;
-            }
-
-            if(passedMiddleSquare(currentPlayer.getPosition()+nrSquares)){
-                currentPlayer.addEnergy(6);
-            }
-
-            Square desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
-
-            initialSquare.removePlayer(currentPlayer);
-            desiredSquare.addPlayer(currentPlayer);
-            currentPlayer.removeEnergy();
-            currentPlayer.updatePosition(nrSquares);
-
-            nextTurn();
-            return true;
         }
 
-        if(nrSquares<1 || nrSquares>6){
-            nextTurn();
-            return false;
-        }
         if(currentPlayer.getEnergy()<2){
             nextTurn();
             return false;
