@@ -12,4 +12,4 @@
 
 
 
-![](Diagrama UML.png?raw=true "Diagrama UML")
+![](Diagrama.png?raw=true "Diagrama UML")
