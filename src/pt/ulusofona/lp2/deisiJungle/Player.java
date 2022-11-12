@@ -58,4 +58,8 @@ public class Player {
     void updatePosition(int numberOfSquares){
         position+=numberOfSquares;
     }
+
+    void addEnergy(int energyToAdd){
+        energy+=energyToAdd;
+    }
 }

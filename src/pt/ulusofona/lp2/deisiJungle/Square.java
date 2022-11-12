@@ -8,6 +8,7 @@ public class Square {
     String type, image;
     ArrayList<Player> players = new ArrayList<>();
 
+
     public Square(){
     }
 

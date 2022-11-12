@@ -239,6 +239,10 @@ public class GameManager {
                 return true;
             }
 
+            if(passedMiddleSquare(currentPlayer.getPosition()+nrSquares)){
+                currentPlayer.addEnergy(6);
+            }
+
             Square desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
 
             initialSquare.removePlayer(currentPlayer);
@@ -269,6 +273,13 @@ public class GameManager {
 
             nextTurn();
             return true;
+        }
+
+        //verifica se passa no square do meio onde é adicionado 6 de energia equivalente a 3 moves
+        if(!(currentPlayer.getPosition()>= map.getSize()/2+1)){
+            if(passedMiddleSquare(currentPlayer.getPosition()+nrSquares)){
+                currentPlayer.addEnergy(6);
+            }
         }
 
         Square desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
@@ -454,5 +465,8 @@ public class GameManager {
         }
     }
 
+    boolean passedMiddleSquare(int position){
+        return position >= map.getSize() / 2 + 1;
+    }
 
 }

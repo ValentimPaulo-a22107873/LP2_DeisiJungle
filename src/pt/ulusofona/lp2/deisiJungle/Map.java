@@ -15,8 +15,11 @@ public class Map {
         for(int i=1; i<=squares; i++){
             if(i==squares) {
                 map.add(new Square(i, "Meta", "finish.png"));
-            }
-            else{
+
+            }else if(i==squares/2+1){
+                map.add(new Square(i, "Meio", "unknownPiece.png"));
+
+            }else{
                 map.add(new Square(i, "Vazio", "blank.png"));
             }
         }
