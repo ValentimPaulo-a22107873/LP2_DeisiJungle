@@ -253,8 +253,131 @@ public class Test {
         expected[2] = "1";
 
         Assert.assertArrayEquals(expected,game.getSquareInfo(5));
+    }
+
+
+    @org.junit.Test
+    public void testMoveCurrentPlayer(){
+        //Test Valid move
+
+        GameManager game = new GameManager();
+
+        //        players[0][0]="62";
+        //        players[0][1]="Pedro";
+        //        players[0][2]="E";
+        //
+        //        players[1][0]="1";
+        //        players[1][1]="Paulinho";
+        //        players[1][2]="Z";
+        //
+        //        players[2][0]="23";
+        //        players[2][1]="Joao";
+        //        players[2][2]="P";
+
+        game.createInitialJungle(40,40,createPlayers());
+
+        Player currentPlayer = game.players.get(game.turn);
+
+        game.moveCurrentPlayer(3, false);
+
+        Assert.assertTrue(currentPlayer.energy == 38);
+
+        Assert.assertTrue(currentPlayer.getPosition() == 4);
 
     }
+
+    @org.junit.Test
+    public void testMoveCurrentPlayer1(){
+
+        //Test Invalid Move
+
+        GameManager game = new GameManager();
+
+        //        players[0][0]="62";
+        //        players[0][1]="Pedro";
+        //        players[0][2]="E";
+        //
+        //        players[1][0]="1";
+        //        players[1][1]="Paulinho";
+        //        players[1][2]="Z";
+        //
+        //        players[2][0]="23";
+        //        players[2][1]="Joao";
+        //        players[2][2]="P";
+
+        game.createInitialJungle(40,40,createPlayers());
+
+        Player currentPlayer = game.players.get(game.turn);
+
+        game.moveCurrentPlayer(10, false);
+
+        Assert.assertTrue(currentPlayer.energy == 40);
+
+        Assert.assertTrue(currentPlayer.getPosition() == 1);
+
+    }
+    @org.junit.Test
+    public void testMoveCurrentPlayer2(){
+        //test if the player can move 20 sqr disabeling validations
+
+        GameManager game = new GameManager();
+
+        //        players[0][0]="62";
+        //        players[0][1]="Pedro";
+        //        players[0][2]="E";
+        //
+        //        players[1][0]="1";
+        //        players[1][1]="Paulinho";
+        //        players[1][2]="Z";
+        //
+        //        players[2][0]="23";
+        //        players[2][1]="Joao";
+        //        players[2][2]="P";
+
+        game.createInitialJungle(40,40,createPlayers());
+
+        Player currentPlayer = game.players.get(game.turn);
+
+        game.moveCurrentPlayer(20, true);
+
+        Assert.assertTrue(currentPlayer.energy == 44);
+
+        Assert.assertTrue(currentPlayer.getPosition() == 21);
+
+    }
+    @org.junit.Test
+    public void testMoveCurrentPlayer3(){
+        //test id the game ends
+
+        GameManager game = new GameManager();
+
+        //        players[0][0]="62";
+        //        players[0][1]="Pedro";
+        //        players[0][2]="E";
+        //
+        //        players[1][0]="1";
+        //        players[1][1]="Paulinho";
+        //        players[1][2]="Z";
+        //
+        //        players[2][0]="23";
+        //        players[2][1]="Joao";
+        //        players[2][2]="P";
+
+        game.createInitialJungle(40,40,createPlayers());
+
+        game.moveCurrentPlayer(35,true); //move Paulinho
+        game.moveCurrentPlayer(36,true); // move Joao
+        game.moveCurrentPlayer(37,true); //move Pedro
+
+        Player currentPlayer = game.players.get(game.turn);
+        game.moveCurrentPlayer(5,false); //move Paulinho to the last case
+
+        Assert.assertTrue(game.checkIfGameEnded());
+        Assert.assertEquals(41, currentPlayer.getPosition());
+
+
+    }
+
 
 
 }

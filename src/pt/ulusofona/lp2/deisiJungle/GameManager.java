@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
+
 public class GameManager {
 
     //SPECIES
@@ -323,28 +324,23 @@ public class GameManager {
     public JPanel getAuthorsPanel(){
 
         JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createEmptyBorder(300,300,300,300));
+        panel.setPreferredSize(new Dimension(300,300));
 
-        JButton button = new JButton("PNG - Tenis da Nike");
+        JTextArea text = new JTextArea("ola o meu nome e pedro");
 
-        panel.add(button, BorderLayout.CENTER);
-        return null;
+        panel.setBackground(Color.BLACK);
+
+        JButton buttom = new JButton("Teste");
+        //panel.add(buttom);
+        panel.add(text);
+
+        return panel;
     }
 
     public String whoIsTaborda(){
         return "Wrestling";
     }
     //DONE
-
-
-
-
-
-
-
-
-
-
 
 
     //ADDITIONAL FUNCTIONS
