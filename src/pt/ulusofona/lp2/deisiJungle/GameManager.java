@@ -13,7 +13,7 @@ public class GameManager {
 
     //SPECIES
     Specie elephant = new Specie("Elefante","elephant.png", 'E');
-    Specie lion = new Specie("Leão", "lion.png",'L' );
+    Specie lion = new Lion("Leão", "lion.png",'L' );
     Specie tarzan = new Specie("Tarzan", "tarzan.png", 'Z');
     Specie turtle = new Specie("Tartaruga", "turtle.png",'T');
     Specie bird = new Specie("Pássaro", "bird.png",'P');

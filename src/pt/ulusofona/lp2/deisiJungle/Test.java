@@ -374,8 +374,15 @@ public class Test {
 
         Assert.assertTrue(game.checkIfGameEnded());
         Assert.assertEquals(41, currentPlayer.getPosition());
+    }
 
 
+    @org.junit.Test
+    public void testgetInicialEnergy(){
+        Specie l = new Lion();
+        Assert.assertEquals(180, l.getInitialEnergy());
+
+        System.out.println();
     }
 
 

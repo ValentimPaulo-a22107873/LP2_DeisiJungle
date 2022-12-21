@@ -1,13 +1,27 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Specie {
+import java.util.ArrayList;
 
-    protected String name, image;
+public abstract class  Specie {
+
+    protected String name;
+    protected String image;
     protected char specieIdentifier;
     protected int initialEnergy;
     protected int energyConsume;
     protected int enrgyEarnedByRest;
-    protected int[] speed;
+    protected ArrayList<Integer> speed;
+
+    abstract char getSpecieIdentifier();
+
+    abstract int getInitialEnergy();
+
+    abstract int getEnergyConsume();
+
+    abstract int getEnrgyEarnedByRest();
+
+    abstract ArrayList<Integer> getSpeed();
+
 
 
     public Specie() {
