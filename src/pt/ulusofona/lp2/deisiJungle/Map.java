@@ -16,9 +16,6 @@ public class Map {
             if(i==squares) {
                 map.add(new Square(i, "Meta", "finish.png"));
 
-            }else if(i==squares/2+1){
-                map.add(new Square(i, "Vazio", "unknownPiece.png"));
-
             }else{
                 map.add(new Square(i, "Vazio", "blank.png"));
             }

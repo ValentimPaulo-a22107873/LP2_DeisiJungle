@@ -245,12 +245,13 @@ public class GameManager {
             return true;
         }
 
+        /*
         //verifica se passa no square do meio onde é adicionado 6 de energia equivalente a 3 moves
         if(!(currentPlayer.getPosition()>= map.getSize()/2+1)){
             if(passedMiddleSquare(currentPlayer.getPosition()+nrSquares)){
                 currentPlayer.addEnergy(6);
             }
-        }
+        }*/
 
         Square desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
 

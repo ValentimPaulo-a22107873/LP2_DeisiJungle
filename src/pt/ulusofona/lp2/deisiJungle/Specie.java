@@ -2,8 +2,13 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Specie {
 
-    String name, image;
-    char specieIdentifier;
+    protected String name, image;
+    protected char specieIdentifier;
+    protected int initialEnergy;
+    protected int energyConsume;
+    protected int enrgyEarnedByRest;
+    protected int[] speed;
+
 
     public Specie() {
     }

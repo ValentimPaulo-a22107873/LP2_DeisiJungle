@@ -7,6 +7,10 @@ public class Player {
     Specie specie;
     String name;
 
+    private int distanceWalked;
+
+
+
     public Player() {
     }
 
@@ -33,6 +37,12 @@ public class Player {
 
     int getId(){
         return id;
+    }
+    public int getDistanceWalked() {
+        return distanceWalked;
+    }
+    public void addDistanceWalked(int dist){
+        distanceWalked+=dist;
     }
 
     char getSpecieId(){
