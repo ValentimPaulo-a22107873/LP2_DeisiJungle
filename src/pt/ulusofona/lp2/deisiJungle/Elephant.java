@@ -2,19 +2,26 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.ArrayList;
 
-public class Elephant extends Specie {
+public class Elephant extends Herbivoro {
 
     public Elephant() {
     }
 
-    public Elephant(String name, String image, char specieIdentifier) {
-        super(name, image, specieIdentifier);
+    @Override
+    String getName() {
+        return "Elefante";
     }
 
     @Override
-    char getSpecieIdentifier() {
-        return this.specieIdentifier;
+    String getImage() {
+        return "elephant.png";
     }
+
+    @Override
+    char getIdentifier() {
+        return 'E';
+    }
+
 
     @Override
     int getInitialEnergy() {
@@ -34,6 +41,11 @@ public class Elephant extends Specie {
     @Override
     int[] getSpeed() {
         return new int[]{1,6};
+    }
+
+    @Override
+    char getType() {
+        return 'h';
     }
 
 }

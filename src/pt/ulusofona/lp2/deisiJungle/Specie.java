@@ -3,16 +3,8 @@ package pt.ulusofona.lp2.deisiJungle;
 import java.util.ArrayList;
 
 public abstract class  Specie {
-
-    protected String name;
-    protected String image;
-    protected char specieIdentifier;
-    protected int initialEnergy;
-    protected int energyConsume;
-    protected int enrgyEarnedByRest;
-    protected int[] speed;
-
-    abstract char getSpecieIdentifier();
+    public Specie() {
+    }
 
     abstract int getInitialEnergy();
 
@@ -22,27 +14,14 @@ public abstract class  Specie {
 
     abstract int[] getSpeed();
 
+    abstract char getType();
 
+    abstract String getName();
 
-    public Specie() {
-    }
+    abstract String getImage();
 
-    public Specie(String name, String image, char specieIdentifier) {
-        this.name = name;
-        this.image = image;
-        this.specieIdentifier = specieIdentifier;
-    }
+    abstract char getIdentifier();
 
-    String getName(){
-        return name;
-    }
-
-    String getImage(){
-        return image;
-    }
-
-    char getIdentifier(){
-        return specieIdentifier;
-    }
+    abstract int eat(char foodId);
 
 }

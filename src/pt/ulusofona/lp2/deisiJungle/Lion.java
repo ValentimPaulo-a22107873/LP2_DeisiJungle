@@ -2,23 +2,34 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.ArrayList;
 
-public class Lion extends Specie{
+public class Lion extends Carnivoros{
 
     public Lion() {
     }
 
-    public Lion(String name, String image, char specieIdentifier) {
-        super(name, image, specieIdentifier);
+    @Override
+    String getName() {
+        return "Leão";
     }
 
     @Override
-    char getSpecieIdentifier() {
-        return this.specieIdentifier;
+    String getImage() {
+        return "lion.png";
+    }
+
+    @Override
+    char getIdentifier() {
+        return 'L';
     }
 
     @Override
     int[] getSpeed() {
         return new int[]{4,6};
+    }
+
+    @Override
+    char getType() {
+        return 'c';
     }
 
     @Override

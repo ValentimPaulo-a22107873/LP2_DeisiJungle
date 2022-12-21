@@ -2,16 +2,21 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Player {
 
-    int id, energy, position=1;
-    char specieId;
-    Specie specie;
-    String name;
+    private int id, energy, position=1;
+    private char specieId;
+    private Specie specie;
+    private String name;
 
     private int distanceWalked;
 
 
 
     public Player() {
+    }
+
+
+    public void eat(){
+        energy += specie.eat('h');
     }
 
     public Player(int id, char specieId, int energy, String name) {

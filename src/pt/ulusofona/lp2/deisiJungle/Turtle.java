@@ -2,19 +2,26 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.ArrayList;
 
-public class Turtle extends Specie{
+public class Turtle extends Omnivero{
 
 
     public Turtle() {
     }
 
-    public Turtle(String name, String image, char specieIdentifier) {
-        super(name, image, specieIdentifier);
+
+    @Override
+    String getName() {
+        return "Tartaruga";
     }
 
     @Override
-    char getSpecieIdentifier() {
-        return this.specieIdentifier;
+    String getImage() {
+        return "turtle.png";
+    }
+
+    @Override
+    char getIdentifier() {
+        return 'T';
     }
 
     @Override
@@ -35,5 +42,10 @@ public class Turtle extends Specie{
     @Override
     int[] getSpeed() {
         return new int[]{1,3};
+    }
+
+    @Override
+    char getType() {
+        return 'c';
     }
 }

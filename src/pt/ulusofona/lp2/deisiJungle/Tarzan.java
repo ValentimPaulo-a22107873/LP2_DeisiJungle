@@ -2,18 +2,25 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.ArrayList;
 
-public class Tarzan extends Specie{
+public class Tarzan extends Omnivero{
 
     public Tarzan() {
     }
 
-    public Tarzan(String name, String image, char specieIdentifier) {
-        super(name, image, specieIdentifier);
+
+    @Override
+    String getName() {
+        return "Tarzan";
     }
 
     @Override
-    char getSpecieIdentifier() {
-        return this.specieIdentifier;
+    String getImage() {
+        return "tarzan.png";
+    }
+
+    @Override
+    char getIdentifier() {
+        return 'T';
     }
 
     @Override
@@ -34,5 +41,10 @@ public class Tarzan extends Specie{
     @Override
     int[] getSpeed() {
         return new int[]{1,6};
+    }
+
+    @Override
+    char getType() {
+        return 'o';
     }
 }
