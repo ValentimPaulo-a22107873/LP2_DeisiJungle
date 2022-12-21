@@ -3,29 +3,27 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.concurrent.ThreadLocalRandom;
 
 
 public class GameManager {
 
     //SPECIES
-    Specie elephant = new Specie("Elefante","elephant.png", 'E');
+    Specie elephant = new Elephant("Elefante","elephant.png", 'E');
     Specie lion = new Lion("Leão", "lion.png",'L' );
-    Specie tarzan = new Specie("Tarzan", "tarzan.png", 'Z');
-    Specie turtle = new Specie("Tartaruga", "turtle.png",'T');
-    Specie bird = new Specie("Pássaro", "bird.png",'P');
+    Specie tarzan = new Tarzan("Tarzan", "tarzan.png", 'Z');
+    Specie turtle = new Turtle("Tartaruga", "turtle.png",'T');
+    Specie bird = new Bird("Pássaro", "bird.png",'P');
 
     ArrayList<Specie> species = new ArrayList<>()
     {
         {
             add(elephant);
             add(lion);
-            add(tarzan);
             add(turtle);
             add(bird);
+            add(tarzan);
+
         }
     };
 
@@ -43,15 +41,31 @@ public class GameManager {
     //MANDITORY FUNCTIONS
 
     public String[][] getSpecies(){
-        String[][] result = new String[species.size()][3];
+        String[][] result = new String[species.size()][7];
 
         for(int i = 0; i < species.size(); i++){
 
             result[i][0] = species.get(i).getIdentifier()+"";
             result[i][1] = species.get(i).getName();
             result[i][2] = species.get(i).getImage();
+            result[i][3] = species.get(i).getInitialEnergy()+"";
+            result[i][4] = species.get(i).getEnergyConsume()+"";
+            result[i][5] = species.get(i).getEnrgyEarnedByRest()+"";
+            result[i][6] = species.get(i).getSpeed()[0] + ".." + species.get(i).getSpeed()[1];
 
         }
+
+        /*int cnt = 0;
+
+        for (Specie specie : species) {
+            result[cnt][0] = specie.getIdentifier()+"";
+            result[cnt][1] = specie.getName();
+            result[cnt][2] = specie.getImage();
+            result[cnt][3] = specie.getInitialEnergy()+"";
+            result[cnt][4] = specie.getEnergyConsume()+"";
+            result[cnt][5] = specie.getEnrgyEarnedByRest()+"";
+            result[cnt][6] = specie.getSpeed()[0] + ".." + getSpecies()[1];
+        }*/
         return result;
     }
     //DONE

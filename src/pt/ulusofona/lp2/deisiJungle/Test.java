@@ -5,10 +5,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 
 import org.junit.Assert;
-import org.junit.experimental.theories.suppliers.TestedOn;
-import org.junit.runners.JUnit4;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class Test {
@@ -90,13 +87,13 @@ public class Test {
 
         ArrayList<Player> playersTest = new ArrayList<>();
 
-        playersTest.add(new Player(0, 10, new Specie("leao", "leao.png", 'L'),
+        playersTest.add(new Player(0, 10, new Lion("leao", "leao.png", 'L'),
                 "Pedro"));
-        playersTest.add(new Player(1,10,new Specie("elephant", "elephant.png", 'E'),
+        playersTest.add(new Player(1,10,new Elephant("elephant", "elephant.png", 'E'),
                 "Joao"));
-        playersTest.add(new Player(3, 10, new Specie("leao", "leao.png", 'L'),
+        playersTest.add(new Player(3, 10, new Lion("leao", "leao.png", 'L'),
                 "Paulinho"));
-        playersTest.add(new Player(4,10,new Specie("elephant", "elephant.png", 'E'),
+        playersTest.add(new Player(4,10,new Elephant("elephant", "elephant.png", 'E'),
                 "Antonio Silva"));
 
         return playersTest;
@@ -317,35 +314,6 @@ public class Test {
 
     }
     @org.junit.Test
-    public void testMoveCurrentPlayer2(){
-        //test if the player can move 20 sqr disabeling validations
-
-        GameManager game = new GameManager();
-
-        //        players[0][0]="62";
-        //        players[0][1]="Pedro";
-        //        players[0][2]="E";
-        //
-        //        players[1][0]="1";
-        //        players[1][1]="Paulinho";
-        //        players[1][2]="Z";
-        //
-        //        players[2][0]="23";
-        //        players[2][1]="Joao";
-        //        players[2][2]="P";
-
-        game.createInitialJungle(40,40,createPlayers());
-
-        Player currentPlayer = game.players.get(game.turn);
-
-        game.moveCurrentPlayer(20, true);
-
-        Assert.assertTrue(currentPlayer.energy == 44);
-
-        Assert.assertTrue(currentPlayer.getPosition() == 21);
-
-    }
-    @org.junit.Test
     public void testMoveCurrentPlayer3(){
         //test id the game ends
 
@@ -380,9 +348,47 @@ public class Test {
     @org.junit.Test
     public void testgetInicialEnergy(){
         Specie l = new Lion();
-        Assert.assertEquals(180, l.getInitialEnergy());
+        Assert.assertEquals(80, l.getInitialEnergy());
 
         System.out.println();
+    }
+
+    @org.junit.Test
+    public void testGetSpecies(){
+        GameManager game = new GameManager();
+
+        /*
+        Specie elephant = new Elephant("Elefante","elephant.png", 'E');
+        Specie lion = new Lion("Leão", "lion.png",'L' );
+        Specie tarzan = new Tarzan("Tarzan", "tarzan.png", 'Z');
+        Specie turtle = new Turtle("Tartaruga", "turtle.png",'T');
+        Specie bird = new Bird("Pássaro", "bird.png",'P');*/
+
+        String[][] espiciesInfo = game.getSpecies();
+        Assert.assertEquals(espiciesInfo[0][3], "180");
+        Assert.assertEquals(espiciesInfo[1][3], "80");
+        Assert.assertEquals(espiciesInfo[2][3], "150");
+        Assert.assertEquals(espiciesInfo[3][3], "70");
+        Assert.assertEquals(espiciesInfo[4][3], "70");
+
+        Assert.assertEquals(espiciesInfo[0][4], "4");
+        Assert.assertEquals(espiciesInfo[1][4], "2");
+        Assert.assertEquals(espiciesInfo[2][4], "1");
+        Assert.assertEquals(espiciesInfo[3][4], "4");
+        Assert.assertEquals(espiciesInfo[4][4], "2");
+
+        Assert.assertEquals(espiciesInfo[0][5], "10");
+        Assert.assertEquals(espiciesInfo[1][5], "10");
+        Assert.assertEquals(espiciesInfo[2][5], "5");
+        Assert.assertEquals(espiciesInfo[3][5], "50");
+        Assert.assertEquals(espiciesInfo[4][5], "20");
+
+        Assert.assertEquals(espiciesInfo[0][6], "1..6");
+        Assert.assertEquals(espiciesInfo[1][6], "4..6");
+        Assert.assertEquals(espiciesInfo[2][6], "1..3");
+        Assert.assertEquals(espiciesInfo[3][6], "5..6");
+        Assert.assertEquals(espiciesInfo[4][6], "1..6");
+
     }
 
 

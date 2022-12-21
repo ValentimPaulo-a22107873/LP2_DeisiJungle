@@ -32,12 +32,7 @@ public class Bird extends Specie{
     }
 
     @Override
-    ArrayList<Integer> getSpeed() {
-        return new ArrayList<>(){
-            {
-                add(5);
-                add(6);
-            }
-        };
+    int[] getSpeed() {
+        return new int[]{5, 6};
     }
 }

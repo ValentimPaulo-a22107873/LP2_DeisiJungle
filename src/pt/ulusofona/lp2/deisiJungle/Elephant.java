@@ -2,12 +2,12 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.ArrayList;
 
-public class Tarzan extends Specie{
+public class Elephant extends Specie {
 
-    public Tarzan() {
+    public Elephant() {
     }
 
-    public Tarzan(String name, String image, char specieIdentifier) {
+    public Elephant(String name, String image, char specieIdentifier) {
         super(name, image, specieIdentifier);
     }
 
@@ -18,21 +18,22 @@ public class Tarzan extends Specie{
 
     @Override
     int getInitialEnergy() {
-        return 70;
+        return 180;
     }
 
     @Override
     int getEnergyConsume() {
-        return 2;
+        return 4;
     }
 
     @Override
     int getEnrgyEarnedByRest() {
-        return 20;
+        return 10;
     }
 
     @Override
     int[] getSpeed() {
         return new int[]{1,6};
     }
+
 }

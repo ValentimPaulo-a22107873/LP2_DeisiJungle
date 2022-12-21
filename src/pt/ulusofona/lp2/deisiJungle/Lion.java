@@ -17,14 +17,8 @@ public class Lion extends Specie{
     }
 
     @Override
-    ArrayList<Integer> getSpeed() {
-        return new ArrayList<>(){
-            {
-                add(4);
-                add(5);
-                add(6);
-            }
-        };
+    int[] getSpeed() {
+        return new int[]{4,6};
     }
 
     @Override

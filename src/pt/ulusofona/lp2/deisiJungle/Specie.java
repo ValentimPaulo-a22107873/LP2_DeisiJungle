@@ -10,7 +10,7 @@ public abstract class  Specie {
     protected int initialEnergy;
     protected int energyConsume;
     protected int enrgyEarnedByRest;
-    protected ArrayList<Integer> speed;
+    protected int[] speed;
 
     abstract char getSpecieIdentifier();
 
@@ -20,7 +20,7 @@ public abstract class  Specie {
 
     abstract int getEnrgyEarnedByRest();
 
-    abstract ArrayList<Integer> getSpeed();
+    abstract int[] getSpeed();
 
 
 
