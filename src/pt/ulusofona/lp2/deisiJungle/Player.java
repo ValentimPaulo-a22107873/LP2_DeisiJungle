@@ -8,15 +8,11 @@ public class Player {
     private String name;
 
     private int distanceWalked;
+    private int bananaEaten=0;
 
 
 
     public Player() {
-    }
-
-
-    public void eat(){
-        energy += specie.eat('h');
     }
 
     public Player(int id, char specieId, int energy, String name) {
@@ -33,8 +29,49 @@ public class Player {
         this.name = name;
     }
 
+    public Player(int id, Specie specie, String name) {
+        this.id = id;
+        this.specie = specie;
+        this.name = name;
+    }
 
     //CONSTRUTORES
+
+    public void eat(char food, int initialEnergy, int turn, int mushroomEnergy){
+
+        if(food=='b' && bananaEaten>=1){
+            addEnergy(-40);
+            bananaEaten++;
+        }
+        else if(food=='b' && bananaEaten<1){
+            addEnergy(40);
+            bananaEaten++;
+        }
+        else if(food=='m' && (turn%2)==0) {
+            addEnergy((mushroomEnergy / 100) * getEnergy());
+        }
+        else if((food=='m' && (turn%2)!=0)){
+            addEnergy(-(mushroomEnergy / 100) * getEnergy());
+        }
+        else{
+            addEnergy(specie.eat(food, initialEnergy, turn));
+        }
+    }
+
+
+    public void defineInitialEnergy(){
+        energy = specie.getInitialEnergy();
+    }
+
+
+
+    public int getBananaEaten() {
+        return bananaEaten;
+    }
+
+    public void addBanana(){
+        bananaEaten++;
+    }
 
     Specie getSpecie(){
         return specie;
@@ -67,7 +104,7 @@ public class Player {
     }
 
     void removeEnergy(){
-        energy -= 2;
+        energy -= specie.getEnergyConsume();
     }
 
     void updatePosition(int numberOfSquares){
@@ -75,6 +112,11 @@ public class Player {
     }
 
     void addEnergy(int energyToAdd){
-        energy+=energyToAdd;
+        if(energy + energyToAdd >= specie.getInitialEnergy()){
+            energy=specie.getInitialEnergy();
+        }else{
+            energy+=energyToAdd;
+        }
+
     }
 }

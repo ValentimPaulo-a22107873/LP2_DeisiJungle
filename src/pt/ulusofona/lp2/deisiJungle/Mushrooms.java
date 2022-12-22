@@ -1,6 +1,14 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Cogumelos extends Food {
+public class Mushrooms extends Food {
+
+    public Mushrooms() {
+    }
+
+    @Override
+    String getName() {
+        return "Cogumelo";
+    }
 
     @Override
     char getIdentifier() {

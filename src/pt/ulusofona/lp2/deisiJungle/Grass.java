@@ -1,6 +1,15 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Erva extends Food{
+public class Grass extends Food{
+
+    public Grass() {
+    }
+
+    @Override
+    String getName() {
+        return "Erva";
+    }
+
     @Override
     char getIdentifier() {
         return 'e';

@@ -1,6 +1,15 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 public class Banana extends Food{
+
+    public Banana() {
+    }
+
+    @Override
+    String getName() {
+        return "Banana";
+    }
+
     @Override
     char getIdentifier() {
         return 'b';
@@ -8,6 +17,6 @@ public class Banana extends Food{
 
     @Override
     String getImage() {
-        return "bananas";
+        return "banana.png";
     }
 }

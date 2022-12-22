@@ -9,31 +9,41 @@ import java.util.HashMap;
 public class GameManager {
 
     //SPECIES
-    Specie elephant = new Elephant();
-    Specie lion = new Lion();
-    Specie tarzan = new Tarzan();
-    Specie turtle = new Turtle();
-    Specie bird = new Bird();
-
     ArrayList<Specie> species = new ArrayList<>()
     {
         {
-            add(elephant);
-            add(lion);
-            add(turtle);
-            add(bird);
-            add(tarzan);
+            add(new Elephant());
+            add(new Lion());
+            add(new Turtle());
+            add(new Bird());
+            add(new Tarzan());
 
         }
     };
+
+    //FOODS
+    ArrayList<Food> foods = new ArrayList<>()
+    {
+        {
+            add(new Water());
+            add(new Grass());
+            add(new Banana());
+            add(new Meat());
+            add(new Mushrooms());
+
+        }
+    };
+
+
 
     //PLAYERS
     ArrayList<Player> players = new ArrayList<>();
     HashMap<Integer, Player> playersById = new HashMap<>();
 
     //OTHERS
-    Map map;
-    int turn;
+     Map map;
+     private int turn;
+     private int numberOfPlays;
 
 
 
@@ -44,8 +54,20 @@ public class GameManager {
 
 
 
-    public String[][] stringsgetFoodTypes(){
-        return null;
+    public String[][] getFoodTypes(){
+        String[][] result = new String[foods.size()][3];
+
+
+
+        int cnt = 0;
+        for (Food food : foods) {
+            result[cnt][0] = food.getIdentifier()+"";
+            result[cnt][1] = food.getName();
+            result[cnt][2] = food.getImage();
+
+            cnt++;
+        }
+        return result;
     }
 
 
@@ -136,6 +158,10 @@ public class GameManager {
         //Preenche a 1 casa
         for(Player player : players){
             map.getSquare(1).addPlayer(player);
+        }
+
+        for(Player player : players){
+            player.defineInitialEnergy();
         }
 
         return true;
@@ -398,9 +424,10 @@ public class GameManager {
             turn++;
         }
 
+        numberOfPlays++;
         //System.out.println(turn);
     }
-
+    //ASSUMINDO QUE CADA JOGADA DE CADA JOGADOR CONTA COMO UM TURNO, VERIFICAR
 
 
 
@@ -449,4 +476,15 @@ public class GameManager {
         return position >= map.getSize() / 2 + 1;
     }
 
+    public Map getMap() {
+        return map;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public int getNumberOfPlays() {
+        return numberOfPlays;
+    }
 }

@@ -1,6 +1,15 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Agua extends Food{
+public class Water extends Food{
+
+    public Water(){
+    }
+
+    @Override
+    String getName() {
+        return "Agua";
+    }
+
     @Override
     char getIdentifier() {
         return 'a';

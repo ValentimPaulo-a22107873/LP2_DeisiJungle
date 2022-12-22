@@ -87,13 +87,13 @@ public class Test {
 
         ArrayList<Player> playersTest = new ArrayList<>();
 
-        playersTest.add(new Player(0, 10, new Lion(),
+        playersTest.add(new Player(0, new Lion(),
                 "Pedro"));
-        playersTest.add(new Player(1,10,new Elephant(),
+        playersTest.add(new Player(1,new Elephant(),
                 "Joao"));
-        playersTest.add(new Player(3, 10, new Lion(),
+        playersTest.add(new Player(3,  new Lion(),
                 "Paulinho"));
-        playersTest.add(new Player(4,10,new Elephant(),
+        playersTest.add(new Player(4,new Elephant(),
                 "Antonio Silva"));
 
         return playersTest;
@@ -389,6 +389,72 @@ public class Test {
         Assert.assertEquals(espiciesInfo[3][6], "5..6");
         Assert.assertEquals(espiciesInfo[4][6], "1..6");
 
+    }
+
+    @org.junit.Test
+    public void testEatFood(){
+        GameManager game = new GameManager();
+
+        ArrayList<Player> players = createSomePlayers();
+
+        /*
+        playersTest.add(new Player(0, new Lion(),"Pedro"));
+        playersTest.add(new Player(1,new Elephant(),"Joao"));
+        playersTest.add(new Player(3, new Lion(),"Paulinho"));
+        playersTest.add(new Player(4,new Elephant(),"Antonio Silva"));
+         */
+
+        for(Player player : players){
+            player.defineInitialEnergy();
+        }
+
+        players.get(0).removeEnergy();
+        players.get(0).removeEnergy();
+        players.get(0).removeEnergy();
+        players.get(0).removeEnergy();
+        players.get(0).removeEnergy();
+
+        players.get(0).eat('b',players.get(0).getSpecie().getInitialEnergy(), 4, 0);
+
+        Assert.assertEquals(80, players.get(0).getEnergy());
+
+        players.get(0).eat('b',players.get(0).getSpecie().getInitialEnergy(), 4, 0);
+
+        Assert.assertEquals(40, players.get(0).getEnergy());
+
+    }
+
+
+    @org.junit.Test
+    public void testGetFoods(){
+        GameManager game = new GameManager();
+
+        /*
+            add(new Water());
+            add(new Weed());
+            add(new Banana());
+            add(new Meat());
+            add(new Mushrooms());
+            */
+
+        String[][] foodsInfo = game.getFoodTypes();
+        Assert.assertEquals(foodsInfo[0][0], "a");
+        Assert.assertEquals(foodsInfo[1][0], "e");
+        Assert.assertEquals(foodsInfo[2][0], "b");
+        Assert.assertEquals(foodsInfo[3][0], "c");
+        Assert.assertEquals(foodsInfo[4][0], "m");
+
+        Assert.assertEquals(foodsInfo[0][1], "Agua");
+        Assert.assertEquals(foodsInfo[1][1], "Erva");
+        Assert.assertEquals(foodsInfo[2][1], "Banana");
+        Assert.assertEquals(foodsInfo[3][1], "Carne");
+        Assert.assertEquals(foodsInfo[4][1], "Cogumelo");
+
+        Assert.assertEquals(foodsInfo[0][2], "water.png");
+        Assert.assertEquals(foodsInfo[1][2], "grass.png");
+        Assert.assertEquals(foodsInfo[2][2], "banana.png");
+        Assert.assertEquals(foodsInfo[3][2], "meat.png");
+        Assert.assertEquals(foodsInfo[4][2], "mushroom.png");
     }
 
 

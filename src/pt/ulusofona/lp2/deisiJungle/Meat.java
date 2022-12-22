@@ -1,6 +1,16 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Carne extends Food{
+public class Meat extends Food{
+
+    public Meat(){
+
+    }
+
+    @Override
+    String getName() {
+        return "Carne";
+    }
+
     @Override
     char getIdentifier() {
         return 'c';

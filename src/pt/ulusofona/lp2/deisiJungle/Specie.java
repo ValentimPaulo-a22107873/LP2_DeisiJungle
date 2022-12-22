@@ -22,6 +22,6 @@ public abstract class  Specie {
 
     abstract char getIdentifier();
 
-    abstract int eat(char foodId);
+    abstract int eat(char foodId, int initialEnergy, int turn);
 
 }
