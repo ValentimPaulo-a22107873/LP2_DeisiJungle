@@ -136,10 +136,7 @@ posição final.
     }
 
     public boolean isFoodPositionValid(int i, String[][] foodsInfo, int jnglSz){
-        if(Integer.parseInt(foodsInfo[i][1]) >= jnglSz || Integer.parseInt(foodsInfo[i][1]) <= 0){
-            return false;
-        }
-        return true;
+        return (!(Integer.parseInt(foodsInfo[i][1]) >= jnglSz || Integer.parseInt(foodsInfo[i][1]) <= 0));
     }
 
     /**/
