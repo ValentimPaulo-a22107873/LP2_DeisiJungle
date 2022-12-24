@@ -2,7 +2,9 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Player {
 
-    private int id, energy, position=1;
+    private int id;
+    private int energy;
+    private int position = 1;
     private char specieId;
     private Specie specie;
     private String name;
@@ -38,7 +40,6 @@ public class Player {
     //CONSTRUTORES
 
     public void eat(char food, int initialEnergy, int turn, int mushroomEnergy){
-
         if(food=='b' && bananaEaten>=1){
             addEnergy(-40);
             bananaEaten++;

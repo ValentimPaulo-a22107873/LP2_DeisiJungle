@@ -1,15 +1,27 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import com.sun.jdi.request.ClassPrepareRequest;
+
 import java.util.ArrayList;
 
 public class Square {
 
-    int number;
-    String type, image;
-    ArrayList<Player> players = new ArrayList<>();
+    private int number;
+    private String type;
+    private String image;
+    private ArrayList<Player> players = new ArrayList<>();
+    private Food food;
 
 
     public Square(){
+    }
+
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
     }
 
     public Square(int number, String type, String image) {
@@ -18,23 +30,23 @@ public class Square {
         this.image = image;
     }
 
-    int getNumber(){
+    public int getNumber(){
         return number;
     }
 
-    String getType(){
+    public  String getType(){
         return type;
     }
 
-    String getImage(){
+    public String getImage(){
         return image;
     }
 
-    ArrayList<Player> getPlayers(){
+    public ArrayList<Player> getPlayers(){
         return players;
     }
 
-    String getIdPlayersInString(){
+    public String getIdPlayersInString(){
         String result = "";
 
         for(int i=0; i<players.size(); i++){
@@ -48,12 +60,18 @@ public class Square {
         return result;
     }
 
-    void addPlayer(Player player){
+    public void addPlayer(Player player){
         players.add(player);
     }
 
-    void removePlayer(Player player){
+    public void removePlayer(Player player){
         players.remove(player);
     }
 
+
+    //only for tests uses
+
+    public void setPlayers(ArrayList<Player> players){
+        players = this.players;
+    }
 }

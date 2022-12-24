@@ -156,20 +156,7 @@ public class Test {
     }*/
 
 
-    @org.junit.Test
-    public void testGetPlayersIds(){
 
-        GameManager game = new GameManager();
-
-        game.map = new Map(30);
-
-        game.map.getSquare(3).players = createSomePlayers();
-
-        int[] expected = {0,1,3,4};
-
-        Assert.assertArrayEquals(expected, game.getPlayerIds(3));
-
-    }
 
 
     @org.junit.Test
@@ -231,7 +218,7 @@ public class Test {
 
         game.createInitialJungle(10,10, helper);
 
-        game.map.getSquare(5).players.add(game.players.get(0));
+        game.map.getSquare(5).getPlayers().add(game.players.get(0));
 
         //- [0] => Nome do ficheiro com a
         //imagem a colocar nesse posição
@@ -455,8 +442,41 @@ public class Test {
         Assert.assertEquals(foodsInfo[2][2], "banana.png");
         Assert.assertEquals(foodsInfo[3][2], "meat.png");
         Assert.assertEquals(foodsInfo[4][2], "mushroom.png");
+
+
+      //esultCode x = MovementResultCode.CAUGHT_FOOD;
+        MovementResult zz = new MovementResult(MovementResultCode.VALID_MOVEMENT, "ss");
+
+        if(zz.code()==MovementResultCode.NO_ENERGY);
+
     }
 
+
+
+    @org.junit.Test
+    public void testFuncionsIdFoodValid(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] foodsInfoInvalid = {{"p", "10"}, {"Q", "30"}};
+
+
+        String[][] invalidFoodPosition = {{"c", "1000"}, {"m", "309999"}};
+
+
+        Assert.assertTrue(game.isFoodPositionValid(0,foodsInfo,60));
+        Assert.assertTrue(game.isFoodPositionValid(1,foodsInfo,60));
+
+        Assert.assertTrue(game.isFoodIdValid(0,foodsInfo));
+        Assert.assertTrue(game.isFoodIdValid(1,foodsInfo));
+
+        Assert.assertFalse(game.isFoodIdValid(0,foodsInfoInvalid));
+        Assert.assertFalse(game.isFoodIdValid(1,foodsInfoInvalid));
+
+        Assert.assertFalse(game.isFoodPositionValid(0,invalidFoodPosition,60));
+        Assert.assertFalse(game.isFoodPositionValid(1,invalidFoodPosition,60));
+
+    }
 
 
 }

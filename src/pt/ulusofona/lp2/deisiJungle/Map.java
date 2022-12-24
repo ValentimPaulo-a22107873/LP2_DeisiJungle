@@ -10,7 +10,7 @@ public class Map {
         generateMap(size);
     }
 
-    ArrayList<Square> generateMap(int squares){
+    public ArrayList<Square> generateMap(int squares){
 
         for(int i=1; i<=squares; i++){
             if(i==squares) {
@@ -37,5 +37,9 @@ public class Map {
             return false;
         }
         return true;
+    }
+
+    public void placeFood(int squareIndex, Food food){
+        map.get(squareIndex).setFood(food);
     }
 }
