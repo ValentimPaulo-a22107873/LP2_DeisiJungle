@@ -10,7 +10,7 @@ public class Square {
     private String type;
     private String image;
     private ArrayList<Player> players = new ArrayList<>();
-    private Food food;
+    private Food food = null;
 
 
     public Square(){
@@ -22,13 +22,20 @@ public class Square {
 
     public void setFood(Food food) {
         this.food = food;
+        this.type = food.getName();
+        this.image = food.getImage();
+
     }
 
-    public Square(int number, String type, String image) {
+    public Square(int number, String type, String image, Food food) {
         this.number = number;
         this.type = type;
         this.image = image;
+        this.food = food;
     }
+
+
+    //already done
 
     public int getNumber(){
         return number;

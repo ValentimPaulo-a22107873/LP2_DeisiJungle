@@ -186,7 +186,7 @@ posição final.
             }
 
             //check if the foodId and the position of itself is valid
-            if(!(isFoodPositionValid(cnt, foodsInfo, jungleSize) && isFoodIdValid(cnt, foodsInfo))){
+            if(!(isFoodPositionValid(cnt, foodsInfo, jungleSize) || isFoodIdValid(cnt, foodsInfo))){
                 return InitializationError.createInicializacionError("comida invalida");
             }
 
@@ -197,8 +197,8 @@ posição final.
             String name=playersInfo[cnt][1];
             Specie specie = getSpeciByID(playersInfo[cnt][2].charAt(0));
 
-            players.add(new Player(id, specie.getInitialEnergy(), specie, name));
-            playersById.put(id, new Player(id, specie.getInitialEnergy(), specie, name));
+            players.add(new Player(id, specie, name));
+            playersById.put(id, new Player(id, specie, name));
             cnt++;
 
         }
@@ -206,14 +206,14 @@ posição final.
         map = new Map(jungleSize);
         sortPlayersById(players);
 
+        //place the foods
+        for(int i = 0; i < foodsInfo[1].length; i++){
+            map.placeFood(Integer.parseInt(foodsInfo[i][1]),getFoodById(foodsInfo[i][0].charAt(0)));
+        }
+
         //Preenche a 1 casa
         for(Player player : players){
             map.getSquare(1).addPlayer(player);
-        }
-
-        //place the foods
-        for(int i = 0; i < foodsInfo[1].length; i++){
-            map.placeFood(Integer.parseInt(foodsInfo[i][1]),getFoodById(foodsInfo[i][1].charAt(0)));
         }
 
         for(Player player : players){
@@ -223,7 +223,7 @@ posição final.
         return null;
     }
 
-
+/*
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
 
         players = new ArrayList<>();
@@ -297,6 +297,8 @@ posição final.
     }
     //ON GOING
 
+ */
+
 
     public int[] getPlayerIds(int squareNr){
 
@@ -342,12 +344,17 @@ posição final.
 
     public String[] getPlayerInfo(int playerId){
 
-        String[] playerInfo = new String[4];
+        String[] playerInfo = new String[5];
 
         playerInfo[0] = playersById.get(playerId).getId()+"";
         playerInfo[1] = playersById.get(playerId).getName();
         playerInfo[2] = playersById.get(playerId).getSpecie().getIdentifier()+"";
         playerInfo[3] = playersById.get(playerId).getEnergy()+"";
+
+        int first = playersById.get(playerId).getSpecie().getSpeed()[0];
+        int last = playersById.get(playerId).getSpecie().getSpeed()[1];
+        String speed = ""+first+".."+last;
+        playerInfo[4] = speed;
 
         return playerInfo;
     }

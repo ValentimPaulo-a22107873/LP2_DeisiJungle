@@ -193,7 +193,7 @@ public class Test {
         helper[1][1] = "Joao";
         helper[1][2] = "L";
 
-        game.createInitialJungle(40,30,helper);
+        game.createInitialJungle(40,null,helper);
 
         Assert.assertArrayEquals(expected,game.getPlayerInfo(1));
         Assert.assertFalse(expected == game.getPlayerInfo(2) );
@@ -216,7 +216,7 @@ public class Test {
         helper[1][1] = "Joao";
         helper[1][2] = "L";
 
-        game.createInitialJungle(10,10, helper);
+        game.createInitialJungle(10,null, helper);
 
         game.map.getSquare(5).getPlayers().add(game.players.get(0));
 
@@ -478,5 +478,57 @@ public class Test {
 
     }
 
+    @org.junit.Test
+    public void testgetSquareInfo(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players2 = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+
+        /*
+        playersTest.add(new Player(0, new Lion(),"Pedro"));
+        playersTest.add(new Player(1,new Elephant(),"Joao"));
+        playersTest.add(new Player(3, new Lion(),"Paulinho"));
+        playersTest.add(new Player(4,new Elephant(),"Antonio Silva"));
+         */
+
+
+        game.createInitialJungle(40, players2, foodsInfo);
+        game.players.get(0);
+
+        String[] shit = game.getSquareInfo(10);
+        String[] vazio = new String[]{"meat.png", "Carne", ""};
+
+        String[] shit2 = game.getSquareInfo(30);
+        String[] vazio2 = new String[]{"mushroom.png", "Cogumelo", ""};
+
+        Assert.assertEquals(vazio, shit);
+        Assert.assertEquals(vazio2, shit2);
+
+    }
+
+    @org.junit.Test
+    public void testCreateInitalJungle_1(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+
+        Assert.assertEquals(null, game.createInitialJungle(40, players, foodsInfo));
+    }
+
+    @org.junit.Test
+    public void testCreateInitalJungle_2(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players = {{"0", "Pedro", "H"}, {"1", "Valentim", "T"}};
+
+
+        InitializationError expected = InitializationError.createInicializacionError("comida invalida");
+        Assert.assertEquals(expected, game.createInitialJungle(40, players, foodsInfo));
+    }
 
 }

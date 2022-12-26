@@ -13,11 +13,11 @@ public class Map {
     public ArrayList<Square> generateMap(int squares){
 
         for(int i=1; i<=squares; i++){
-            if(i==squares) {
-                map.add(new Square(i, "Meta", "finish.png"));
 
+            if(i==squares){
+                map.add(new Square(i, "Meta", "finish.png", null));
             }else{
-                map.add(new Square(i, "Vazio", "blank.png"));
+                map.add(new Square(i, "Vazio", "blank.png", null));
             }
         }
 
@@ -40,6 +40,6 @@ public class Map {
     }
 
     public void placeFood(int squareIndex, Food food){
-        map.get(squareIndex).setFood(food);
+        getSquare(squareIndex).setFood(food);
     }
 }
