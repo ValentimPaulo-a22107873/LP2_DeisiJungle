@@ -20,7 +20,7 @@ public class Tarzan extends Omnivero{
 
     @Override
     char getIdentifier() {
-        return 'T';
+        return 'Z';
     }
 
     @Override

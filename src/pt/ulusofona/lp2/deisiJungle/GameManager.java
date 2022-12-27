@@ -36,7 +36,6 @@ public class GameManager {
     };
 
 
-
     //PLAYERS
     ArrayList<Player> players = new ArrayList<>();
     HashMap<Integer, Player> playersById = new HashMap<>();
@@ -48,50 +47,11 @@ public class GameManager {
 
 
 
+    ///*---------- MANDITORY FUNCTIONS ----------*///
 
-    //MANDITORY FUNCTIONS
-
-    public Specie getSpeciByID(char id){
-        for (Specie specie : species) {
-            if(id == specie.getIdentifier()){
-                return specie;
-            }
-        }
-        return null;
-    }
-
-
-    public String[][] getFoodTypes(){
-        String[][] result = new String[foods.size()][3];
-
-
-
-        int cnt = 0;
-        for (Food food : foods) {
-            result[cnt][0] = food.getIdentifier()+"";
-            result[cnt][1] = food.getName();
-            result[cnt][2] = food.getImage();
-
-            cnt++;
-        }
-        return result;
-    }
-
-
-
-    public Food getFoodById(char id){
-        for (Food food : foods) {
-            if(id == food.getIdentifier()){
-                return food;
-            }
-        }
-        return null;
-    }
-
+    //////FIRST FUNCTION - getSpecies()
     public String[][] getSpecies(){
         String[][] result = new String[species.size()][7];
-
-
 
         int cnt = 0;
         for (Specie specie : species) {
@@ -106,42 +66,27 @@ public class GameManager {
         }
         return result;
     }
-    //DONE
+    ///DONE
 
 
+    //////SECOND FUNCTION - getFoodTypes()
+    public String[][] getFoodTypes(){
+        String[][] result = new String[foods.size()][3];
 
-    public boolean isSpecieValid(char specieId){
-        for(Specie specie : species){
-            if(specie.getIdentifier() == specieId){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /* Os alimentos têm que estar
-posicionados dentro dos limites do
-terreno. Além disso, não pode haver
-alimentos na posição inicial nem na
-posição final.
-*/
-
-    public boolean isFoodIdValid(char foodId){
+        int cnt = 0;
         for (Food food : foods) {
-            if(food.getIdentifier() == foodId){
-                return true;
-            }
+            result[cnt][0] = food.getIdentifier()+"";
+            result[cnt][1] = food.getName();
+            result[cnt][2] = food.getImage();
+
+            cnt++;
         }
-        return false;
+        return result;
     }
+    ///DONE
 
-    public boolean isFoodPositionValid(int position, int jnglSz){
-        return (!(position >= jnglSz || position <= 0));
-    }
 
-    /**/
-
+    //////THIRD FUNCTION - createInitialJungle()
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
 
         reset();
@@ -198,8 +143,8 @@ posição final.
             String name=playersInfo[i][1];
             Specie specie = getSpeciByID(playersInfo[i][2].charAt(0));
 
-            players.add(new Player(id, specie, name));
-            playersById.put(id, new Player(id, specie, name));
+            players.add(new Player(id,specie.getInitialEnergy(), specie, name));
+            playersById.put(id, new Player(id,specie.getInitialEnergy(), specie, name));
         }
 
         //create map
@@ -209,10 +154,6 @@ posição final.
         //Preenche a 1 casa
         for(Player player : players){
             map.getSquare(1).addPlayer(player);
-        }
-
-        for(Player player : players){
-            player.defineInitialEnergy();
         }
 
         //VERIFICATIONS================================================================
@@ -246,10 +187,10 @@ posição final.
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
         return createInitialJungle(jungleSize, playersInfo, null);
     }
+    ///DONE
 
 
-
-
+    //////FOURTH FUNCTION - getPlayerIds()
     public int[] getPlayerIds(int squareNr){
 
         if(!map.isSquareValid(squareNr)){
@@ -270,10 +211,10 @@ posição final.
 
         return playerIDs;
     }
-    //DONE
+    ///DONE
 
 
-
+    //////FIFTH FUNCTION - getSquareInfo()
     public String[] getSquareInfo(int squareNr){
 
         if(!map.isSquareValid(squareNr)){
@@ -289,9 +230,10 @@ posição final.
 
         return squareInfo;
     }
-    //DONE
+    ///DONE
 
 
+    //////SIXTH FUNCTION - getPlayerInfo()
     public String[] getPlayerInfo(int playerId){
 
         String[] playerInfo = new String[5];
@@ -308,9 +250,10 @@ posição final.
 
         return playerInfo;
     }
-    //DONE
+    ///DONE
 
 
+    //////SEVENTH FUNCTION - getCurrentPlayerInfo()
     public String[] getCurrentPlayerInfo(){
 
         String[] playerInfo = new String[4];
@@ -322,9 +265,17 @@ posição final.
 
         return playerInfo;
     }
-    //ON GOING
+    ///DONE
 
 
+    //////EIGHT FUNCTION - getCurrentPlayerEnergyInfo()
+    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
+        return null;
+    }
+    ///ON GOING !!!
+
+
+    //////NINTH FUNCTION - getPlayersInfo()
     public String[][] getPlayersInfo(){
 
         String[][] playersInfo = new String[players.size()][4];
@@ -339,8 +290,10 @@ posição final.
 
         return playersInfo;
     }
-    //DONE
+    ///DONE
 
+
+    //////TENTH FUNCTION - moveCurrentPlayer()
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
         Player currentPlayer = players.get(turn);
@@ -390,7 +343,10 @@ posição final.
         return true;
 
     }
+    ///ON GOING !!!
 
+
+    //////ELEVENTH FUNCTION - getWinnerInfo()
     public String[] getWinnerInfo(){
 
         if(!checkIfGameEnded()){
@@ -420,7 +376,10 @@ posição final.
         }
         return getPlayerInfo(players.get(0).getId());
     }
+    ///DONE
 
+
+    //////TWELFTH FUNCTION - getGameResults()
     public ArrayList<String> getGameResults(){
 
         ArrayList<String> result =  new ArrayList<>();
@@ -447,7 +406,10 @@ posição final.
 
         return result;
     }
+    ///ON GOING !!!
 
+
+    //////THIRTEENTH FUNCTION - getAuthorsPanel()
     public JPanel getAuthorsPanel(){
 
         JPanel panel = new JPanel();
@@ -463,14 +425,46 @@ posição final.
 
         return panel;
     }
+    ///ON GOING !!!
 
+
+    //////FOURTEENTH FUNCTION - whoIsTaborda()
     public String whoIsTaborda(){
         return "Wrestling";
     }
-    //DONE
+    ///DONE
 
 
-    //ADDITIONAL FUNCTIONS
+    //////FIFTEENTH FUNCTION - saveGame()
+    public boolean saveGame(File file){
+        return true;
+    }
+    ///ON GOING !!!
+
+
+    //////SIXTEENTH FUNCTION - loadGame()
+    public boolean loadGame(File file){
+        return true;
+    }
+    ///ON GOING !!!
+
+
+
+    ///*---------- OTHER FUNCTIONS ----------*///
+
+    ///GETTERS
+    public Map getMap() {
+        return map;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public int getNumberOfPlays() {
+        return numberOfPlays;
+    }
+    ///GETTERS
 
     Specie getSpicieById(char id){
         for(Specie specie : species){
@@ -501,7 +495,6 @@ posição final.
         return players;
     }
 
-
     void nextTurn(){
         if(turn == players.size()-1){
             turn = 0;
@@ -514,8 +507,6 @@ posição final.
         //System.out.println(turn);
     }
     //ASSUMINDO QUE CADA JOGADA DE CADA JOGADOR CONTA COMO UM TURNO, VERIFICAR
-
-
 
     boolean checkIfGameEnded(){
 
@@ -558,24 +549,48 @@ posição final.
         }
     }
 
-    boolean passedMiddleSquare(int position){
-        return position >= map.getSize() / 2 + 1;
-    }
-
-    public Map getMap() {
-        return map;
-    }
-
-    public int getTurn() {
-        return turn;
-    }
-
-    public int getNumberOfPlays() {
-        return numberOfPlays;
-    }
-
     public void reset() {
         map = null;
         players = new ArrayList<>();
+    }
+
+    public Specie getSpeciByID(char id){
+        for (Specie specie : species) {
+            if(id == specie.getIdentifier()){
+                return specie;
+            }
+        }
+        return null;
+    }
+
+    public Food getFoodById(char id){
+        for (Food food : foods) {
+            if(id == food.getIdentifier()){
+                return food;
+            }
+        }
+        return null;
+    }
+
+    public boolean isSpecieValid(char specieId){
+        for(Specie specie : species){
+            if(specie.getIdentifier() == specieId){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isFoodIdValid(char foodId){
+        for (Food food : foods) {
+            if(food.getIdentifier() == foodId){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isFoodPositionValid(int position, int jnglSz){
+        return (!(position >= jnglSz || position <= 0));
     }
 }

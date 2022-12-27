@@ -83,23 +83,6 @@ public class Test {
     }
 
 
-    public ArrayList<Player> createSomePlayers (){
-
-        ArrayList<Player> playersTest = new ArrayList<>();
-
-        playersTest.add(new Player(0, new Lion(),
-                "Pedro"));
-        playersTest.add(new Player(1,new Elephant(),
-                "Joao"));
-        playersTest.add(new Player(3,  new Lion(),
-                "Paulinho"));
-        playersTest.add(new Player(4,new Elephant(),
-                "Antonio Silva"));
-
-        return playersTest;
-    }
-
-
     //@Test
     //public void testeGetSpecies(){
 
@@ -156,7 +139,18 @@ public class Test {
     }*/
 
 
+    @org.junit.Test
+    public void testGetPlayerInitialEnergy(){
 
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+        game.createInitialJungle(40,players,foodsInfo);
+
+        Assert.assertEquals(150, game.players.get(1).getEnergy());
+    }
 
 
     @org.junit.Test
@@ -164,39 +158,19 @@ public class Test {
 
         GameManager game = new GameManager();
 
-        // [0] => O ID do jogador
-        //- [1] => O Nome do jogador
-        //- [2] => O ID da espécie associada ao
-        //jogador.
-        //- [3] => A energia atual do jogador,
-        //medida em unidades de energia
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
 
-        //public Player(int id, char specieId, int energy, String name) {
-        game.players.add(new Player(1,'E',30, "Pedro"));
-        game.players.add(new Player(2,'L',30, "Joao"));
+        game.createInitialJungle(40,players,foodsInfo);
 
-        String[] expected = new String[4];
+        String[] expected = new String[5];
         expected[0] = "1";
-        expected[1] = "Pedro";
-        expected[2] = "E";
-        expected[3] = "30";
+        expected[1] = "Valentim";
+        expected[2] = "T";
+        expected[3] = "150";
+        expected[4] = "1..3";
 
-        String[][] helper = new String[2][3];
-        //- [0] => O ID do jogador
-        //- [1] => O Nome do jogador
-        //- [2] => O ID da espécie
-        helper[0][0] = "1";
-        helper[0][1] = "Pedro";
-        helper[0][2] = "E";
-
-        helper[1][0] = "2";
-        helper[1][1] = "Joao";
-        helper[1][2] = "L";
-
-        game.createInitialJungle(40,null,helper);
-
-        Assert.assertArrayEquals(expected,game.getPlayerInfo(1));
-        Assert.assertFalse(expected == game.getPlayerInfo(2) );
+        Assert.assertEquals(expected, game.getPlayerInfo(game.players.get(1).getId()));
     }
 
 
@@ -204,21 +178,13 @@ public class Test {
     public void testGetSquareInfo(){
         GameManager game = new GameManager();
 
-        String[][] helper = new String[2][3];
-        //- [0] => O ID do jogador
-        //- [1] => O Nome do jogador
-        //- [2] => O ID da espécie
-        helper[0][0] = "1";
-        helper[0][1] = "Pedro";
-        helper[0][2] = "E";
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
 
-        helper[1][0] = "2";
-        helper[1][1] = "Joao";
-        helper[1][2] = "L";
-
-        game.createInitialJungle(10,null, helper);
+        game.createInitialJungle(40, players, foodsInfo);
 
         game.map.getSquare(5).getPlayers().add(game.players.get(0));
+        game.map.getSquare(5).getPlayers().add(game.players.get(1));
 
         //- [0] => Nome do ficheiro com a
         //imagem a colocar nesse posição
@@ -234,7 +200,7 @@ public class Test {
         String[] expected = new String[3];
         expected[0] = "blank.png";
         expected[1] = "Vazio";
-        expected[2] = "1";
+        expected[2] = "0,1";
 
         Assert.assertArrayEquals(expected,game.getSquareInfo(5));
     }
@@ -382,7 +348,10 @@ public class Test {
     public void testEatFood(){
         GameManager game = new GameManager();
 
-        ArrayList<Player> players = createSomePlayers();
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players2 = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+        game.createInitialJungle(40, players2, foodsInfo);
 
         /*
         playersTest.add(new Player(0, new Lion(),"Pedro"));
@@ -391,23 +360,20 @@ public class Test {
         playersTest.add(new Player(4,new Elephant(),"Antonio Silva"));
          */
 
-        for(Player player : players){
-            player.defineInitialEnergy();
-        }
 
-        players.get(0).removeEnergy();
-        players.get(0).removeEnergy();
-        players.get(0).removeEnergy();
-        players.get(0).removeEnergy();
-        players.get(0).removeEnergy();
+        game.players.get(0).removeEnergy();
+        game.players.get(0).removeEnergy();
+        game.players.get(0).removeEnergy();
+        game.players.get(0).removeEnergy();
+        game.players.get(0).removeEnergy();
 
-        players.get(0).eat('b',players.get(0).getSpecie().getInitialEnergy(), 4, 0);
+        game.players.get(0).eat('b',game.players.get(0).getSpecie().getInitialEnergy(), 4, 0);
 
-        Assert.assertEquals(80, players.get(0).getEnergy());
+        Assert.assertEquals(80, game.players.get(0).getEnergy());
 
-        players.get(0).eat('b',players.get(0).getSpecie().getInitialEnergy(), 4, 0);
+        game.players.get(0).eat('b',game.players.get(0).getSpecie().getInitialEnergy(), 4, 0);
 
-        Assert.assertEquals(40, players.get(0).getEnergy());
+        Assert.assertEquals(40, game.players.get(0).getEnergy());
 
     }
 
@@ -439,7 +405,7 @@ public class Test {
 
         Assert.assertEquals(foodsInfo[0][2], "water.png");
         Assert.assertEquals(foodsInfo[1][2], "grass.png");
-        Assert.assertEquals(foodsInfo[2][2], "banana.png");
+        Assert.assertEquals(foodsInfo[2][2], "bananas.png");
         Assert.assertEquals(foodsInfo[3][2], "meat.png");
         Assert.assertEquals(foodsInfo[4][2], "mushroom.png");
 
