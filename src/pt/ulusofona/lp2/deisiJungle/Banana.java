@@ -17,6 +17,6 @@ public class Banana extends Food{
 
     @Override
     String getImage() {
-        return "banana.png";
+        return "bananas.png";
     }
 }

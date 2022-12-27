@@ -464,17 +464,17 @@ public class Test {
         String[][] invalidFoodPosition = {{"c", "1000"}, {"m", "309999"}};
 
 
-        Assert.assertTrue(game.isFoodPositionValid(0,foodsInfo,60));
-        Assert.assertTrue(game.isFoodPositionValid(1,foodsInfo,60));
+        Assert.assertTrue(game.isFoodPositionValid(Integer.parseInt(foodsInfo[0][1]),60));
+        Assert.assertTrue(game.isFoodPositionValid(Integer.parseInt(foodsInfo[1][1]),60));
 
-        Assert.assertTrue(game.isFoodIdValid(0,foodsInfo));
-        Assert.assertTrue(game.isFoodIdValid(1,foodsInfo));
+        Assert.assertTrue(game.isFoodIdValid(foodsInfo[0][0].charAt(0)));
+        Assert.assertTrue(game.isFoodIdValid(foodsInfo[1][0].charAt(0)));
 
-        Assert.assertFalse(game.isFoodIdValid(0,foodsInfoInvalid));
-        Assert.assertFalse(game.isFoodIdValid(1,foodsInfoInvalid));
+        Assert.assertFalse(game.isFoodIdValid(foodsInfoInvalid[0][0].charAt(0)));
+        Assert.assertFalse(game.isFoodIdValid(foodsInfoInvalid[1][0].charAt(0)));
 
-        Assert.assertFalse(game.isFoodPositionValid(0,invalidFoodPosition,60));
-        Assert.assertFalse(game.isFoodPositionValid(1,invalidFoodPosition,60));
+        Assert.assertFalse(game.isFoodPositionValid(Integer.parseInt(invalidFoodPosition[0][1]),60));
+        Assert.assertFalse(game.isFoodPositionValid(Integer.parseInt(invalidFoodPosition[1][1]),60));
 
     }
 
@@ -495,40 +495,98 @@ public class Test {
 
 
         game.createInitialJungle(40, players2, foodsInfo);
-        game.players.get(0);
+        Specie especie = game.players.get(0).getSpecie();
 
-        String[] shit = game.getSquareInfo(10);
+        String[] stuff = game.getSquareInfo(10);
         String[] vazio = new String[]{"meat.png", "Carne", ""};
 
-        String[] shit2 = game.getSquareInfo(30);
+        String[] stuff2 = game.getSquareInfo(30);
         String[] vazio2 = new String[]{"mushroom.png", "Cogumelo", ""};
 
-        Assert.assertEquals(vazio, shit);
-        Assert.assertEquals(vazio2, shit2);
+        String[] stuff3 = game.getSquareInfo(1);
+        String[] vazio3 = new String[]{"blank.png", "Vazio", "0,1"};
+
+        Assert.assertEquals(vazio, stuff);
+        Assert.assertEquals(vazio2, stuff2);
+        Assert.assertEquals(vazio3, stuff3);
 
     }
 
     @org.junit.Test
-    public void testCreateInitalJungle_1(){
+    public void testCreateInitalJungle_sucessfull(){
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
         String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
 
-
-        Assert.assertEquals(null, game.createInitialJungle(40, players, foodsInfo));
+        InitializationError expected = null;
+        Assert.assertEquals(expected, game.createInitialJungle(40, players, foodsInfo));
     }
 
     @org.junit.Test
-    public void testCreateInitalJungle_2(){
+    public void testCreateInitalJungle_invalidNumberOfPlayers(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players = {{"0", "Pedro", "L"}};
+
+        InitializationError expected = new InitializationError("numero de jogadores invalidos");
+        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
+    }
+
+    @org.junit.Test
+    public void testCreateInitalJungle_invalidNumberOfSquares(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+        InitializationError expected = new InitializationError("O mapa tem de ter, pelo menos, duas posições por cada jogador que esteja em jogo");
+        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(3, players, foodsInfo).getMessage());
+    }
+
+    @org.junit.Test
+    public void testCreateInitalJungle_repeatedPlayerId(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"0", "Valentim", "T"}};
+
+        InitializationError expected = new InitializationError("id de jgador invalido");
+        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
+    }
+
+    @org.junit.Test
+    public void testCreateInitalJungle_invalidSpecieId(){
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
         String[][] players = {{"0", "Pedro", "H"}, {"1", "Valentim", "T"}};
 
+        InitializationError expected = new InitializationError("especie invalida");
+        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
+    }
 
-        InitializationError expected = InitializationError.createInicializacionError("comida invalida");
-        Assert.assertEquals(expected, game.createInitialJungle(40, players, foodsInfo));
+    @org.junit.Test
+    public void testCreateInitalJungle_invalidFoodId(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"k", "10"}, {"m", "30"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+        InitializationError expected = new InitializationError("id de comida inválido");
+        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
+    }
+
+    @org.junit.Test
+    public void testCreateInitalJungle_invalidFoodPosition(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "40"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+        InitializationError expected = new InitializationError("posição de comida inválida");
+        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
     }
 
 }

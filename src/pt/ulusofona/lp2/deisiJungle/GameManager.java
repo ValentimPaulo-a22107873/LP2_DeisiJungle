@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class GameManager {
@@ -109,9 +110,9 @@ public class GameManager {
 
 
 
-    public boolean isSpecieValid(String[][] playersInfo, int i){
+    public boolean isSpecieValid(char specieId){
         for(Specie specie : species){
-            if(specie.getIdentifier() == playersInfo[i][2].charAt(0)){
+            if(specie.getIdentifier() == specieId){
                 return true;
             }
         }
@@ -126,90 +127,84 @@ alimentos na posição inicial nem na
 posição final.
 */
 
-    public boolean isFoodIdValid(int i, String[][] foodsInfo){
+    public boolean isFoodIdValid(char foodId){
         for (Food food : foods) {
-            if(food.getIdentifier() == foodsInfo[i][0].charAt(0)){
+            if(food.getIdentifier() == foodId){
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isFoodPositionValid(int i, String[][] foodsInfo, int jnglSz){
-        return (!(Integer.parseInt(foodsInfo[i][1]) >= jnglSz || Integer.parseInt(foodsInfo[i][1]) <= 0));
+    public boolean isFoodPositionValid(int position, int jnglSz){
+        return (!(position >= jnglSz || position <= 0));
     }
 
     /**/
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
 
+        reset();
+
         players = new ArrayList<>();
         playersById = new HashMap<>();
+
+        ArrayList<Integer> repeated = new ArrayList<>();
 
 
 
         //VERIFICATIONS================================================================
         //check if the number of players is valid
         if(playersInfo.length < 2 || playersInfo.length > 4){
-            return  InitializationError.createInicializacionError("numero de jogadores invalidos");
+            return new InitializationError("numero de jogadores invalidos");
         }
 
         //O mapa tem de ter, pelo menos, duas posições por cada jogador que esteja em jogo.
         if (playersInfo.length*2 > jungleSize){
-            return InitializationError.createInicializacionError("O mapa tem de ter, pelo menos, duas posições por cada jogador que esteja em jogo");
+            return new InitializationError("O mapa tem de ter, pelo menos, duas posições por cada jogador que esteja em jogo");
         }
+        //END OF VERIFICATIONS================================================================
 
-        int cnt = 0;
-        ArrayList<Integer> playerIds = new ArrayList<>();
 
-        for (Player player : players) {
+        //VERIFICATIONS================================================================
+        //check if playersInfo is valid
+        for (int i=0; i<playersInfo.length; i++) {
 
             //check if there are any players Ids duplicated
             try{
-                if(!playerIds.contains(Integer.parseInt(playersInfo[cnt][0]))){
-                    playerIds.add(Integer.parseInt(playersInfo[cnt][0]));
+                if(!repeated.contains(Integer.parseInt(playersInfo[i][0]))){
+                    repeated.add(Integer.parseInt(playersInfo[i][0]));
                 }else {
-                    return InitializationError.createInicializacionError("id de jgador invalido");
+                    return new InitializationError("id de jgador invalido");
                 }
             }catch (NumberFormatException e){
-                return InitializationError.createInicializacionError("id de jgador invalido");
+                return new InitializationError("id de jgador invalido");
             }
 
             //check if the character os the specie passed on players info is valid
-            if(!isSpecieValid(playersInfo,cnt)){
-                return InitializationError.createInicializacionError("especie invalida");
+            if(!isSpecieValid(playersInfo[i][2].charAt(0))){
+                return new InitializationError("especie invalida");
             }
 
             //check if the name of the player is valid
-            if (playersInfo[cnt][1] == null || playersInfo[cnt][1].equals("")) {
-                return InitializationError.createInicializacionError("nome invalido");
+            if (playersInfo[i][1] == null || playersInfo[i][1].equals("")) {
+                return new InitializationError("nome invalido");
             }
 
-            //check if the foodId and the position of itself is valid
-            if(!(isFoodPositionValid(cnt, foodsInfo, jungleSize) || isFoodIdValid(cnt, foodsInfo))){
-                return InitializationError.createInicializacionError("comida invalida");
-            }
-
-        // END OF VERIFICATIONS================================================================
+            //END OF VERIFICATIONS================================================================
 
             //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
-            int id=Integer.parseInt(playersInfo[cnt][0]);
-            String name=playersInfo[cnt][1];
-            Specie specie = getSpeciByID(playersInfo[cnt][2].charAt(0));
+            int id=Integer.parseInt(playersInfo[i][0]);
+            String name=playersInfo[i][1];
+            Specie specie = getSpeciByID(playersInfo[i][2].charAt(0));
 
             players.add(new Player(id, specie, name));
             playersById.put(id, new Player(id, specie, name));
-            cnt++;
-
         }
 
+        //create map
         map = new Map(jungleSize);
         sortPlayersById(players);
-
-        //place the foods
-        for(int i = 0; i < foodsInfo[1].length; i++){
-            map.placeFood(Integer.parseInt(foodsInfo[i][1]),getFoodById(foodsInfo[i][0].charAt(0)));
-        }
 
         //Preenche a 1 casa
         for(Player player : players){
@@ -218,86 +213,41 @@ posição final.
 
         for(Player player : players){
             player.defineInitialEnergy();
+        }
+
+        //VERIFICATIONS================================================================
+        //check if foodsInfo is valid and place it on the map
+        if(foodsInfo != null){
+
+            for(int i=0; i<foodsInfo.length; i++){
+
+                if(foodsInfo[i][0] == null || Objects.equals(foodsInfo[i][0], "")){
+                    return new InitializationError("id de comida inválido");
+                }
+
+                if(!isFoodIdValid(foodsInfo[i][0].charAt(0))){
+                    return new InitializationError("id de comida inválido");
+                }
+
+                if(!isFoodPositionValid(Integer.parseInt(foodsInfo[i][1]), jungleSize)){
+                    return new InitializationError("posição de comida inválida");
+                }
+
+                //END OF VERIFICATIONS================================================================
+                //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
+
+                map.placeFood(Integer.parseInt(foodsInfo[i][1]), getFoodById(foodsInfo[i][0].charAt(0)));
+            }
         }
 
         return null;
     }
 
-/*
-    public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
-
-        players = new ArrayList<>();
-        playersById = new HashMap<>();
-
-        //O número de jogadores.
-        if(playersInfo.length < 2 || playersInfo.length > 4){
-            return false;
-        }
-
-        //O mapa tem de ter, pelo menos, duas posições por cada jogador que esteja em jogo.
-        if (playersInfo.length*2 > jungleSize){
-            return false;
-        }
-
-        ArrayList<Integer> playerIds = new ArrayList<>();
-
-        for(int i=0; i<playersInfo.length; i++){
-
-            try{
-                if(!playerIds.contains(Integer.parseInt(playersInfo[i][0]))){
-                    playerIds.add(Integer.parseInt(playersInfo[i][0]));
-                }else {
-                    return false;
-                }
-            }catch (NumberFormatException e){
-                return false;
-            }
-
-            //Verifica se a espécie existe
-            boolean validSpecie=false;
-            for(Specie specie : species){
-                if(specie.getIdentifier() == playersInfo[i][2].charAt(0)){
-                    validSpecie=true;
-                    break;
-                }
-            }
-            if(!validSpecie){
-                return false;
-            }
-
-            //Verifica se o nome e valido
-            if (playersInfo[i][1] == null || playersInfo[i][1].equals("")) {
-                return false;
-            }
-
-            //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
-            int id=Integer.parseInt(playersInfo[i][0]);
-            String name=playersInfo[i][1];
-            char specieIdentifier=playersInfo[i][2].charAt(0);
-
-            players.add(new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
-            playersById.put(id, new Player(id,initialEnergy,getSpicieById(specieIdentifier),name));
-
-        }
-        map = new Map(jungleSize);
-        sortPlayersById(players);
-
-        //System.out.println(players);
-
-        //Preenche a 1 casa
-        for(Player player : players){
-            map.getSquare(1).addPlayer(player);
-        }
-
-        for(Player player : players){
-            player.defineInitialEnergy();
-        }        return true;
-
-
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
+        return createInitialJungle(jungleSize, playersInfo, null);
     }
-    //ON GOING
 
- */
+
 
 
     public int[] getPlayerIds(int squareNr){
@@ -622,5 +572,10 @@ posição final.
 
     public int getNumberOfPlays() {
         return numberOfPlays;
+    }
+
+    public void reset() {
+        map = null;
+        players = new ArrayList<>();
     }
 }
