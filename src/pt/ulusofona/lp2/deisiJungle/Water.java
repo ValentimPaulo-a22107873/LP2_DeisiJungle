@@ -19,4 +19,9 @@ public class Water extends Food{
     String getImage() {
         return "water.png";
     }
+
+    @Override
+    String getTooltip() {
+        return "Agua : + 15U|20% energia";
+    }
 }

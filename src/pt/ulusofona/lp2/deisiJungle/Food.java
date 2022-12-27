@@ -11,4 +11,6 @@ public abstract class Food{
     abstract char getIdentifier();
 
     abstract String getImage();
+
+    abstract String getTooltip();
 }

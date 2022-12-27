@@ -9,7 +9,7 @@ public class Lion extends Carnivoros{
 
     @Override
     String getName() {
-        return "Leão";
+        return "Leao";
     }
 
     @Override

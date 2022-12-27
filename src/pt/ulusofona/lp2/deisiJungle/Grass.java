@@ -19,4 +19,9 @@ public class Grass extends Food{
     String getImage() {
         return "grass.png";
     }
+
+    @Override
+    String getTooltip() {
+        return "Erva : +- 20 energia";
+    }
 }

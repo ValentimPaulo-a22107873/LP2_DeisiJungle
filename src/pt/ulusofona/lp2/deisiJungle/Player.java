@@ -39,32 +39,12 @@ public class Player {
 
     //CONSTRUTORES
 
-    public void eat(char food, int initialEnergy, int turn, int mushroomEnergy){
-        if(food=='b' && bananaEaten>=1){
-            addEnergy(-40);
-            bananaEaten++;
-        }
-        else if(food=='b' && bananaEaten<1){
-            addEnergy(40);
-            bananaEaten++;
-        }
-        else if(food=='m' && (turn%2)==0) {
-            addEnergy((mushroomEnergy / 100) * getEnergy());
-        }
-        else if((food=='m' && (turn%2)!=0)){
-            addEnergy(-(mushroomEnergy / 100) * getEnergy());
-        }
-        else{
-            addEnergy(specie.eat(food, initialEnergy, turn));
-        }
-    }
+
 
 
     public void defineInitialEnergy(){
         energy = specie.getInitialEnergy();
     }
-
-
 
     public int getBananaEaten() {
         return bananaEaten;
@@ -113,11 +93,69 @@ public class Player {
     }
 
     void addEnergy(int energyToAdd){
-        if(energy + energyToAdd >= specie.getInitialEnergy()){
-            energy=specie.getInitialEnergy();
+        if(energy + energyToAdd >= 200){
+            energy=200;
         }else{
             energy+=energyToAdd;
         }
 
+    }
+
+
+
+
+
+    public boolean eat(Food food, int turn){
+        if(food.getIdentifier()=='a'){
+            addEnergy(specie.eat('a', specie.getInitialEnergy(), turn));
+            return true;
+        }
+
+        else if(food.getIdentifier()=='e'){
+            addEnergy(specie.eat('e', specie.getInitialEnergy(), turn));
+            return true;
+        }
+
+        else if(food.getIdentifier()=='c'){
+            addEnergy(specie.eat('c', specie.getInitialEnergy(), turn));
+            return true;
+        }
+
+        else if(food.getIdentifier()=='b'){
+            eatBanana((Banana) food);
+            return true;
+        }
+
+        else if(food.getIdentifier()=='m'){
+            eatMushroom((Mushrooms) food, turn);
+            return true;
+        }
+
+        else{
+            return false;
+        }
+    }
+
+
+    void eatBanana(Banana banana){
+        if(banana.bananaAvailable()){
+
+            if(bananaEaten==0){
+                addEnergy(40);
+            }else{
+                addEnergy(-40);
+            }
+            addBanana();
+        }
+    }
+
+    void eatMushroom(Mushrooms mushroom, int turn){
+        int value = (mushroom.getEnergy()/100) * this.energy;
+
+        if(turn+1%2 == 0){
+            addEnergy(value);
+        }else{
+            addEnergy(-value);
+        }
     }
 }

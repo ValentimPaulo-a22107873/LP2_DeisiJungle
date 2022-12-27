@@ -344,39 +344,6 @@ public class Test {
 
     }
 
-    @org.junit.Test
-    public void testEatFood(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
-        String[][] players2 = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
-
-        game.createInitialJungle(40, players2, foodsInfo);
-
-        /*
-        playersTest.add(new Player(0, new Lion(),"Pedro"));
-        playersTest.add(new Player(1,new Elephant(),"Joao"));
-        playersTest.add(new Player(3, new Lion(),"Paulinho"));
-        playersTest.add(new Player(4,new Elephant(),"Antonio Silva"));
-         */
-
-
-        game.players.get(0).removeEnergy();
-        game.players.get(0).removeEnergy();
-        game.players.get(0).removeEnergy();
-        game.players.get(0).removeEnergy();
-        game.players.get(0).removeEnergy();
-
-        game.players.get(0).eat('b',game.players.get(0).getSpecie().getInitialEnergy(), 4, 0);
-
-        Assert.assertEquals(80, game.players.get(0).getEnergy());
-
-        game.players.get(0).eat('b',game.players.get(0).getSpecie().getInitialEnergy(), 4, 0);
-
-        Assert.assertEquals(40, game.players.get(0).getEnergy());
-
-    }
-
 
     @org.junit.Test
     public void testGetFoods(){
@@ -461,13 +428,17 @@ public class Test {
 
 
         game.createInitialJungle(40, players2, foodsInfo);
-        Specie especie = game.players.get(0).getSpecie();
+        String i = game.map.getSquare(30).getFood().getTooltip();
+
+        for(int x = 0; x<15;x++){
+            game.nextTurn();
+        }
 
         String[] stuff = game.getSquareInfo(10);
-        String[] vazio = new String[]{"meat.png", "Carne", ""};
+        String[] vazio = new String[]{"meat.png", "Carne toxica", ""};
 
         String[] stuff2 = game.getSquareInfo(30);
-        String[] vazio2 = new String[]{"mushroom.png", "Cogumelo", ""};
+        String[] vazio2 = new String[]{"mushroom.png", i, ""};
 
         String[] stuff3 = game.getSquareInfo(1);
         String[] vazio3 = new String[]{"blank.png", "Vazio", "0,1"};
@@ -554,5 +525,74 @@ public class Test {
         InitializationError expected = new InitializationError("posição de comida inválida");
         Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
     }
+
+
+    @org.junit.Test
+    public void testEatFood(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "40"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        Player teste1 = game.players.get(0);
+
+        //energia player Pedro - 80
+        teste1.removeEnergy();
+        teste1.removeEnergy();
+        teste1.removeEnergy();
+        teste1.removeEnergy();
+        teste1.removeEnergy();
+        teste1.removeEnergy();
+        teste1.removeEnergy();
+        teste1.removeEnergy();
+        teste1.removeEnergy();
+        teste1.removeEnergy();
+        //energia player Pedro - 60
+
+
+        Food food1 = game.map.getSquare(10).getFood();
+        teste1.eat(food1, game.getNumberOfPlays());
+
+        Assert.assertEquals(110, teste1.getEnergy());
+    }
+
+    @org.junit.Test
+    public void testEatFood2(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "10"}, {"m", "40"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        Player teste2 = game.players.get(0);
+
+        //energia player Pedro - 80
+        teste2.removeEnergy();
+        teste2.removeEnergy();
+        teste2.removeEnergy();
+        teste2.removeEnergy();
+        teste2.removeEnergy();
+        teste2.removeEnergy();
+        teste2.removeEnergy();
+        teste2.removeEnergy();
+        teste2.removeEnergy();
+        teste2.removeEnergy();
+        //energia player Pedro - 60
+
+        for(int i = 0; i<15;i++){
+            game.nextTurn();
+        }
+
+        Food food2 = game.map.getSquare(10).getFood();
+        teste2.eat(food2, game.getNumberOfPlays());
+
+        Assert.assertEquals(10, teste2.getEnergy());
+    }
+
+
+
 
 }

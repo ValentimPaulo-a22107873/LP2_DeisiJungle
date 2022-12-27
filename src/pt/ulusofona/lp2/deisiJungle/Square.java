@@ -22,9 +22,8 @@ public class Square {
 
     public void setFood(Food food) {
         this.food = food;
-        this.type = food.getName();
+        this.type = food.getTooltip();
         this.image = food.getImage();
-
     }
 
     public Square(int number, String type, String image, Food food) {
@@ -41,8 +40,15 @@ public class Square {
         return number;
     }
 
-    public  String getType(){
-        return type;
+    public  String getType(int turn){
+        if(food!=null){
+            if(food.getIdentifier()=='c'){
+                Meat meat = (Meat)food;
+                meat.updateTurn(turn);
+            }
+            return food.getTooltip();
+        }
+        return this.type;
     }
 
     public String getImage(){

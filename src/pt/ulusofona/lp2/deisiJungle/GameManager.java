@@ -42,8 +42,8 @@ public class GameManager {
 
     //OTHERS
      Map map;
-     private int turn;
-     private int numberOfPlays;
+     private int turn = 0;
+     private int numberOfPlays=0;
 
 
 
@@ -177,6 +177,7 @@ public class GameManager {
                 //END OF VERIFICATIONS================================================================
                 //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
 
+
                 map.placeFood(Integer.parseInt(foodsInfo[i][1]), getFoodById(foodsInfo[i][0].charAt(0)));
             }
         }
@@ -225,7 +226,7 @@ public class GameManager {
         String[] squareInfo = new String[3];
 
         squareInfo[0] = square.getImage();
-        squareInfo[1] = square.getType();
+        squareInfo[1] = square.getType(numberOfPlays);
         squareInfo[2] = square.getIdPlayersInString();
 
         return squareInfo;
