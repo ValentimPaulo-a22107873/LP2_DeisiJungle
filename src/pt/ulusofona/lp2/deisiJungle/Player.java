@@ -127,20 +127,20 @@ public class Player {
 
     public boolean eat(Food food, int turn){
         if(food.getIdentifier()=='a'){
-            addEnergy(specie.eat('a', specie.getInitialEnergy(), turn));
+            addEnergy(specie.eat('a', energy, turn));
             foodEaten++;
             return true;
         }
 
         else if(food.getIdentifier()=='e'){
-            addEnergy(specie.eat('e', specie.getInitialEnergy(), turn));
+            addEnergy(specie.eat('e', energy, turn));
             foodEaten++;
             return true;
         }
 
         else if(food.getIdentifier()=='c'){
-            if(specie.eat('c', specie.getInitialEnergy(), turn)!=0){
-                addEnergy(specie.eat('c', specie.getInitialEnergy(), turn));
+            if(specie.eat('c', energy, turn)!=0){
+                addEnergy(specie.eat('c', energy, turn));
                 foodEaten++;
                 return true;
             }

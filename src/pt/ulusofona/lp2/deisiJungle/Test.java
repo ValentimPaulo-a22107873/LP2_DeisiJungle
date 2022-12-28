@@ -900,4 +900,18 @@ public class Test {
 
         game.moveCurrentPlayer(5, false); //play 1
     }
+
+    @org.junit.Test
+    public void drinkWater(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"a", "3"}, {"b", "6"}};
+        String[][] players = {{"0", "Pedro", "Z"}, {"1", "Valentim", "L"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        MovementResult move = game.moveCurrentPlayer(2,false);
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(79, game.players.get(0).getEnergy());
+    }
 }

@@ -3,13 +3,13 @@ package pt.ulusofona.lp2.deisiJungle;
 public abstract class Omnivero extends Specie{
 
     @Override
-    public int eat(char foodId, int initialEnergy, int turn){
+    public int eat(char foodId, int energy, int turn){
         if(foodId == 'e'){
             return 20;
         }
         // Se ingerido por omnívoros, aumenta a energia em 20%
         if(foodId == 'a'){
-            return (int)(0.2 * initialEnergy);
+            return (int)(0.2 * energy);
         }
 
         if(foodId == 'c'){
