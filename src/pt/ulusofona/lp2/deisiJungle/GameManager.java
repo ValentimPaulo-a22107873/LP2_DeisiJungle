@@ -366,17 +366,13 @@ public class GameManager {
     //////ELEVENTH FUNCTION - getWinnerInfo()
     public String[] getWinnerInfo(){
 
-        if(checkIfGameEnded()){
+        if(!checkIfGameEnded()){
             return null;
         }
 
         if(playerToFar()){
             return getPlayerInfo(playersByPosition.get(1).getId());
         }
-
-
-        playersByPosition = players;
-        sortPlayersByPocision();
 
         int nbrPlayersSamePosition = 0;
         int positionOfFirstPlace = playersByPosition.get(0).getPosition();

@@ -683,7 +683,7 @@ public class Test {
          */
 
         //move pedro - 0 / 180 / 1
-        MovementResult move = game.moveCurrentPlayer(0,false); // plays 1
+        MovementResult move = game.moveCurrentPlayer(0,true); // plays 1
         Assert.assertEquals(MovementResultCode.VALID_MOVEMENT, move.code());
         Assert.assertEquals(1, game.players.get(0).getPosition());
         Assert.assertEquals(190, game.players.get(0).getEnergy());
