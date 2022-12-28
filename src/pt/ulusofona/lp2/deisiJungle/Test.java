@@ -711,4 +711,34 @@ public class Test {
         Assert.assertEquals(expected, obtained);
     }
 
+    @org.junit.Test
+    public void testMovePlayer3(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "5"}, {"m", "10"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        String[] expected = new String[]{"1","Valentim","Z","112","1..6"};
+
+        MovementResult move = game.moveCurrentPlayer(4,false); // plays 1
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(122,game.players.get(0).getEnergy());
+
+        move = game.moveCurrentPlayer(4,false); //plays 2
+        String[] obtained = game.getPlayerInfo(game.players.get(1).getId());
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(expected, obtained);
+
+        move = game.moveCurrentPlayer(0,false); //plays 3
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(182, game.players.get(0).getEnergy());
+
+        move = game.moveCurrentPlayer(0,false); //plays 2
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(182, game.players.get(1).getEnergy());
+
+
+    }
 }

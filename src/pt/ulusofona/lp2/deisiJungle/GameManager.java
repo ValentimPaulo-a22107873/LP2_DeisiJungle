@@ -40,7 +40,6 @@ public class GameManager {
     //PLAYERS
     ArrayList<Player> players = new ArrayList<>();
     ArrayList<Player> playersByPosition = new ArrayList<>();
-    HashMap<Integer, Player> playersById = new HashMap<>();
 
     //OTHERS
      Map map;
@@ -94,7 +93,6 @@ public class GameManager {
         reset();
 
         players = new ArrayList<>();
-        playersById = new HashMap<>();
 
         ArrayList<Integer> repeated = new ArrayList<>();
 
@@ -146,7 +144,6 @@ public class GameManager {
             Specie specie = getSpeciByID(playersInfo[i][2].charAt(0));
 
             players.add(new Player(id,specie.getInitialEnergy(), specie, name));
-            playersById.put(id, new Player(id,specie.getInitialEnergy(), specie, name));
         }
 
         //create map
@@ -240,14 +237,21 @@ public class GameManager {
     public String[] getPlayerInfo(int playerId){
 
         String[] playerInfo = new String[5];
+        Player player = new Player();
 
-        playerInfo[0] = playersById.get(playerId).getId()+"";
-        playerInfo[1] = playersById.get(playerId).getName();
-        playerInfo[2] = playersById.get(playerId).getSpecie().getIdentifier()+"";
-        playerInfo[3] = playersById.get(playerId).getEnergy()+"";
+        for(int i=0; i<players.size(); i++){
+            if(players.get(i).getId()==playerId){
+                player = players.get(i);
+            }
+        }
 
-        int first = playersById.get(playerId).getSpecie().getSpeed()[0];
-        int last = playersById.get(playerId).getSpecie().getSpeed()[1];
+        playerInfo[0] = player.getId()+"";
+        playerInfo[1] = player.getName();
+        playerInfo[2] = player.getSpecie().getIdentifier()+"";
+        playerInfo[3] = player.getEnergy()+"";
+
+        int first = player.getSpecie().getSpeed()[0];
+        int last = player.getSpecie().getSpeed()[1];
         String speed = ""+first+".."+last;
         playerInfo[4] = speed;
 
