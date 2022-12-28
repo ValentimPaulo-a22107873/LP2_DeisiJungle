@@ -431,7 +431,7 @@ public class Test {
         String i = game.map.getSquare(30).getFood().getTooltip();
 
         for(int x = 0; x<15;x++){
-            game.nextTurn();
+            game.moveCurrentPlayer(0, false);
         }
 
         String[] stuff = game.getSquareInfo(10);
@@ -587,7 +587,7 @@ public class Test {
         }
 
         Food food2 = game.map.getSquare(10).getFood();
-        teste2.eat(food2, game.getNumberOfPlays());
+        teste2.eat(food2, 15);
 
         Assert.assertEquals(10, teste2.getEnergy());
     }
@@ -791,5 +791,40 @@ public class Test {
 
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(82, game.players.get(0).getEnergy());
+    }
+
+    @org.junit.Test
+    public void testRandomTests(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "15"}, {"m", "10"}, {"b", "5"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        //chekc first banana
+        String[] expected = new String[3];
+        expected[0] = "bananas.png";
+        expected[1] = "Bananas : 3 : +40 energia";
+        expected[2] = "";
+        Assert.assertEquals(expected,game.getSquareInfo(5));
+
+        //check meat
+        String[] expected3 = new String[3];
+        expected3[0] = "meat.png";
+        expected3[1] = "Carne : + 50 energia : 1 jogadas";
+        expected3[2] = "";
+        Assert.assertEquals(expected3,game.getSquareInfo(15));
+
+
+        game.moveCurrentPlayer(4, false); //play 1
+        String[] expected2 = new String[3];
+        expected2[0] = "bananas.png";
+        expected2[1] = "Bananas : 2 : +40 energia";
+        expected2[2] = "0";
+        Assert.assertEquals(expected2,game.getSquareInfo(5));
+
+
+
     }
 }

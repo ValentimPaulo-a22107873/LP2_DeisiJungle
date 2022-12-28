@@ -353,9 +353,10 @@ public class GameManager {
         }
 
         Square desiredSquare = map.getSquare(currentPlayer.getPosition());
-
-        initialSquare.removePlayer(currentPlayer);
-        desiredSquare.addPlayer(currentPlayer);
+        if(nrSquares!=0){
+            initialSquare.removePlayer(currentPlayer);
+            desiredSquare.addPlayer(currentPlayer);
+        }
 
         if(desiredSquare.getFood()!=null){
 
