@@ -10,7 +10,7 @@ public class Banana extends Food{
 
     @Override
     String getName() {
-        return "Banana";
+        return "Bananas";
     }
 
     @Override

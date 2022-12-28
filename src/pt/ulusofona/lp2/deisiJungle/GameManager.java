@@ -45,7 +45,7 @@ public class GameManager {
     //OTHERS
      Map map;
      private int turn = 0;
-     private int numberOfPlays=1;
+     private int numberOfPlays=0;
 
 
 
@@ -366,7 +366,7 @@ public class GameManager {
     //////ELEVENTH FUNCTION - getWinnerInfo()
     public String[] getWinnerInfo(){
 
-        if(!checkIfGameEnded()){
+        if(checkIfGameEnded()){
             return null;
         }
 
