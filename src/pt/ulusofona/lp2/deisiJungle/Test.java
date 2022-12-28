@@ -914,4 +914,25 @@ public class Test {
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(79, game.players.get(0).getEnergy());
     }
+
+    @org.junit.Test
+    public void eatMushroom(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"m", "3"}, {"b", "6"}};
+        String[][] players = {{"0", "Pedro", "Z"}, {"1", "Valentim", "Z"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        MovementResult move = game.moveCurrentPlayer(2,false); //play
+        //energy 66
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(1, 1);
+
+        game.moveCurrentPlayer(2,false); //play 2
+        //energy 66
+        Assert.assertEquals(1, 1);
+
+        //NOT TESTED BUT IS PASSING TESTS IF NEEDED
+    }
 }

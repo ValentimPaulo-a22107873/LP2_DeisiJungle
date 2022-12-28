@@ -179,12 +179,12 @@ public class Player {
     }
 
     void eatMushroom(Mushrooms mushroom, int turn){
-        int value = (mushroom.getEnergy()/100) * this.energy;
+        int value = this.energy * mushroom.getEnergy();
 
         if(turn%2 == 0){
-            addEnergy(value);
+            addEnergy(value/100);
         }else{
-            addEnergy(-value);
+            addEnergy(-value/100);
         }
     }
 }
