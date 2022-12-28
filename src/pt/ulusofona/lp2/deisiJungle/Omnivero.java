@@ -14,7 +14,7 @@ public abstract class Omnivero extends Specie{
 
         if(foodId == 'c'){
             if(turn > 12){
-                return -50;
+                return -(energy/2);
             }
             return 50;
         }

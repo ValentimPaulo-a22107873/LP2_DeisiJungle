@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public abstract class Herbivoro extends Specie {
     @Override
-    public int eat(char foodId, int initialEnergy, int turn){
+    public int eat(char foodId, int energy, int turn){
 
         if(foodId == 'e'){
             return 20;

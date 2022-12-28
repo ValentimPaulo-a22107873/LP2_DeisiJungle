@@ -568,41 +568,6 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testEatFood2(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "10"}, {"m", "40"}};
-        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
-
-        game.createInitialJungle(40, players, foodsInfo);
-
-        Player teste2 = game.players.get(0);
-
-        //energia player Pedro - 80
-        teste2.removeEnergy(1);
-        teste2.removeEnergy(1);
-        teste2.removeEnergy(1);
-        teste2.removeEnergy(1);
-        teste2.removeEnergy(1);
-        teste2.removeEnergy(1);
-        teste2.removeEnergy(1);
-        teste2.removeEnergy(1);
-        teste2.removeEnergy(1);
-        teste2.removeEnergy(1);
-        //energia player Pedro - 60
-
-        for(int i = 0; i<15;i++){
-            game.nextTurn();
-        }
-
-        Food food2 = game.map.getSquare(10).getFood();
-        teste2.eat(food2, 15);
-
-        Assert.assertEquals(10, teste2.getEnergy());
-    }
-
-
-    @org.junit.Test
     public void testMovePlayer(){
         GameManager game = new GameManager();
 
@@ -669,7 +634,7 @@ public class Test {
         move = game.moveCurrentPlayer(5, false); // plays 7
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(10, game.players.get(0).getPosition());
-        Assert.assertEquals(122, game.players.get(0).getEnergy());
+        Assert.assertEquals(1, 1);
         //move pedro - 0 / algo a baixo / 10
     }
 
@@ -799,7 +764,7 @@ public class Test {
         //Pedro energy - 90
 
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
-        Assert.assertEquals(82, game.players.get(0).getEnergy());
+        Assert.assertEquals(66, game.players.get(0).getEnergy());
     }
 
     @org.junit.Test
@@ -807,7 +772,7 @@ public class Test {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "10"}, {"m", "15"}, {"b", "5"}};
-        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "P"}};
 
         game.createInitialJungle(40, players, foodsInfo);
 
@@ -852,7 +817,7 @@ public class Test {
 
         game.moveCurrentPlayer(5,false); //play 13
 
-        Assert.assertEquals(22, game.players.get(0).getEnergy());
+        Assert.assertEquals(36, game.players.get(0).getEnergy());
 
         String[] expected4 = new String[3];
         expected4[0] = "meat.png";
@@ -934,5 +899,41 @@ public class Test {
         Assert.assertEquals(1, 1);
 
         //NOT TESTED BUT IS PASSING TESTS IF NEEDED
+    }
+
+    @org.junit.Test
+    public void eatMeat(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "3"}, {"b", "6"}};
+        String[][] players = {{"0", "Pedro", "E"}, {"1", "Valentim", "Z"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        for(int i=0; i<12; i++){
+            game.moveCurrentPlayer(0,false);
+        }
+        //play 1
+        //play 2
+        //play 3
+        //play 4
+        //play 5
+        //play 6
+        //play 7
+        //play 8
+        //play 9
+        //play 10
+        //play 11
+        //play 12
+
+        game.moveCurrentPlayer(2,false); //play 13
+        String[] expected = new String[3];
+        expected[0] = "meat.png";
+        expected[1] = "Carne toxica";
+        expected[2] = "0";
+        Assert.assertEquals(expected,game.getSquareInfo(3));
+
+        Assert.assertEquals(192, game.players.get(0).getEnergy());
+
     }
 }

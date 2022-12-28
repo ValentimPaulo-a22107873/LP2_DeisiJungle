@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.ArrayList;
 
-public class Bird extends Herbivoro{
+public class Bird extends Omnivero{
 
     public Bird() {
     }
