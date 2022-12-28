@@ -25,7 +25,7 @@ public class Banana extends Food{
 
     @Override
     String getTooltip() {
-        return "Bananas : "+numberBananas+" : +40 energia";
+        return "Bananas : "+numberBananas+" : + 40 energia";
     }
 
     public boolean bananaAvailable(){

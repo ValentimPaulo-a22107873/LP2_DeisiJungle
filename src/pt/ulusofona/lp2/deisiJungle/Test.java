@@ -416,7 +416,7 @@ public class Test {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
-        String[][] players2 = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+        String[][] players2 = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}};
 
 
         /*
@@ -446,6 +446,15 @@ public class Test {
         Assert.assertEquals(vazio, stuff);
         Assert.assertEquals(vazio2, stuff2);
         Assert.assertEquals(vazio3, stuff3);
+
+        game.moveCurrentPlayer(6,false);
+        game.moveCurrentPlayer(6,false);
+
+        String[] stuff4 = game.getSquareInfo(7);
+        String[] vazio4 = new String[]{"blank.png", "Vazio", "0,1"};
+
+        Assert.assertEquals(vazio4, stuff4);
+
 
     }
 
@@ -797,7 +806,7 @@ public class Test {
     public void testRandomTests(){
         GameManager game = new GameManager();
 
-        String[][] foodsInfo = {{"c", "15"}, {"m", "10"}, {"b", "5"}};
+        String[][] foodsInfo = {{"c", "10"}, {"m", "15"}, {"b", "5"}};
         String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}};
 
         game.createInitialJungle(40, players, foodsInfo);
@@ -805,7 +814,7 @@ public class Test {
         //chekc first banana
         String[] expected = new String[3];
         expected[0] = "bananas.png";
-        expected[1] = "Bananas : 3 : +40 energia";
+        expected[1] = "Bananas : 3 : + 40 energia";
         expected[2] = "";
         Assert.assertEquals(expected,game.getSquareInfo(5));
 
@@ -814,17 +823,42 @@ public class Test {
         expected3[0] = "meat.png";
         expected3[1] = "Carne : + 50 energia : 0 jogadas";
         expected3[2] = "";
-        Assert.assertEquals(expected3,game.getSquareInfo(15));
+        Assert.assertEquals(expected3,game.getSquareInfo(10));
 
 
         game.moveCurrentPlayer(4, false); //play 1
         String[] expected2 = new String[3];
         expected2[0] = "bananas.png";
-        expected2[1] = "Bananas : 2 : +40 energia";
+        expected2[1] = "Bananas : 2 : + 40 energia";
         expected2[2] = "0";
         Assert.assertEquals(expected2,game.getSquareInfo(5));
 
+        for(int i=0; i<11; i++){
+            game.moveCurrentPlayer(0,false);
+        }
+        //play 2
+        //play 3
+        //play 4
+        //play 5
+        //play 6
+        //play 7
+        //play 8
+        //play 9
+        //play 10
+        //play 11
+        //play 12
 
+        Assert.assertEquals(82, game.players.get(0).getEnergy());
+
+        game.moveCurrentPlayer(5,false); //play 13
+
+        Assert.assertEquals(22, game.players.get(0).getEnergy());
+
+        String[] expected4 = new String[3];
+        expected4[0] = "meat.png";
+        expected4[1] = "Carne toxica";
+        expected4[2] = "0";
+        Assert.assertEquals(expected4,game.getSquareInfo(10));
 
     }
 }
