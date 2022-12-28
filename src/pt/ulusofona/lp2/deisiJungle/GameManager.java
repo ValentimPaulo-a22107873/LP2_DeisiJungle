@@ -177,7 +177,25 @@ public class GameManager {
                 //END OF VERIFICATIONS================================================================
                 //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
 
-                map.placeFood(Integer.parseInt(foodsInfo[i][1]), getFoodById(foodsInfo[i][0].charAt(0)));
+                char foodId = foodsInfo[i][0].charAt(0);
+                Food food = null;
+                if(foodId == 'a'){
+                    food = new Water();
+                }
+                if(foodId == 'e'){
+                    food = new Grass();
+                }
+                if(foodId == 'm'){
+                    food = new Mushrooms();
+                }
+                if(foodId == 'c'){
+                    food = new Meat();
+                }
+                if(foodId == 'b'){
+                    food = new Banana();
+                }
+
+                map.placeFood(Integer.parseInt(foodsInfo[i][1]), food);
             }
         }
 

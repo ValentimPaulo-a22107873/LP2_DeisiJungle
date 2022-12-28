@@ -451,7 +451,7 @@ public class Test {
         game.moveCurrentPlayer(6,false);
 
         String[] stuff4 = game.getSquareInfo(7);
-        String[] vazio4 = new String[]{"blank.png", "Vazio", "0,1"};
+        String[] vazio4 = new String[]{"blank.png", "Vazio", "1,0"};
 
         Assert.assertEquals(vazio4, stuff4);
 
@@ -859,6 +859,47 @@ public class Test {
         expected4[1] = "Carne toxica";
         expected4[2] = "0";
         Assert.assertEquals(expected4,game.getSquareInfo(10));
+
+    }
+
+    @org.junit.Test
+    public void testRandomTests2(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"b", "3"}, {"b", "6"}};
+        String[][] players = {{"0", "Pedro", "Z"}, {"1", "Valentim", "L"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        String[] expected = new String[3];
+        expected[0] = "bananas.png";
+        expected[1] = "Bananas : 3 : + 40 energia";
+        expected[2] = "";
+        Assert.assertEquals(expected,game.getSquareInfo(3));
+
+        String[] expected2 = new String[3];
+        expected2[0] = "bananas.png";
+        expected2[1] = "Bananas : 3 : + 40 energia";
+        expected2[2] = "";
+        Assert.assertEquals(expected2,game.getSquareInfo(6));
+
+        MovementResult move = game.moveCurrentPlayer(2, false); //play 1
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+
+        String[] expected3 = new String[3];
+        expected3[0] = "bananas.png";
+        expected3[1] = "Bananas : 2 : + 40 energia";
+        expected3[2] = "0";
+        Assert.assertEquals(expected3,game.getSquareInfo(3));
+
+        String[] expected4 = new String[3];
+        expected4[0] = "bananas.png";
+        expected4[1] = "Bananas : 3 : + 40 energia";
+        expected4[2] = "";
+        Assert.assertEquals(expected4,game.getSquareInfo(6));
+
+        game.moveCurrentPlayer(5, false); //play 1
+
 
     }
 }

@@ -62,8 +62,6 @@ public class Square {
     public String getIdPlayersInString(){
         String result = "";
 
-        sortPlayersById(players);
-
         for(int i=0; i<players.size(); i++){
 
             if(i== players.size()-1){
@@ -88,25 +86,5 @@ public class Square {
 
     public void setPlayers(ArrayList<Player> players){
         players = this.players;
-    }
-
-    ArrayList<Player> sortPlayersById(ArrayList<Player> players){
-        for (int i = 0; i < players.size(); i++) {
-
-            // Inner nested loop pointing 1 index ahead
-            for (int j = i + 1; j < players.size(); j++) {
-
-                // Checking elements
-                Player temp;
-                if (players.get(j).getId() < players.get(i).getId()) {
-
-                    // Swapping
-                    temp = players.get(i);
-                    players.set(i, players.get(j));
-                    players.set(j, temp);
-                }
-            }
-        }
-        return players;
     }
 }
