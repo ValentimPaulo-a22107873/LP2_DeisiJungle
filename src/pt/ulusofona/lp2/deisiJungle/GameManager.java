@@ -39,6 +39,7 @@ public class GameManager {
 
     //PLAYERS
     ArrayList<Player> players = new ArrayList<>();
+    ArrayList<Player> playersByPosition = players;
     HashMap<Integer, Player> playersById = new HashMap<>();
 
     //OTHERS
@@ -257,7 +258,7 @@ public class GameManager {
     //////SEVENTH FUNCTION - getCurrentPlayerInfo()
     public String[] getCurrentPlayerInfo(){
 
-        String[] playerInfo = new String[4];
+        String[] playerInfo = new String[5];
 
         playerInfo[0] = players.get(turn).getId()+"";
         playerInfo[1] = players.get(turn).getName();
@@ -386,10 +387,10 @@ public class GameManager {
         sortPlayersByPocision();
 
         int nbrPlayersSamePosition = 0;
-        int positionOfFirstPlace = players.get(0).getPosition();
+        int positionOfFirstPlace = playersByPosition.get(0).getPosition();
 
-        for(int i = 1; i < players.size(); i++){
-            if(players.get(i).getPosition() == positionOfFirstPlace){
+        for(int i = 1; i < playersByPosition.size(); i++){
+            if(playersByPosition.get(i).getPosition() == positionOfFirstPlace){
                 nbrPlayersSamePosition++;
             }
         }
@@ -398,13 +399,13 @@ public class GameManager {
 
         if(nbrPlayersSamePosition >= 1){
             for(int x = 0 ; x <  nbrPlayersSamePosition; x++){
-                helper.add(players.get(x));
+                helper.add(playersByPosition.get(x));
             }
             sortPlayersById(helper);
 
             return getPlayerInfo(helper.get(0).getId());
         }
-        return getPlayerInfo(players.get(0).getId());
+        return getPlayerInfo(playersByPosition  .get(0).getId());
     }
     ///DONE
 
@@ -544,20 +545,22 @@ public class GameManager {
 
         //o jogo acaba se todos estiverem sem energia
 
-        boolean resultA = true;
-        boolean resultB = true;
+        boolean resultA = false;
+        boolean resultB = false;
 
-        for(Player player : players){
-            if(player.getEnergy() >= 2){
-                resultA = false;
-            }
+        sortPlayersByPocision();
+
+        int firstPosition = playersByPosition.get(0).getPosition();
+        int secondPosition = playersByPosition.get(1).getPosition();
+
+        if((firstPosition-secondPosition) > map.getSize()/2){
+            resultA = true;
         }
-
 
 
         // chek if someone ios on the last
         if(map.getSquare(map.getSize()).getPlayers().size() < 1){
-            resultB = false;
+            resultB = true;
         }
 
         return resultA || resultB;
@@ -565,19 +568,19 @@ public class GameManager {
 
     void sortPlayersByPocision(){
         //https://www.geeksforgeeks.org/sorting-in-java/--
-        for (int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < playersByPosition.size(); i++) {
 
             // Inner nested loop pointing 1 index ahead
-            for (int j = i + 1; j < players.size(); j++) {
+            for (int j = i + 1; j < playersByPosition.size(); j++) {
 
                 // Checking elements
                 Player temp;
-                if (players.get(j).getPosition() > players.get(i).getPosition()) {
+                if (playersByPosition.get(j).getPosition() > playersByPosition.get(i).getPosition()) {
 
                     // Swapping
-                    temp = players.get(i);
-                    players.set(i, players.get(j));
-                    players.set(j, temp);
+                    temp = playersByPosition.get(i);
+                    playersByPosition.set(i, playersByPosition.get(j));
+                    playersByPosition.set(j, temp);
                 }
             }
         }

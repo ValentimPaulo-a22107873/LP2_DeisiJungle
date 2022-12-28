@@ -128,17 +128,20 @@ public class Player {
     public boolean eat(Food food, int turn){
         if(food.getIdentifier()=='a'){
             addEnergy(specie.eat('a', specie.getInitialEnergy(), turn));
+            foodEaten++;
             return true;
         }
 
         else if(food.getIdentifier()=='e'){
             addEnergy(specie.eat('e', specie.getInitialEnergy(), turn));
+            foodEaten++;
             return true;
         }
 
         else if(food.getIdentifier()=='c'){
             if(specie.eat('c', specie.getInitialEnergy(), turn)!=0){
                 addEnergy(specie.eat('c', specie.getInitialEnergy(), turn));
+                foodEaten++;
                 return true;
             }
             return false;
@@ -150,6 +153,7 @@ public class Player {
 
         else if(food.getIdentifier()=='m'){
             eatMushroom((Mushrooms) food, turn);
+            foodEaten++;
             return true;
         }
 
@@ -162,8 +166,10 @@ public class Player {
         if(banana.bananaAvailable()){
 
             if(bananaEaten==0){
+                foodEaten++;
                 addEnergy(40);
             }else{
+                foodEaten++;
                 addEnergy(-40);
             }
             addBanana();
