@@ -366,7 +366,7 @@ public class Test {
 
         Assert.assertEquals(foodsInfo[0][1], "Agua");
         Assert.assertEquals(foodsInfo[1][1], "Erva");
-        Assert.assertEquals(foodsInfo[2][1], "Banana");
+        Assert.assertEquals(foodsInfo[2][1], "Bananas");
         Assert.assertEquals(foodsInfo[3][1], "Carne");
         Assert.assertEquals(foodsInfo[4][1], "Cogumelo");
 
