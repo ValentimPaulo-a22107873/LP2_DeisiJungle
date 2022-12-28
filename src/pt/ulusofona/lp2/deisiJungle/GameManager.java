@@ -273,7 +273,7 @@ public class GameManager {
     public String[] getCurrentPlayerEnergyInfo(int nrPositions){
         Player currentPlayer = players.get(turn);
 
-        String energyConsumed = (currentPlayer.getSpecie().getEnergyConsume()*nrPositions) + "";
+        String energyConsumed = (currentPlayer.getSpecie().getEnergyConsume()*Math.abs(nrPositions)) + "";
         String energyRest = currentPlayer.getSpecie().getEnrgyEarnedByRest()+"";
 
         return new String[]{energyConsumed, energyRest};
@@ -305,43 +305,65 @@ public class GameManager {
         Player currentPlayer = players.get(turn);
         Square initialSquare = map.getSquare(currentPlayer.getPosition());
 
-
+        //VERIFICATIONS================================================================
+        //CHECK IF NUMBER OF SQUARES IS VALID
         if(!bypassValidations){
-            if(nrSquares<1 || nrSquares>6){
+            if(nrSquares<-6 || nrSquares>6){
                 nextTurn();
-                return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+                return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
             }
         }
 
-        if(currentPlayer.getEnergy()<2){
+        //CHECK IF PLAYER CHOOSES TO GO BACKWARDS WONT GO BEHIND FIRST HOUSE
+        if(currentPlayer.getPosition()-nrSquares<1){
             nextTurn();
-            return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+            return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
         }
 
-        if(currentPlayer.getPosition()+nrSquares >= map.getSize()){
-            Square desiredSquare = map.getSquare(map.getSize());
+        //CHECK IF WANTS TO REST
+        if(nrSquares==0){
+            currentPlayer.rest();
+            nextTurn();
+        }
+
+        //CHECK IF MOVEMENT IS VALID
+        int valid = currentPlayer.move(nrSquares, map.getSize());
+
+        //ENERGY
+        if(valid == 3){
+            nextTurn();
+            return new MovementResult(MovementResultCode.NO_ENERGY,null);
+        }
+
+        //INVALID NRSQUARES
+        if(valid == 2){
+            nextTurn();
+            return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
+        }
+
+        //EVERYTHING VALID, REMOVE FROM PREVIOUS HOUSE, ADD TO NEXT AND CHECK IF EAT
+        if(valid == 1){
+            Square desiredSquare = map.getSquare(currentPlayer.getPosition());
 
             initialSquare.removePlayer(currentPlayer);
             desiredSquare.addPlayer(currentPlayer);
-            currentPlayer.removeEnergy();
-            currentPlayer.updatePosition(nrSquares);
 
+            if(desiredSquare.getFood()!=null){
+
+                boolean eaten = currentPlayer.eat(desiredSquare.getFood(), numberOfPlays);
+
+                if(eaten){
+                    nextTurn();
+                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou "+ desiredSquare.getFood().getName());
+                }
+                nextTurn();
+                return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
+            }
             nextTurn();
-            return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+            return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
         }
 
-
-
-        Square desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
-
-        initialSquare.removePlayer(currentPlayer);
-        desiredSquare.addPlayer(currentPlayer);
-        currentPlayer.removeEnergy();
-        currentPlayer.updatePosition(nrSquares);
-
-        nextTurn();
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
-
+        return null;
     }
     ///ON GOING !!!
 
@@ -523,6 +545,8 @@ public class GameManager {
             }
         }
 
+
+
         // chek if someone ios on the last
         if(map.getSquare(map.getSize()).getPlayers().size() < 1){
             resultB = false;
@@ -593,6 +617,6 @@ public class GameManager {
     }
 
     public boolean isFoodPositionValid(int position, int jnglSz){
-        return (!(position >= jnglSz || position <= 0));
+        return (!(position >= jnglSz || position < 1));
     }
 }

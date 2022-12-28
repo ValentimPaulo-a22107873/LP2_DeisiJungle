@@ -498,7 +498,7 @@ public class Test {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
-        String[][] players = {{"0", "Pedro", "H"}, {"1", "Valentim", "T"}};
+        String[][] players = {{"0", "Pedro", "h"}, {"1", "Valentim", "T"}};
 
         InitializationError expected = new InitializationError("especie invalida");
         Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
@@ -539,16 +539,16 @@ public class Test {
         Player teste1 = game.players.get(0);
 
         //energia player Pedro - 80
-        teste1.removeEnergy();
-        teste1.removeEnergy();
-        teste1.removeEnergy();
-        teste1.removeEnergy();
-        teste1.removeEnergy();
-        teste1.removeEnergy();
-        teste1.removeEnergy();
-        teste1.removeEnergy();
-        teste1.removeEnergy();
-        teste1.removeEnergy();
+        teste1.removeEnergy(1);
+        teste1.removeEnergy(1);
+        teste1.removeEnergy(1);
+        teste1.removeEnergy(1);
+        teste1.removeEnergy(1);
+        teste1.removeEnergy(1);
+        teste1.removeEnergy(1);
+        teste1.removeEnergy(1);
+        teste1.removeEnergy(1);
+        teste1.removeEnergy(1);
         //energia player Pedro - 60
 
 
@@ -570,16 +570,16 @@ public class Test {
         Player teste2 = game.players.get(0);
 
         //energia player Pedro - 80
-        teste2.removeEnergy();
-        teste2.removeEnergy();
-        teste2.removeEnergy();
-        teste2.removeEnergy();
-        teste2.removeEnergy();
-        teste2.removeEnergy();
-        teste2.removeEnergy();
-        teste2.removeEnergy();
-        teste2.removeEnergy();
-        teste2.removeEnergy();
+        teste2.removeEnergy(1);
+        teste2.removeEnergy(1);
+        teste2.removeEnergy(1);
+        teste2.removeEnergy(1);
+        teste2.removeEnergy(1);
+        teste2.removeEnergy(1);
+        teste2.removeEnergy(1);
+        teste2.removeEnergy(1);
+        teste2.removeEnergy(1);
+        teste2.removeEnergy(1);
         //energia player Pedro - 60
 
         for(int i = 0; i<15;i++){

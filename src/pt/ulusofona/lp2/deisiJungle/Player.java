@@ -44,14 +44,6 @@ public class Player {
         return foodEaten;
     }
 
-    public void defineInitialEnergy(){
-        energy = specie.getInitialEnergy();
-    }
-
-    public int getBananaEaten() {
-        return bananaEaten;
-    }
-
     public void addBanana(){
         bananaEaten++;
     }
@@ -88,12 +80,12 @@ public class Player {
         return name;
     }
 
-    void removeEnergy(){
-        energy -= specie.getEnergyConsume();
+    void removeEnergy(int times){
+        energy -= specie.getEnergyConsume() * times;
     }
 
-    void updatePosition(int numberOfSquares){
-        position+=numberOfSquares;
+    void updatePosition(int positionExpected){
+        position=positionExpected;
     }
 
     void addEnergy(int energyToAdd){
@@ -105,7 +97,29 @@ public class Player {
 
     }
 
+    int move(int distance, int mapSize){
+        if(energy < specie.getEnergyConsume()){
+            return 3;
+        }
+        if(Math.abs(distance)<specie.getSpeed()[0] || Math.abs(distance)>specie.getSpeed()[0]){
+            return 2;
+        }
 
+        //CHECKED IF MOVEMENT IS VALID TO HAPPEN
+        removeEnergy(Math.abs(distance));
+
+        if(position+distance >= mapSize){
+            updatePosition(mapSize);
+        }
+        updatePosition(position+distance);
+        distanceWalked+=Math.abs(distance);
+
+        return 1;
+    }
+
+    void rest(){
+        addEnergy(specie.getEnrgyEarnedByRest());
+    }
 
 
     //FUNCTIONS RELATED WITH THE METHOD - eat()
@@ -122,8 +136,11 @@ public class Player {
         }
 
         else if(food.getIdentifier()=='c'){
-            addEnergy(specie.eat('c', specie.getInitialEnergy(), turn));
-            return true;
+            if(specie.eat('c', specie.getInitialEnergy(), turn)!=0){
+                addEnergy(specie.eat('c', specie.getInitialEnergy(), turn));
+                return true;
+            }
+            return false;
         }
 
         else if(food.getIdentifier()=='b'){
