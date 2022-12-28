@@ -225,7 +225,7 @@ public class GameManager {
         String[] squareInfo = new String[3];
 
         squareInfo[0] = square.getImage();
-        squareInfo[1] = square.getType(numberOfPlays);
+        squareInfo[1] = square.getType(numberOfPlays-1);
         squareInfo[2] = square.getIdPlayersInString();
 
         return squareInfo;

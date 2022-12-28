@@ -812,7 +812,7 @@ public class Test {
         //check meat
         String[] expected3 = new String[3];
         expected3[0] = "meat.png";
-        expected3[1] = "Carne : + 50 energia : 1 jogadas";
+        expected3[1] = "Carne : + 50 energia : 0 jogadas";
         expected3[2] = "";
         Assert.assertEquals(expected3,game.getSquareInfo(15));
 

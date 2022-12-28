@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Meat extends Food{
 
-    int turn=1;
+    int turn;
 
     public Meat(){
 
