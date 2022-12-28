@@ -563,7 +563,7 @@ public class GameManager {
             resultB = false;
         }
 
-        return resultA || resultB;
+        return resultA && resultB;
     }
 
     void sortPlayersByPocision(){
