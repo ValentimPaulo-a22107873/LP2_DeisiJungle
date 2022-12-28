@@ -8,9 +8,9 @@ public class Player {
     private char specieId;
     private Specie specie;
     private String name;
-
-    private int distanceWalked;
+    private int distanceWalked = 0;
     private int bananaEaten=0;
+    private int foodEaten = 0;
 
 
 
@@ -40,7 +40,9 @@ public class Player {
     //CONSTRUTORES
 
 
-
+    public int getFoodEaten() {
+        return foodEaten;
+    }
 
     public void defineInitialEnergy(){
         energy = specie.getInitialEnergy();
@@ -61,9 +63,11 @@ public class Player {
     int getId(){
         return id;
     }
+
     public int getDistanceWalked() {
         return distanceWalked;
     }
+
     public void addDistanceWalked(int dist){
         distanceWalked+=dist;
     }
@@ -104,6 +108,7 @@ public class Player {
 
 
 
+    //FUNCTIONS RELATED WITH THE METHOD - eat()
 
     public boolean eat(Food food, int turn){
         if(food.getIdentifier()=='a'){
@@ -122,8 +127,7 @@ public class Player {
         }
 
         else if(food.getIdentifier()=='b'){
-            eatBanana((Banana) food);
-            return true;
+            return eatBanana((Banana) food);
         }
 
         else if(food.getIdentifier()=='m'){
@@ -136,8 +140,7 @@ public class Player {
         }
     }
 
-
-    void eatBanana(Banana banana){
+    boolean eatBanana(Banana banana){
         if(banana.bananaAvailable()){
 
             if(bananaEaten==0){
@@ -146,13 +149,15 @@ public class Player {
                 addEnergy(-40);
             }
             addBanana();
+            return true;
         }
+        return false;
     }
 
     void eatMushroom(Mushrooms mushroom, int turn){
         int value = (mushroom.getEnergy()/100) * this.energy;
 
-        if(turn+1%2 == 0){
+        if(turn%2 == 0){
             addEnergy(value);
         }else{
             addEnergy(-value);

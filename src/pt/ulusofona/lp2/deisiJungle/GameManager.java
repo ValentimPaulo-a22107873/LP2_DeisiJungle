@@ -177,7 +177,6 @@ public class GameManager {
                 //END OF VERIFICATIONS================================================================
                 //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
 
-
                 map.placeFood(Integer.parseInt(foodsInfo[i][1]), getFoodById(foodsInfo[i][0].charAt(0)));
             }
         }
@@ -271,9 +270,14 @@ public class GameManager {
 
     //////EIGHT FUNCTION - getCurrentPlayerEnergyInfo()
     public String[] getCurrentPlayerEnergyInfo(int nrPositions){
-        return null;
+        Player currentPlayer = players.get(turn);
+
+        String energyConsumed = (currentPlayer.getSpecie().getEnergyConsume()*nrPositions) + "";
+        String energyRest = currentPlayer.getSpecie().getEnrgyEarnedByRest()+"";
+
+        return new String[]{energyConsumed, energyRest};
     }
-    ///ON GOING !!!
+    ///DONE
 
 
     //////NINTH FUNCTION - getPlayersInfo()
@@ -295,7 +299,7 @@ public class GameManager {
 
 
     //////TENTH FUNCTION - moveCurrentPlayer()
-    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+    public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
         Player currentPlayer = players.get(turn);
         Square initialSquare = map.getSquare(currentPlayer.getPosition());
@@ -304,13 +308,13 @@ public class GameManager {
         if(!bypassValidations){
             if(nrSquares<1 || nrSquares>6){
                 nextTurn();
-                return false;
+                return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
             }
         }
 
         if(currentPlayer.getEnergy()<2){
             nextTurn();
-            return false;
+            return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
         }
 
         if(currentPlayer.getPosition()+nrSquares >= map.getSize()){
@@ -322,16 +326,10 @@ public class GameManager {
             currentPlayer.updatePosition(nrSquares);
 
             nextTurn();
-            return true;
+            return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
         }
 
-        /*
-        //verifica se passa no square do meio onde é adicionado 6 de energia equivalente a 3 moves
-        if(!(currentPlayer.getPosition()>= map.getSize()/2+1)){
-            if(passedMiddleSquare(currentPlayer.getPosition()+nrSquares)){
-                currentPlayer.addEnergy(6);
-            }
-        }*/
+
 
         Square desiredSquare = map.getSquare(currentPlayer.getPosition()+nrSquares);
 
@@ -341,7 +339,7 @@ public class GameManager {
         currentPlayer.updatePosition(nrSquares);
 
         nextTurn();
-        return true;
+        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
 
     }
     ///ON GOING !!!
@@ -357,10 +355,10 @@ public class GameManager {
         sortPlayersByPocision();
 
         int nbrPlayersSamePosition = 0;
-        int positionOfFitstPlace = players.get(0).getPosition();
+        int positionOfFirstPlace = players.get(0).getPosition();
 
         for(int i = 1; i < players.size(); i++){
-            if(players.get(i).getPosition() == positionOfFitstPlace){
+            if(players.get(i).getPosition() == positionOfFirstPlace){
                 nbrPlayersSamePosition++;
             }
         }
@@ -394,20 +392,22 @@ public class GameManager {
                 sortPlayersById(map.getSquare(i).getPlayers());
 
                 for(Player player : map.getSquare(i).getPlayers()){
-                    result.add("#"+counter + " " + player.getName()+ ", " + player.getSpecie().getName() + ", " + player.getPosition());
+                    result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
+                            +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
                     counter++;
                 }
             }
             if(map.getSquare(i).getPlayers().size() == 1){
                 Player player = map.getSquare(i).getPlayers().get(0);
-                result.add("#"+counter + " " + player.getName()+ ", " + player.getSpecie().getName() + ", " + player.getPosition());
+                result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
+                        +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
                 counter++;
             }
         }
 
         return result;
     }
-    ///ON GOING !!!
+    ///DONE
 
 
     //////THIRTEENTH FUNCTION - getAuthorsPanel()

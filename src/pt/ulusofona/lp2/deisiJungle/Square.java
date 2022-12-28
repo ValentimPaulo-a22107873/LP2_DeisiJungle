@@ -40,7 +40,7 @@ public class Square {
         return number;
     }
 
-    public  String getType(int turn){
+    public String getType(int turn){
         if(food!=null){
             if(food.getIdentifier()=='c'){
                 Meat meat = (Meat)food;
