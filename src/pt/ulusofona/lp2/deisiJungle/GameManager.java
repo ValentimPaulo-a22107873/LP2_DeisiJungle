@@ -39,13 +39,13 @@ public class GameManager {
 
     //PLAYERS
     ArrayList<Player> players = new ArrayList<>();
-    ArrayList<Player> playersByPosition = players;
+    ArrayList<Player> playersByPosition = new ArrayList<>();
     HashMap<Integer, Player> playersById = new HashMap<>();
 
     //OTHERS
      Map map;
      private int turn = 0;
-     private int numberOfPlays=0;
+     private int numberOfPlays=1;
 
 
 
@@ -311,68 +311,54 @@ public class GameManager {
 
         Player currentPlayer = players.get(turn);
         Square initialSquare = map.getSquare(currentPlayer.getPosition());
+        nextTurn();
 
         //VERIFICATIONS================================================================
         //CHECK IF NUMBER OF SQUARES IS VALID
         if(!bypassValidations){
             if(nrSquares<-6 || nrSquares>6){
-                nextTurn();
                 return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
             }
         }
 
         //CHECK IF PLAYER CHOOSES TO GO BACKWARDS WONT GO BEHIND FIRST HOUSE
-        if(currentPlayer.getPosition()-nrSquares<1){
-            nextTurn();
+        if(currentPlayer.getPosition()+nrSquares<1){
             return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
         }
 
         //CHECK IF WANTS TO REST
         if(nrSquares==0){
             currentPlayer.rest();
-            nextTurn();
-        }
 
-        //CHECK IF MOVEMENT IS VALID
-        int valid = currentPlayer.move(nrSquares, map.getSize());
-        currentPlayer.move(nrSquares, map.getSize());
+        }else{
 
-        //ENERGY
-        if(valid == 3){
-            nextTurn();
-            return new MovementResult(MovementResultCode.NO_ENERGY,null);
-        }
+            int valid = currentPlayer.move(nrSquares, map.getSize());
 
-        //INVALID NRSQUARES
-        /*if(valid == 2){
-            nextTurn();
-            return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
-        }*/
-
-        //EVERYTHING VALID, REMOVE FROM PREVIOUS HOUSE, ADD TO NEXT AND CHECK IF EAT
-        if(valid == 1){
-            Square desiredSquare = map.getSquare(currentPlayer.getPosition());
-
-            initialSquare.removePlayer(currentPlayer);
-            desiredSquare.addPlayer(currentPlayer);
-
-            if(desiredSquare.getFood()!=null){
-
-                boolean eaten = currentPlayer.eat(desiredSquare.getFood(), numberOfPlays);
-                currentPlayer.eat(desiredSquare.getFood(), numberOfPlays);
-
-                if(eaten){
-                    nextTurn();
-                    return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou "+ desiredSquare.getFood().getName());
-                }
-                nextTurn();
-                return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
+            if(valid == 3){
+                return new MovementResult(MovementResultCode.NO_ENERGY,null);
             }
-            nextTurn();
+
+            if(valid == 2){
+                return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
+            }
+        }
+
+        Square desiredSquare = map.getSquare(currentPlayer.getPosition());
+
+        initialSquare.removePlayer(currentPlayer);
+        desiredSquare.addPlayer(currentPlayer);
+
+        if(desiredSquare.getFood()!=null){
+
+            boolean valid = currentPlayer.eat(desiredSquare.getFood(), numberOfPlays);
+
+
+            if(valid){
+                return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou "+ desiredSquare.getFood().getName());
+            }
             return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
         }
-
-        return null;
+        return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
     }
     ///ON GOING !!!
 
@@ -384,6 +370,7 @@ public class GameManager {
             return null;
         }
 
+        playersByPosition = players;
         sortPlayersByPocision();
 
         int nbrPlayersSamePosition = 0;
@@ -548,6 +535,7 @@ public class GameManager {
         boolean resultA = false;
         boolean resultB = false;
 
+        playersByPosition = players;
         sortPlayersByPocision();
 
         int firstPosition = playersByPosition.get(0).getPosition();

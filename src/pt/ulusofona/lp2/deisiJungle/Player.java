@@ -101,7 +101,7 @@ public class Player {
         if(energy < specie.getEnergyConsume()){
             return 3;
         }
-        if(Math.abs(distance)<specie.getSpeed()[0] || Math.abs(distance)>specie.getSpeed()[0]){
+        if(Math.abs(distance)<specie.getSpeed()[0] || Math.abs(distance)>specie.getSpeed()[1]){
             return 2;
         }
 

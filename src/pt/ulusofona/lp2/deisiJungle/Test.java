@@ -592,7 +592,76 @@ public class Test {
         Assert.assertEquals(10, teste2.getEnergy());
     }
 
+    @org.junit.Test
+    public void testMovePlayer(){
+        GameManager game = new GameManager();
 
+        String[][] foodsInfo = {{"c", "5"}, {"m", "10"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        Assert.assertEquals(0, game.players.get(game.getTurn()).getId());
+
+        /*
+              init   rest  consume
+        LION - 80  /  10  /   2   /
+        TURT - 150 /  5   /   1   /
+         */
+
+
+
+        //move pedro - 0 / 80 / 1
+        MovementResult move = game.moveCurrentPlayer(-8,false); // plays 1
+        Assert.assertEquals(MovementResultCode.INVALID_MOVEMENT, move.code());
+        //move pedro - 0 / 80 / 1
+
+
+        //move valentim - 1 / 150 / 1
+        move = game.moveCurrentPlayer(-2,false); // plays 2
+        Assert.assertEquals(MovementResultCode.INVALID_MOVEMENT, move.code());
+        //move valentim - 1 / 150 / 1
+
+
+        //move pedro - 0 / 80 / 1
+        move = game.moveCurrentPlayer(0, false); // plays 3
+        Assert.assertEquals(MovementResultCode.VALID_MOVEMENT, move.code());
+        Assert.assertEquals(1, game.players.get(0).getPosition());
+        Assert.assertEquals(90, game.players.get(0).getEnergy());
+        //move pedro - 0 / 90 / 1
+
+
+        //move valentim - 1 / 150 / 1
+        move = game.moveCurrentPlayer(2, false); // plays 4
+        Assert.assertEquals(MovementResultCode.VALID_MOVEMENT, move.code());
+        Assert.assertEquals(3, game.players.get(1).getPosition());
+        Assert.assertEquals(148, game.players.get(1).getEnergy());
+        //move valentim - 1 / 148 / 3
+
+
+        //move pedro - 0 / 90 / 1
+        move = game.moveCurrentPlayer(4, false); // plays 5
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(5, game.players.get(0).getPosition());
+        Assert.assertEquals(132, game.players.get(0).getEnergy());
+        //move pedro - 0 / 132 / 5
+
+
+        //move valentim - 1 / 148 / 3
+        move = game.moveCurrentPlayer(2, false); // plays 6
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(5, game.players.get(1).getPosition());
+        Assert.assertEquals(196, game.players.get(1).getEnergy());
+        //move valentim - 1 / 196 / 5
+
+
+        //move pedro - 0 / 132 / 5
+        move = game.moveCurrentPlayer(5, false); // plays 7
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(10, game.players.get(0).getPosition());
+        Assert.assertEquals(122, game.players.get(0).getEnergy());
+        //move pedro - 0 / algo a baixo / 10
+    }
 
 
 }
