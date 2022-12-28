@@ -549,21 +549,16 @@ public class GameManager {
     boolean checkIfGameEnded(){
 
         //o jogo acaba se todos estiverem sem energia
-
-
-        boolean resultA = true;
-        boolean resultB = true;
-
         if(playerToFar()){
-            resultA = false;
+            return true;
         }
 
         // chek if someone ios on the last
         if(map.getSquare(map.getSize()).getPlayers().size() < 1){
-            resultB = false;
+            return true;
         }
 
-        return resultA && resultB;
+        return false;
     }
 
     void sortPlayersByPocision(){
