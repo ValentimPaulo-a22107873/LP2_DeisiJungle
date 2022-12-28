@@ -366,7 +366,7 @@ public class GameManager {
     //////ELEVENTH FUNCTION - getWinnerInfo()
     public String[] getWinnerInfo(){
 
-        if(!checkIfGameEnded()){
+        if(checkIfGameEnded()){
             return null;
         }
 
@@ -551,13 +551,16 @@ public class GameManager {
         //o jogo acaba se todos estiverem sem energia
 
 
-        boolean resultA = playerToFar();
-        boolean resultB = false;
+        boolean resultA = true;
+        boolean resultB = true;
 
+        if(playerToFar()){
+            resultA = false;
+        }
 
         // chek if someone ios on the last
         if(map.getSquare(map.getSize()).getPlayers().size() < 1){
-            resultB = true;
+            resultB = false;
         }
 
         return resultA || resultB;

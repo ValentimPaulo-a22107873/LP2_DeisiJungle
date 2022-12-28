@@ -8,7 +8,7 @@ public class Mushrooms extends Food {
 
     public Mushrooms() {
         Random number = new Random();
-        this.energy = number.nextInt(50)+10;
+        this.energy = number.nextInt(40)+10;
     }
 
     public int getEnergy() {
