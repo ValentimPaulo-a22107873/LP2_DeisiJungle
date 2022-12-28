@@ -17,7 +17,7 @@ public class Mushrooms extends Food {
 
     @Override
     String getName() {
-        return "Cogumelo";
+        return "Cogumelo Magico";
     }
 
     @Override

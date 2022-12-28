@@ -338,7 +338,7 @@ public class GameManager {
                 return new MovementResult(MovementResultCode.NO_ENERGY,null);
             }
 
-            if(valid == 2){
+            if(valid == 2 && !bypassValidations){
                 return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
             }
         }
@@ -351,7 +351,6 @@ public class GameManager {
         if(desiredSquare.getFood()!=null){
 
             boolean valid = currentPlayer.eat(desiredSquare.getFood(), numberOfPlays);
-
 
             if(valid){
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou "+ desiredSquare.getFood().getName());
@@ -369,6 +368,11 @@ public class GameManager {
         if(checkIfGameEnded()){
             return null;
         }
+
+        if(playerToFar()){
+            return getPlayerInfo(playersByPosition.get(1).getId());
+        }
+
 
         playersByPosition = players;
         sortPlayersByPocision();
@@ -392,7 +396,7 @@ public class GameManager {
 
             return getPlayerInfo(helper.get(0).getId());
         }
-        return getPlayerInfo(playersByPosition  .get(0).getId());
+        return getPlayerInfo(playersByPosition.get(0).getId());
     }
     ///DONE
 
@@ -404,26 +408,45 @@ public class GameManager {
 
         int counter = 1;
 
+        if(playerToFar()){
 
-        for(int i = map.getSize() ; i >= 1; i--){
+            sortPlayersByPocision();
 
-            if(map.getSquare(i).getPlayers().size() > 1){
-                sortPlayersById(map.getSquare(i).getPlayers());
+            Player player = playersByPosition.get(1);
+            result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
+                    +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
 
-                for(Player player : map.getSquare(i).getPlayers()){
+            for(int i=0; i<playersByPosition.size(); i++) {
+                counter++;
+
+                if (i == 1) {
+                    break;
+                }
+                Player otherPlayer = playersByPosition.get(i);
+                result.add("#" + counter + " " + otherPlayer.getName() + ", " + otherPlayer.getSpecie().getName() + ", " + otherPlayer.getPosition()
+                        + ", " + otherPlayer.getDistanceWalked() + ", " + otherPlayer.getFoodEaten());
+            }
+        }else{
+
+            for(int i = map.getSize() ; i >= 1; i--){
+
+                if(map.getSquare(i).getPlayers().size() > 1){
+                    sortPlayersById(map.getSquare(i).getPlayers());
+
+                    for(Player player : map.getSquare(i).getPlayers()){
+                        result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
+                                +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
+                        counter++;
+                    }
+                }
+                if(map.getSquare(i).getPlayers().size() == 1){
+                    Player player = map.getSquare(i).getPlayers().get(0);
                     result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
                             +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
                     counter++;
                 }
             }
-            if(map.getSquare(i).getPlayers().size() == 1){
-                Player player = map.getSquare(i).getPlayers().get(0);
-                result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
-                        +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
-                counter++;
-            }
         }
-
         return result;
     }
     ///DONE
@@ -532,18 +555,11 @@ public class GameManager {
 
         //o jogo acaba se todos estiverem sem energia
 
-        boolean resultA = false;
+        boolean resultA = playerToFar();
         boolean resultB = false;
 
         playersByPosition = players;
         sortPlayersByPocision();
-
-        int firstPosition = playersByPosition.get(0).getPosition();
-        int secondPosition = playersByPosition.get(1).getPosition();
-
-        if((firstPosition-secondPosition) > map.getSize()/2){
-            resultA = true;
-        }
 
 
         // chek if someone ios on the last
@@ -617,5 +633,17 @@ public class GameManager {
 
     public boolean isFoodPositionValid(int position, int jnglSz){
         return (!(position >= jnglSz || position < 1));
+    }
+
+    boolean playerToFar(){
+
+        int firstPosition = playersByPosition.get(0).getPosition();
+        int secondPosition = playersByPosition.get(1).getPosition();
+
+        if((firstPosition-secondPosition) > map.getSize()/2){
+            return true;
+        }
+
+        return false;
     }
 }
