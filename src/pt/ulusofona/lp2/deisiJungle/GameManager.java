@@ -23,7 +23,7 @@ public class GameManager {
         }
     };
 
-    //FOODS
+    //FOODS FOR VERIFICATIONS
     ArrayList<Food> foods = new ArrayList<>()
     {
         {
@@ -177,25 +177,7 @@ public class GameManager {
                 //END OF VERIFICATIONS================================================================
                 //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
 
-                char foodId = foodsInfo[i][0].charAt(0);
-                Food food = null;
-                if(foodId == 'a'){
-                    food = new Water();
-                }
-                if(foodId == 'e'){
-                    food = new Grass();
-                }
-                if(foodId == 'm'){
-                    food = new Mushrooms();
-                }
-                if(foodId == 'c'){
-                    food = new Meat();
-                }
-                if(foodId == 'b'){
-                    food = new Banana();
-                }
-
-                map.placeFood(Integer.parseInt(foodsInfo[i][1]), food);
+                map.placeFood(Integer.parseInt(foodsInfo[i][1]), newFood(foodsInfo[i][0].charAt(0)));
             }
         }
 
@@ -667,5 +649,21 @@ public class GameManager {
         }
 
         return false;
+    }
+
+    Food newFood(char id){
+        if(id == 'a'){
+            return new Water();
+        }
+        if(id == 'e'){
+            return new Grass();
+        }
+        if(id == 'm'){
+            return new Mushrooms();
+        }
+        if(id == 'c'){
+            return new Meat();
+        }
+        return new Banana();
     }
 }
