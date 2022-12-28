@@ -29,7 +29,7 @@ public class Meat extends Food{
         if(turn > 12){
             return "Carne toxica";
         }else{
-            return "Carne : +- 50 energia : "+turn+" jogadas";
+            return "Carne : + 50 energia : "+turn+" jogadas";
         }
     }
 
