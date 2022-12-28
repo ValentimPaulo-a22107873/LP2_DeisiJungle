@@ -368,7 +368,7 @@ public class Test {
         Assert.assertEquals(foodsInfo[1][1], "Erva");
         Assert.assertEquals(foodsInfo[2][1], "Bananas");
         Assert.assertEquals(foodsInfo[3][1], "Carne");
-        Assert.assertEquals(foodsInfo[4][1], "Cogumelo");
+        Assert.assertEquals(foodsInfo[4][1], "Cogumelo Magico");
 
         Assert.assertEquals(foodsInfo[0][2], "water.png");
         Assert.assertEquals(foodsInfo[1][2], "grass.png");
@@ -592,6 +592,7 @@ public class Test {
         Assert.assertEquals(10, teste2.getEnergy());
     }
 
+
     @org.junit.Test
     public void testMovePlayer(){
         GameManager game = new GameManager();
@@ -663,5 +664,30 @@ public class Test {
         //move pedro - 0 / algo a baixo / 10
     }
 
+
+    @org.junit.Test
+    public void testMovePlayer2(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "5"}, {"m", "10"}};
+        String[][] players = {{"0", "Pedro", "E"}, {"1", "Valentim", "T"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        Assert.assertEquals(0, game.players.get(game.getTurn()).getId());
+
+        /*
+              init   rest  consume
+        LION - 180  /  10  /   2   /
+        TURT - 150 /  5   /   1   /
+         */
+
+        //move pedro - 0 / 180 / 1
+        MovementResult move = game.moveCurrentPlayer(0,false); // plays 1
+        Assert.assertEquals(MovementResultCode.VALID_MOVEMENT, move.code());
+        Assert.assertEquals(1, game.players.get(0).getPosition());
+        Assert.assertEquals(190, game.players.get(0).getEnergy());
+        //move pedro - 0 / 190 / 1
+    }
 
 }

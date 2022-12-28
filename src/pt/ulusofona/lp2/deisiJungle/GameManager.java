@@ -151,6 +151,7 @@ public class GameManager {
 
         //create map
         map = new Map(jungleSize);
+        playersByPosition = players;
         sortPlayersById(players);
 
         //Preenche a 1 casa
@@ -410,8 +411,6 @@ public class GameManager {
 
         if(playerToFar()){
 
-            sortPlayersByPocision();
-
             Player player = playersByPosition.get(1);
             result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
                     +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
@@ -555,11 +554,9 @@ public class GameManager {
 
         //o jogo acaba se todos estiverem sem energia
 
+
         boolean resultA = playerToFar();
         boolean resultB = false;
-
-        playersByPosition = players;
-        sortPlayersByPocision();
 
 
         // chek if someone ios on the last
@@ -636,6 +633,8 @@ public class GameManager {
     }
 
     boolean playerToFar(){
+
+        sortPlayersByPocision();
 
         int firstPosition = playersByPosition.get(0).getPosition();
         int secondPosition = playersByPosition.get(1).getPosition();
