@@ -16,8 +16,9 @@ public abstract class Carnivoros extends Specie{
         if(foodId == 'c'){
             if(turn > 12){
                 return -50;
+            }else{
+                return 50;
             }
-            return 50;
         }
         return -1;
     }

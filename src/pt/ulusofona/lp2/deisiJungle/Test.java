@@ -738,7 +738,58 @@ public class Test {
         move = game.moveCurrentPlayer(0,false); //plays 2
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(182, game.players.get(1).getEnergy());
+    }
+
+    @org.junit.Test
+    public void testMovePlayer_eat(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "5"}, {"m", "10"}, {"b", "15"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
 
 
+        game.moveCurrentPlayer(0,false); // plays 1
+        //Pedro energy - 90
+
+        game.moveCurrentPlayer(0,false); //plays 2
+        //Valentim energy - 90
+
+        game.moveCurrentPlayer(0,false); // plays 3
+        //Pedro energy - 100
+
+        game.moveCurrentPlayer(0,false); //plays 4
+        //Valentim energy - 110
+
+        game.moveCurrentPlayer(0,false); // plays 5
+        //Pedro energy - 110
+
+        game.moveCurrentPlayer(0,false); //plays 6
+        //Valentim energy - 130
+
+        game.moveCurrentPlayer(0,false); // plays 7
+        //Pedro energy - 120
+
+        game.moveCurrentPlayer(0,false); //plays 8
+        //Valentim energy - 150
+
+        game.moveCurrentPlayer(0,false); // plays 9
+        //Pedro energy - 130
+
+        game.moveCurrentPlayer(0,false); //plays 10
+        //Valentim energy - 170
+
+        game.moveCurrentPlayer(0,false); // plays 11
+        //Pedro energy - 140
+
+        game.moveCurrentPlayer(0,false); //plays 12
+        //Valentim energy - 190
+
+        MovementResult move = game.moveCurrentPlayer(4,false); // plays 13
+        //Pedro energy - 90
+
+        Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
+        Assert.assertEquals(82, game.players.get(0).getEnergy());
     }
 }

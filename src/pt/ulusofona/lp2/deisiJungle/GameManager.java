@@ -225,7 +225,7 @@ public class GameManager {
         String[] squareInfo = new String[3];
 
         squareInfo[0] = square.getImage();
-        squareInfo[1] = square.getType(numberOfPlays-1);
+        squareInfo[1] = square.getType(numberOfPlays);
         squareInfo[2] = square.getIdPlayersInString();
 
         return squareInfo;
@@ -322,12 +322,14 @@ public class GameManager {
         //CHECK IF NUMBER OF SQUARES IS VALID
         if(!bypassValidations){
             if(nrSquares<-6 || nrSquares>6){
+                numberOfPlays++;
                 return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
             }
         }
 
         //CHECK IF PLAYER CHOOSES TO GO BACKWARDS WONT GO BEHIND FIRST HOUSE
         if(currentPlayer.getPosition()+nrSquares<1){
+            numberOfPlays++;
             return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
         }
 
@@ -340,10 +342,12 @@ public class GameManager {
             int valid = currentPlayer.move(nrSquares, map.getSize());
 
             if(valid == 3){
+                numberOfPlays++;
                 return new MovementResult(MovementResultCode.NO_ENERGY,null);
             }
 
             if(valid == 2 && !bypassValidations){
+                numberOfPlays++;
                 return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
             }
         }
@@ -358,10 +362,13 @@ public class GameManager {
             boolean valid = currentPlayer.eat(desiredSquare.getFood(), numberOfPlays);
 
             if(valid){
+                numberOfPlays++;
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD, "Apanhou "+ desiredSquare.getFood().getName());
             }
+            numberOfPlays++;
             return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
         }
+        numberOfPlays++;
         return new MovementResult(MovementResultCode.VALID_MOVEMENT,null);
     }
     ///ON GOING !!!
@@ -545,7 +552,6 @@ public class GameManager {
             turn++;
         }
 
-        numberOfPlays++;
         //System.out.println(turn);
     }
     //ASSUMINDO QUE CADA JOGADA DE CADA JOGADOR CONTA COMO UM TURNO, VERIFICAR
