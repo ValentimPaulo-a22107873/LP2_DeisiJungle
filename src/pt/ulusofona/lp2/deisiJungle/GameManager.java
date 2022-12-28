@@ -264,6 +264,12 @@ public class GameManager {
         playerInfo[2] = players.get(turn).getSpecie().getIdentifier()+"";
         playerInfo[3] = players.get(turn).getEnergy()+"";
 
+        int first = players.get(turn).getSpecie().getSpeed()[0];
+        int last = players.get(turn).getSpecie().getSpeed()[1];
+        String speed = ""+first+".."+last;
+        playerInfo[4] = speed;
+
+
         return playerInfo;
     }
     ///DONE
@@ -328,6 +334,7 @@ public class GameManager {
 
         //CHECK IF MOVEMENT IS VALID
         int valid = currentPlayer.move(nrSquares, map.getSize());
+        currentPlayer.move(nrSquares, map.getSize());
 
         //ENERGY
         if(valid == 3){
@@ -336,10 +343,10 @@ public class GameManager {
         }
 
         //INVALID NRSQUARES
-        if(valid == 2){
+        /*if(valid == 2){
             nextTurn();
             return new MovementResult(MovementResultCode.INVALID_MOVEMENT,null);
-        }
+        }*/
 
         //EVERYTHING VALID, REMOVE FROM PREVIOUS HOUSE, ADD TO NEXT AND CHECK IF EAT
         if(valid == 1){
@@ -351,6 +358,7 @@ public class GameManager {
             if(desiredSquare.getFood()!=null){
 
                 boolean eaten = currentPlayer.eat(desiredSquare.getFood(), numberOfPlays);
+                currentPlayer.eat(desiredSquare.getFood(), numberOfPlays);
 
                 if(eaten){
                     nextTurn();

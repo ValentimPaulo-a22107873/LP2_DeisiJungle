@@ -110,8 +110,9 @@ public class Player {
 
         if(position+distance >= mapSize){
             updatePosition(mapSize);
+        }else{
+            updatePosition(position+distance);
         }
-        updatePosition(position+distance);
         distanceWalked+=Math.abs(distance);
 
         return 1;
