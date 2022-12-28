@@ -366,7 +366,7 @@ public class GameManager {
     //////ELEVENTH FUNCTION - getWinnerInfo()
     public String[] getWinnerInfo(){
 
-        if(checkIfGameEnded()){
+        if(!checkIfGameEnded()){
             return null;
         }
 
@@ -554,7 +554,7 @@ public class GameManager {
         }
 
         // chek if someone ios on the last
-        if(map.getSquare(map.getSize()).getPlayers().size() < 1){
+        if(map.getSquare(map.getSize()).getPlayers().size() >= 1){
             return true;
         }
 
