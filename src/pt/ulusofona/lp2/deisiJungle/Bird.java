@@ -9,7 +9,7 @@ public class Bird extends Omnivero{
 
     @Override
     String getName() {
-        return "Pássaro";
+        return "Passaro";
     }
 
     @Override
