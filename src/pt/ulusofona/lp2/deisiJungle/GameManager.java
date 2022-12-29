@@ -242,24 +242,21 @@ public class GameManager {
     public String[] getPlayerInfo(int playerId){
 
         String[] playerInfo = new String[5];
-        Player player = new Player();
 
         for(int i=0; i<players.size(); i++){
             if(players.get(i).getId()==playerId){
-                player = players.get(i);
+
+                playerInfo[0] = players.get(i).getId()+"";
+                playerInfo[1] = players.get(i).getName();
+                playerInfo[2] = players.get(i).getSpecie().getIdentifier()+"";
+                playerInfo[3] = players.get(i).getEnergy()+"";
+
+                int first = players.get(i).getSpecie().getSpeed()[0];
+                int last = players.get(i).getSpecie().getSpeed()[1];
+                String speed = ""+first+".."+last;
+                playerInfo[4] = speed;
             }
         }
-
-        playerInfo[0] = player.getId()+"";
-        playerInfo[1] = player.getName();
-        playerInfo[2] = player.getSpecie().getIdentifier()+"";
-        playerInfo[3] = player.getEnergy()+"";
-
-        int first = player.getSpecie().getSpeed()[0];
-        int last = player.getSpecie().getSpeed()[1];
-        String speed = ""+first+".."+last;
-        playerInfo[4] = speed;
-
         return playerInfo;
     }
     ///DONE
@@ -595,7 +592,7 @@ public class GameManager {
     }
 
     public boolean isFoodPositionValid(int position, int jnglSz){
-        return (!(position >= jnglSz || position < 1));
+        return (!(position >= jnglSz || position <= 1));
     }
 
     boolean playerToFar(){
