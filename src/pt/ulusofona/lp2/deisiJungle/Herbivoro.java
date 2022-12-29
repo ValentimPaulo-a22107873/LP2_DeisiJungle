@@ -9,7 +9,7 @@ public abstract class Herbivoro extends Specie {
         }
 
         if(foodId == 'a'){
-            return 15;
+             return 15;
         }
 
         if(foodId == 'c'){

@@ -6,20 +6,14 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import org.junit.Assert;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Test {
-
-
-    /*        GameManager game = new GameManager();
-
-        ArrayList<Player> playersTest = new ArrayList<>();
-
-
-
-
-        game.players = playersTest;*/
-
 
     public String[][] createPlayers(){
         String[][] players = new String[3][3];
@@ -936,4 +930,60 @@ public class Test {
         Assert.assertEquals(192, game.players.get(0).getEnergy());
 
     }
+
+
+
+    @org.junit.Test
+    public void testRighSomethingToAFile() throws IOException {
+        String text = "Welcome to the save file\nHappy new Year!";
+        String _testFolder="";
+
+        GameManager game = new GameManager();
+
+
+        //create file
+        String nomeFicheiro = "save.txt";
+        File ficheiro = new File(_testFolder + nomeFicheiro);
+
+        //right to file
+        Path filePath = Path.of(ficheiro.getPath());
+        Files.writeString(filePath, text);
+
+        // Reading the content of the file
+        String file_content = Files.readString(filePath);
+
+
+
+        System.out.println(file_content);
+
+
+        //split it
+        String data[] = file_content.split("\n");
+
+        //tests propose
+        System.out.println(data[0]);
+        System.out.println(data[1]);
+
+
+        //check if the Strings in the text files are the same
+        Assert.assertEquals(text, file_content);
+        Assert.assertEquals("Welcome to the save file", data[0]);
+        Assert.assertEquals("Happy new Year!", data[1]);
+
+
+        //delete everithing from the file
+        PrintWriter writer = new PrintWriter(ficheiro);
+        writer.print("");
+        writer.close();
+
+
+        //check if the file is empty
+        file_content = Files.readString(filePath);
+        Assert.assertEquals("", file_content);
+
+
+
+    }
+
+
 }
