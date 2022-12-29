@@ -659,27 +659,6 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testGetWinnerInfo(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "5"}, {"m", "10"}};
-        String[][] players = {{"0", "Pedro", "E"}, {"1", "Valentim", "T"}};
-
-        game.createInitialJungle(40, players, foodsInfo);
-
-        game.map.getSquare(15).addPlayer(game.players.get(0));
-        game.map.getSquare(36).addPlayer(game.players.get(1));
-
-        game.players.get(0).updatePosition(15);
-        game.players.get(1).updatePosition(36);
-
-
-        String[] expected = new String[]{"0","Pedro","E","180","1..6"};
-        String[] obtained = game.getWinnerInfo();
-        Assert.assertEquals(expected, obtained);
-    }
-
-    @org.junit.Test
     public void testMovePlayer3(){
         GameManager game = new GameManager();
 
