@@ -6,6 +6,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 
 public class GameManager {
@@ -445,7 +448,14 @@ public class GameManager {
 
 
     //////FIFTEENTH FUNCTION - saveGame()
-    public boolean saveGame(File file){
+    public boolean saveGame(File file) throws IOException {
+        String text = "Welcome to the save file\nHappy new Year!";
+
+        // Defining the file name of the file
+        Path fileName = Path.of(file.getPath());
+
+        // Writing into the file
+        Files.writeString(fileName, text);
         return true;
     }
     ///ON GOING !!!
@@ -455,6 +465,8 @@ public class GameManager {
     public boolean loadGame(File file){
         return true;
     }
+
+
     ///ON GOING !!!
 
 
