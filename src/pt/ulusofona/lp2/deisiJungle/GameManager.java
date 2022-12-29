@@ -43,7 +43,7 @@ public class GameManager {
 
     //OTHERS
      Map map;
-     private int turn = 0;
+     private int turn;
      private int numberOfPlays=1;
 
 
@@ -91,6 +91,7 @@ public class GameManager {
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
 
         reset();
+        turn = 0;
 
         players = new ArrayList<>();
 
@@ -558,6 +559,8 @@ public class GameManager {
     public void reset() {
         map = null;
         players = new ArrayList<>();
+        numberOfPlays=1;
+        turn=0;
     }
 
     public Specie getSpeciByID(char id){
@@ -606,6 +609,8 @@ public class GameManager {
 
         int firstPosition = playersByPosition.get(0).getPosition();
         int secondPosition = playersByPosition.get(1).getPosition();
+
+        sortPlayersById(players);
 
         if((firstPosition-secondPosition) > map.getSize()/2){
             return true;
