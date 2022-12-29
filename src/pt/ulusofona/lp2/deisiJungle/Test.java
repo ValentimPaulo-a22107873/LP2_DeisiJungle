@@ -985,5 +985,64 @@ public class Test {
 
     }
 
+    @org.junit.Test
+    public void moveWith3Players(){
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "15"}, {"b", "20"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}, {"2", "Joao", "P"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        //PEDRO - 80 energy / 2 consume
+        //Valentim - 70 energy / 2 consume
+        //Joao - 70 energy / 4 consume
+
+        game.moveCurrentPlayer(4,false); //play 1 - turn 0
+
+        Assert.assertEquals(72, game.players.get(0).getEnergy());//check energy
+        Assert.assertEquals(5, game.players.get(0).getPosition());//check energy
+
+        game.moveCurrentPlayer(2,false); //play 2 - turn 1
+
+        Assert.assertEquals(66, game.players.get(1).getEnergy());//check energy
+        Assert.assertEquals(3, game.players.get(1).getPosition());//check energy
+
+        game.moveCurrentPlayer(6,false); //play 3 - turn 2
+
+        Assert.assertEquals(46, game.players.get(2).getEnergy());//check energy
+        Assert.assertEquals(7, game.players.get(2).getPosition());//check energy
+
+        game.moveCurrentPlayer(6,false); //play 4 - turn 0
+
+        Assert.assertEquals(60, game.players.get(0).getEnergy());//check energy
+        Assert.assertEquals(11, game.players.get(0).getPosition());//check energy
+
+        game.moveCurrentPlayer(6,false); //play 5 - turn 1
+
+        Assert.assertEquals(54, game.players.get(1).getEnergy());//check energy
+        Assert.assertEquals(9, game.players.get(1).getPosition());//check energy
+
+        game.moveCurrentPlayer(0,false); //play 6 - turn 2
+
+        Assert.assertEquals(96, game.players.get(2).getEnergy());//check energy
+        Assert.assertEquals(7, game.players.get(2).getPosition());//check energy
+
+        game.moveCurrentPlayer(4,false); //play 7 - turn 0
+
+        Assert.assertEquals(102, game.players.get(0).getEnergy());//check energy
+        Assert.assertEquals(15, game.players.get(0).getPosition());//check energy
+
+        game.moveCurrentPlayer(6,false); //play 8 - turn 1
+
+        Assert.assertEquals(92, game.players.get(1).getEnergy());//check energy
+        Assert.assertEquals(15, game.players.get(1).getPosition());//check energy
+
+        game.moveCurrentPlayer(6,false); //play 9 - turn 2
+
+        Assert.assertEquals(72, game.players.get(2).getEnergy());//check energy
+        Assert.assertEquals(13, game.players.get(2).getPosition());//check energy
+    }
+
 
 }

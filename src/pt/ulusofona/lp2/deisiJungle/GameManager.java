@@ -383,10 +383,15 @@ public class GameManager {
             return null;
         }
 
+        if(map.getSquare(map.getSize()).getPlayers().size() >=1){
+            return getPlayerInfo(map.getSquare(map.getSize()).getPlayers().get(0).getId());
+        }
+
         if(playerToFar()){
             return getPlayerInfo(playersByPosition.get(1).getId());
         }
-        return getPlayerInfo(map.getSquare(map.getSize()).getPlayers().get(0).getId());
+
+        return null;
     }
     ///DONE
 
