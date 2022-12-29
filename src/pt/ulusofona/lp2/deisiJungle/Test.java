@@ -506,10 +506,10 @@ public class Test {
     public void testCreateInitalJungle_invalidSpecieId(){
         GameManager game = new GameManager();
 
-        String[][] foodsInfo = {{"h", "50"}, {"m", "30"}};
+        String[][] foodsInfo = {{"c", "h"}, {"m", "30"}};
         String[][] players = {{"0", "Pedro", "Z"}, {"1", "Valentim", "T"}};
 
-        InitializationError expected = new InitializationError("id de comida inválido");
+        InitializationError expected = new InitializationError("posição de comida inválida");
         Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
     }
 

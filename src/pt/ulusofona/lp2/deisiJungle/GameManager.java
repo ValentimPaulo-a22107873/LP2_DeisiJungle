@@ -170,14 +170,19 @@ public class GameManager {
                     return new InitializationError("id de comida inválido");
                 }
 
-                if(!isFoodPositionValid(Integer.parseInt(foodsInfo[i][1]), jungleSize)){
+                try{
+                    if(!isFoodPositionValid(Integer.parseInt(foodsInfo[i][1]), jungleSize)){
+                        return new InitializationError("posição de comida inválida");
+                    }
+
+                    //END OF VERIFICATIONS================================================================
+                    //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
+
+                    map.placeFood(Integer.parseInt(foodsInfo[i][1]), newFood(foodsInfo[i][0].charAt(0)));
+
+                }catch (NumberFormatException e) {
                     return new InitializationError("posição de comida inválida");
                 }
-
-                //END OF VERIFICATIONS================================================================
-                //COMO JA PASSOU AS VALIDAÇOES COLOCA AS VARIAVEIS
-
-                map.placeFood(Integer.parseInt(foodsInfo[i][1]), newFood(foodsInfo[i][0].charAt(0)));
             }
         }
 
@@ -335,12 +340,7 @@ public class GameManager {
 
         //CHECK IF WANTS TO REST
         if(nrSquares==0){
-
-            if(!currentPlayer.rest()){
-                numberOfPlays++;
-                return new MovementResult(MovementResultCode.NO_ENERGY,null);
-            }
-
+            currentPlayer.rest();
         }else{
 
             int valid = currentPlayer.move(nrSquares, map.getSize());
