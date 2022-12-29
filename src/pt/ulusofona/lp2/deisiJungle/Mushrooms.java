@@ -32,6 +32,6 @@ public class Mushrooms extends Food {
 
     @Override
     String getTooltip() {
-        return "Cogumelo Magico: +- "+energy+"% energia";
+        return "Cogumelo Magico : +- "+energy+"% energia";
     }
 }
