@@ -1023,5 +1023,29 @@ public class Test {
         Assert.assertEquals(13, game.players.get(2).getPosition());//check energy
     }
 
+    @org.junit.Test
+    public void test_checkEnergy() {
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "5"}, {"b", "20"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}, {"2", "Joao", "P"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        //PEDRO - 80 energy / 2 consume
+        //Valentim - 70 energy / 2 consume
+        //Joao - 70 energy / 4 consume
+
+        for(int i=0; i<12; i++){
+            game.moveCurrentPlayer(0, false);
+        }
+
+        game.players.get(0).removeEnergy(59);
+
+        Assert.assertEquals(2, game.players.get(0).getEnergy());
+
+        MovementResult move = game.moveCurrentPlayer(4,false);
+        Assert.assertEquals(MovementResultCode.NO_ENERGY, move.code());
+    }
 
 }

@@ -98,7 +98,8 @@ public class Player {
     }
 
     int move(int distance, int mapSize){
-        if(energy < specie.getEnergyConsume()){
+
+        if(energy < specie.getEnergyConsume()*distance){
             return 3;
         }
         if(Math.abs(distance)<specie.getSpeed()[0] || Math.abs(distance)>specie.getSpeed()[1]){

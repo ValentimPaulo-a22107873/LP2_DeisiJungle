@@ -427,7 +427,7 @@ public class GameManager {
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(300,300));
 
-        JTextArea text = new JTextArea("ola o meu nome e pedro");
+        JTextArea text = new JTextArea("Realizado por Lopes e Paulinho");
 
         panel.setBackground(Color.BLACK);
 
