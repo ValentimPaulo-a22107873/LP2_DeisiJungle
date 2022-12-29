@@ -402,6 +402,15 @@ public class GameManager {
 
         ArrayList<String> result =  new ArrayList<>();
         int counter = 1;
+        int id=-1;
+
+
+        if(playerToFar()){
+            result.add("#"+counter+" "+players.get(1).getName()+", "+players.get(1).getSpecie().getName()+", "+players.get(1).getPosition()
+                    +", "+players.get(1).getDistanceWalked()+", "+players.get(1).getFoodEaten());
+            counter+=1;
+            id = players.get(1).getId();
+        }
 
         for(int x = map.getSize() ; x >= 1; x--){
 
@@ -410,9 +419,12 @@ public class GameManager {
             for(int y=0; y<players.size(); y++){
 
                 Player player = players.get(y);
-                result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
-                        +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
-                counter++;
+
+                if(player.getId()!=id){
+                    result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
+                            +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
+                    counter++;
+                }
             }
         }
 
