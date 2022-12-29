@@ -506,7 +506,7 @@ public class Test {
     public void testCreateInitalJungle_invalidSpecieId(){
         GameManager game = new GameManager();
 
-        String[][] foodsInfo = {{"h", "10"}, {"m", "30"}};
+        String[][] foodsInfo = {{"h", "50"}, {"m", "30"}};
         String[][] players = {{"0", "Pedro", "Z"}, {"1", "Valentim", "T"}};
 
         InitializationError expected = new InitializationError("id de comida inválido");

@@ -414,46 +414,21 @@ public class GameManager {
     public ArrayList<String> getGameResults(){
 
         ArrayList<String> result =  new ArrayList<>();
-
         int counter = 1;
 
-        if(playerToFar()){
+        for(int x = map.getSize() ; x >= 1; x--){
 
-            Player player = playersByPosition.get(1);
-            result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
-                    +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
+            ArrayList<Player> players = sortPlayersById(map.getSquare(x).getPlayers());
 
-            for(int i=0; i<playersByPosition.size(); i++) {
+            for(int y=0; y<players.size(); y++){
+
+                Player player = players.get(y);
+                result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
+                        +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
                 counter++;
-
-                if (i == 1) {
-                    break;
-                }
-                Player otherPlayer = playersByPosition.get(i);
-                result.add("#" + counter + " " + otherPlayer.getName() + ", " + otherPlayer.getSpecie().getName() + ", " + otherPlayer.getPosition()
-                        + ", " + otherPlayer.getDistanceWalked() + ", " + otherPlayer.getFoodEaten());
-            }
-        }else{
-
-            for(int i = map.getSize() ; i >= 1; i--){
-
-                if(map.getSquare(i).getPlayers().size() > 1){
-                    sortPlayersById(map.getSquare(i).getPlayers());
-
-                    for(Player player : map.getSquare(i).getPlayers()){
-                        result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
-                                +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
-                        counter++;
-                    }
-                }
-                if(map.getSquare(i).getPlayers().size() == 1){
-                    Player player = map.getSquare(i).getPlayers().get(0);
-                    result.add("#"+counter+" "+player.getName()+", "+player.getSpecie().getName()+", "+player.getPosition()
-                            +", "+player.getDistanceWalked()+", "+player.getFoodEaten());
-                    counter++;
-                }
             }
         }
+
         return result;
     }
     ///DONE
