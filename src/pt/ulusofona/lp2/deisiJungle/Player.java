@@ -118,8 +118,14 @@ public class Player {
         return 1;
     }
 
-    void rest(){
+    boolean rest(){
+
+        if(energy<specie.getEnergyConsume()){
+            return false;
+        }
+
         addEnergy(specie.getEnrgyEarnedByRest());
+        return true;
     }
 
 

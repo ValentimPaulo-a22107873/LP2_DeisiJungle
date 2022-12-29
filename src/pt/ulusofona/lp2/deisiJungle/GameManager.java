@@ -335,7 +335,11 @@ public class GameManager {
 
         //CHECK IF WANTS TO REST
         if(nrSquares==0){
-            currentPlayer.rest();
+
+            if(!currentPlayer.rest()){
+                numberOfPlays++;
+                return new MovementResult(MovementResultCode.NO_ENERGY,null);
+            }
 
         }else{
 
@@ -385,27 +389,7 @@ public class GameManager {
         if(playerToFar()){
             return getPlayerInfo(playersByPosition.get(1).getId());
         }
-
-        int nbrPlayersSamePosition = 0;
-        int positionOfFirstPlace = playersByPosition.get(0).getPosition();
-
-        for(int i = 1; i < playersByPosition.size(); i++){
-            if(playersByPosition.get(i).getPosition() == positionOfFirstPlace){
-                nbrPlayersSamePosition++;
-            }
-        }
-
-        ArrayList<Player> helper = new ArrayList<>();
-
-        if(nbrPlayersSamePosition >= 1){
-            for(int x = 0 ; x <  nbrPlayersSamePosition; x++){
-                helper.add(playersByPosition.get(x));
-            }
-            sortPlayersById(helper);
-
-            return getPlayerInfo(helper.get(0).getId());
-        }
-        return getPlayerInfo(playersByPosition.get(0).getId());
+        return getPlayerInfo(map.getSquare(map.getSize()).getPlayers().get(0).getId());
     }
     ///DONE
 
