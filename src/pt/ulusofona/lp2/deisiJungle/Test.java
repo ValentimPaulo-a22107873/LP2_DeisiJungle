@@ -1048,4 +1048,29 @@ public class Test {
         Assert.assertEquals(MovementResultCode.NO_ENERGY, move.code());
     }
 
+
+    @org.junit.Test
+    public void test_moveWithBypass() {
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "5"}, {"b", "20"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}, {"2", "Joao", "P"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        //PEDRO - 80 energy / 2 consume
+        //Valentim - 70 energy / 2 consume
+        //Joao - 70 energy / 4 consume
+
+        MovementResult move = game.moveCurrentPlayer(-10, true);
+
+        Assert.assertEquals(MovementResultCode.INVALID_MOVEMENT, move.code());
+        Assert.assertEquals(1, game.players.get(0).getPosition());
+
+        move = game.moveCurrentPlayer(16, true);
+
+        Assert.assertEquals(MovementResultCode.VALID_MOVEMENT, move.code());
+        Assert.assertEquals(17, game.players.get(1).getPosition());
+    }
+
 }

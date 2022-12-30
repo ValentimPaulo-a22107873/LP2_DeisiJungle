@@ -344,7 +344,7 @@ public class GameManager {
             currentPlayer.rest();
         }else{
 
-            int valid = currentPlayer.move(nrSquares, map.getSize());
+            int valid = currentPlayer.move(nrSquares, map.getSize(), !bypassValidations);
 
             if(valid == 3){
                 numberOfPlays++;
