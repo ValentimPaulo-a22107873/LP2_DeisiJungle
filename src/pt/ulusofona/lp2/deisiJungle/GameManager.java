@@ -2,10 +2,13 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
-
+import java.util.Scanner;
 
 
 public class GameManager {
@@ -461,6 +464,59 @@ public class GameManager {
 
     //////FIFTEENTH FUNCTION - saveGame()
     public boolean saveGame(File file){
+        try (BufferedWriter buff = new BufferedWriter(new FileWriter(file));) {
+
+            // global variables
+
+            buff.write(map.getSize() + "\n");
+            buff.write(turn + "\n");
+            buff.write(numberOfPlays + "\n");
+
+
+            // players stuff
+            for (int x = 0; x < 4; x++) {
+
+                if (x >= players.size()) {
+                    buff.write("-\n");
+                } else {
+                    Player player = players.get(x);
+
+                    buff.write(player.getName() + "#" + player.getId() + "#" +
+                            player.getSpecie().getIdentifier() + "#" + player.getPosition() + "#" +
+                            player.getEnergy() + "#" + player.getBananaEaten() + "\n");
+                }
+
+            }
+
+            // food stuff
+
+            for (Square square : map.getMap()) {
+
+                if(square.getFood() == null){
+                    buff.write("-" +  "#" + square.getNumber() + "#" + "-" + "#" + "-" + "\n");
+                }else{
+
+                    Food food = square.getFood();
+
+                    if(square.getFood().getIdentifier() == 'b'){
+                        buff.write(square.getFood().getIdentifier() + "#" + square.getNumber() + "#" +
+                                food.getBananaEaten((Banana) food) + "#" + "-" + "\n");
+                    }
+                    else if(square.getFood().getIdentifier() == 'm'){
+                        buff.write(square.getFood().getIdentifier() + "#" + square.getNumber() + "#" +
+                                "-" + "#" + food.getMushroomEnergy((Mushrooms) food) + "\n");
+                    }
+                    else{
+                        buff.write(food.getIdentifier() + "#" + square.getNumber() + "#" +
+                                "-" + "#" + "-" + "\n");
+                    }
+                }
+            }
+
+
+        } catch (IOException io) {
+            return false;
+        }
         return true;
     }
     ///ON GOING !!!
@@ -468,6 +524,90 @@ public class GameManager {
 
     //////SIXTEENTH FUNCTION - loadGame()
     public boolean loadGame(File file){
+
+        try {
+
+            reset();
+            Scanner scanner = new Scanner(file);
+
+            //global stuff
+            int sizeMap  = Integer.parseInt(scanner.nextLine());
+            turn = Integer.parseInt(scanner.nextLine());
+            numberOfPlays = Integer.parseInt(scanner.nextLine());
+
+            map = new Map(sizeMap);
+
+            int count = 4;
+            String line;
+            String[] split;
+
+            while (scanner.hasNextLine()) {
+
+                line = scanner.nextLine();
+
+                if (count >= 4 && count <= 7) {
+
+                    //player stuff
+
+                    if(line.equals("-")){
+                        count++;
+                        continue;
+                    }
+
+                    split = line.split("#");
+
+                    String name = split[0];
+                    int id = Integer.parseInt(split[1]);
+                    char specieId = split[2].charAt(0);
+                    int position = Integer.parseInt(split[3]);
+                    int energy = Integer.parseInt(split[4]);
+                    int bananaEaten = Integer.parseInt(split[5]);
+
+                    Specie specie = getSpeciByID(specieId);
+                    Player player = new Player(id, energy, specie, name, position, bananaEaten);
+                    players.add(player);
+
+                    for(Square square : map.getMap()){
+
+                        for(Player posPlayer : players){
+                            if(posPlayer.getPosition() == square.getNumber()){
+                                square.addPlayer(posPlayer);
+                            }
+                        }
+                    }
+
+                } else{
+
+                    //food stuff
+
+                    split = line.split("#");
+
+                    char foodId = split[0].charAt(0);
+
+                    if(foodId != '-'){
+                        int position = Integer.parseInt(split[1]);
+                        Food food = newFood(foodId);
+
+                        if(foodId=='b'){
+                            int banana = Integer.parseInt(split[2]);
+                            ((Banana)food).updateBanana(banana);
+                        }
+                        if(foodId=='m'){
+                            int mushroom = Integer.parseInt(split[3]);
+                            ((Mushrooms)food).updateEnergy(mushroom);
+                        }
+
+                        Square square = map.getSquare(position);
+                        square.setFood(food);
+                    }
+                }
+                count++;
+            }
+
+        } catch (IOException io) {
+            return false;
+        }
+
         return true;
     }
 
@@ -571,8 +711,6 @@ public class GameManager {
     public void reset() {
         map = null;
         players = new ArrayList<>();
-        numberOfPlays=1;
-        turn=0;
     }
 
     public Specie getSpeciByID(char id){

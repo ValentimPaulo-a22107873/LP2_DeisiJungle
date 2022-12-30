@@ -35,4 +35,12 @@ public class Banana extends Food{
         numberBananas--;
         return true;
     }
+
+    public int getNumberBananas() {
+        return numberBananas;
+    }
+
+    public void updateBanana(int number){
+        this.numberBananas = number;
+    }
 }

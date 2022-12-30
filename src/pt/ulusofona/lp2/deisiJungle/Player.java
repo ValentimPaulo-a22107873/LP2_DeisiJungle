@@ -17,13 +17,6 @@ public class Player {
     public Player() {
     }
 
-    public Player(int id, char specieId, int energy, String name) {
-        this.id = id;
-        this.specieId = specieId;
-        this.energy = energy;
-        this.name = name;
-    }
-
     public Player(int id, int energy, Specie specie, String name) {
         this.id = id;
         this.energy = energy;
@@ -31,14 +24,21 @@ public class Player {
         this.name = name;
     }
 
-    public Player(int id, Specie specie, String name) {
+    public Player(int id, int energy, Specie specie, String name, int position, int bananaEaten) {
         this.id = id;
+        this.energy = energy;
         this.specie = specie;
         this.name = name;
+        this.position = position;
+        this.bananaEaten = bananaEaten;
     }
 
     //CONSTRUTORES
 
+
+    public int getBananaEaten() {
+        return bananaEaten;
+    }
 
     public int getFoodEaten() {
         return foodEaten;

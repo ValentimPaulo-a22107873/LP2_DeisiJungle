@@ -73,8 +73,15 @@ public class Square {
         return result;
     }
 
-    public void addPlayer(Player player){
+    public boolean addPlayer(Player player){
+
+        for(Player playertest : players){
+            if(playertest.getId() == player.getId()){
+                return true;
+            }
+        }
         players.add(player);
+        return true;
     }
 
     public void removePlayer(Player player){

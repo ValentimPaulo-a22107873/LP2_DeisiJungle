@@ -13,4 +13,12 @@ public abstract class Food{
     abstract String getImage();
 
     abstract String getTooltip();
+
+    public int getBananaEaten(Banana banana){
+        return banana.getNumberBananas();
+    }
+
+    public int getMushroomEnergy(Mushrooms mushroom){
+        return mushroom.getEnergy();
+    }
 }

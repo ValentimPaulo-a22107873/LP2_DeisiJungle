@@ -24,6 +24,10 @@ public class Map {
         return map;
     }
 
+    public ArrayList<Square> getMap() {
+        return map;
+    }
+
     Square getSquare(int number){
         return map.get(number-1);
     }

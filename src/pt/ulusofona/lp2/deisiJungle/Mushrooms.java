@@ -34,4 +34,8 @@ public class Mushrooms extends Food {
     String getTooltip() {
         return "Cogumelo Magico : +- "+energy+"% energia";
     }
+
+    public void updateEnergy(int number){
+        this.energy = number;
+    }
 }
