@@ -5,10 +5,13 @@ Pedro Lopes
 Valentim Paulo
 
 
-Extras:
-Adiciona-mos ao nosso programa uma funcionalidade que permite aos jogadores
-receberem energia quando passam na casa central do mapa, permitindo assim que exista
-uma maior chance de cada jogador chegar à meta sem que fique sem energia antes disso.
+Welcome to Deisi Jungle.
+Este é um jogo de tabuleiro, onde cada player escolhe um animal e joga com este mesmo.
+Tendo em conta que cada animal tem as suas características, terão um grande desafio pela frente.
+
+Código:
+Através da realização desta segunda parte do projeto, apercebemo-nos da importancia da utilização
+das heranças, visto que nos permitem uma realização bem mais simples e mais organizada.
 
 
 
