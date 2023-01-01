@@ -15,7 +15,6 @@ das heranças, visto que nos permitem uma realização bem mais simples e mais o
 
 
 
-
-
+video da demonstraçao do funcionamento do jogo no visualizador: https://www.youtube.com/watch?v=6kCvZj21n4M
 
 ![](Diagrama.png?raw=true "Diagrama UML")
