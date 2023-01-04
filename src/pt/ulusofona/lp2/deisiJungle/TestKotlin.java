@@ -85,4 +85,17 @@ public class TestKotlin {
 
         Assert.assertEquals("Valentim:P:6\n" + "Pedro:E:4\n" + "Total:10", FunctionsKt.getMostTraveled(game));
     }
+
+    @org.junit.Test
+    public void kotlin_getMostTraveled_2() {
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "3"}, {"b", "6"}};
+        String[][] players = {{"0", "Pedro", "E"}, {"1", "Valentim", "P"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+
+        Assert.assertEquals("Pedro:E:0\n" + "Valentim:P:0\n" + "Total:0", FunctionsKt.getMostTraveled(game));
+    }
 }
