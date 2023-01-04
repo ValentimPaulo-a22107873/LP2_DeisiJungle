@@ -123,6 +123,13 @@ public class Player {
         addEnergy(specie.getEnrgyEarnedByRest());
     }
 
+    public String kotlin_getPlayerInfo(){
+        return this.id+" | "+this.name+" | "+this.specie.getName()+" | "+this.energy+" | "+this.position;
+    }
+
+    public String kotlin_getMostTraveled(){
+        return this.name+":"+this.specie.getIdentifier()+":"+distanceWalked;
+    }
 
     //FUNCTIONS RELATED WITH THE METHOD - eat()
 

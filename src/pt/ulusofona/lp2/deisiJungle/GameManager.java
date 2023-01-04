@@ -688,6 +688,22 @@ public class GameManager {
         return false;
     }
 
+    public ArrayList<Player> getPlayerBySpecieId(char specieId){
+        ArrayList<Player> speciePlayers = new ArrayList<>();
+
+        for(Player player : players){
+            if(player.getSpecieId()==specieId){
+                speciePlayers.add(player);
+            }
+        }
+
+        return speciePlayers;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
     void sortPlayersByPocision(){
         //https://www.geeksforgeeks.org/sorting-in-java/--
         for (int i = 0; i < playersByPosition.size(); i++) {
@@ -769,6 +785,15 @@ public class GameManager {
         return false;
     }
 
+    public Player getPlayerByName(String name) {
+        for(Player player : players){
+            if(Objects.equals(player.getName(), name)){
+                return player;
+            }
+        }
+        return null;
+    }
+
     Food newFood(char id){
         if(id == 'a'){
             return new Water();
@@ -784,4 +809,6 @@ public class GameManager {
         }
         return new Banana();
     }
+
+
 }
