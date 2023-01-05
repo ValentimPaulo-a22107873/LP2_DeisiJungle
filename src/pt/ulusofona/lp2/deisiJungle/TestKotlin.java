@@ -98,4 +98,19 @@ public class TestKotlin {
 
         Assert.assertEquals("Pedro:E:0\n" + "Valentim:P:0\n" + "Total:0", FunctionsKt.getMostTraveled(game));
     }
+
+    @org.junit.Test
+    public void kotlin_getConsumedFood_1() {
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "3"}, {"b", "6"}};
+        String[][] players = {{"0", "Pedro", "T"}, {"1", "Valentim", "P"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+        game.moveCurrentPlayer(2,false);
+        game.moveCurrentPlayer(5,false);
+
+        Assert.assertEquals("Bananas\nCarne", FunctionsKt.getConsumedFood(game));
+        Assert.assertEquals("Bananas\nCarne", FunctionsKt.getConsumedFood(game));
+    }
 }

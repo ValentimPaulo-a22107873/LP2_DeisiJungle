@@ -144,12 +144,14 @@ public class Player {
         if(food.getIdentifier()=='a'){
             addEnergy(specie.eat('a', energy, turn));
             foodEaten++;
+            food.addTimesEaten();
             return true;
         }
 
         else if(food.getIdentifier()=='e'){
             addEnergy(specie.eat('e', energy, turn));
             foodEaten++;
+            food.addTimesEaten();
             return true;
         }
 
@@ -164,7 +166,6 @@ public class Player {
         }
 
         else if(food.getIdentifier()=='b'){
-            food.addTimesEaten();
             return eatBanana((Banana) food);
         }
 
@@ -172,6 +173,7 @@ public class Player {
             food.addTimesEaten();
             eatMushroom((Mushrooms) food, turn);
             foodEaten++;
+            food.addTimesEaten();
             return true;
         }
 
@@ -185,9 +187,11 @@ public class Player {
 
             if(bananaEaten==0){
                 foodEaten++;
+                banana.addTimesEaten();
                 addEnergy(40);
             }else{
                 foodEaten++;
+                banana.addTimesEaten();
                 addEnergy(-40);
             }
             addBanana();
