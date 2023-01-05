@@ -2,8 +2,17 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public abstract class Food{
 
+    private int timesEaten = 0;
     public Food(){
 
+    }
+
+    public int getTimesEaten(){
+        return timesEaten;
+    }
+
+    public void addTimesEaten(){
+        timesEaten++;
     }
 
     abstract String getName();

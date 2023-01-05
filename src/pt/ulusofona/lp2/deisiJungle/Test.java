@@ -1073,4 +1073,31 @@ public class Test {
         Assert.assertEquals(17, game.players.get(1).getPosition());
     }
 
+
+    @org.junit.Test
+    public void test_testTimesEaten(){
+
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "5"}, {"b", "20"}};
+        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "Z"}, {"2", "Joao", "P"}};
+
+        game.createInitialJungle(40,players,foodsInfo);
+
+        Food banana = new Banana();
+        Food meat = new Meat();
+
+
+        game.players.get(0).eat(banana,10);
+        game.players.get(1).eat(meat,10);
+
+        Assert.assertEquals(1,banana.getTimesEaten());
+        Assert.assertEquals(1,meat.getTimesEaten());
+
+
+
+
+    }
+
+
 }

@@ -34,4 +34,16 @@ fun getMostTraveled(manager: GameManager) : String{
             .map { it.kotlin_getMostTraveled() }
             .joinToString("\n") + "\n" +"Total:"+total
 }
+fun getTopEnergeticOmnivores(manager : GameManager, maxResults: Int) : String{
+    return manager.getPlayers()
+        .filter { it.specie.type == 'o'}
+        .sortedWith{i , j -> j.energy - i.energy}
+        .take(maxResults)
+        .map{it.kotlin_getTopEnergeticOmnivores()}
+        .joinToString("\n")
+
+}
+
+
+
 

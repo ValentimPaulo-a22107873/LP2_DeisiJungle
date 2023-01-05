@@ -2,11 +2,12 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class Banana extends Food{
 
-    int numberBananas;
+    private int numberBananas;
 
     public Banana() {
         this.numberBananas = 3;
     }
+
 
     @Override
     String getName() {

@@ -123,12 +123,19 @@ public class Player {
         addEnergy(specie.getEnrgyEarnedByRest());
     }
 
+
+
+    //FUNCTIONS RELATED TO THE KOTLIN CLASS
     public String kotlin_getPlayerInfo(){
         return this.id+" | "+this.name+" | "+this.specie.getName()+" | "+this.energy+" | "+this.position;
     }
 
     public String kotlin_getMostTraveled(){
         return this.name+":"+this.specie.getIdentifier()+":"+distanceWalked;
+    }
+
+    public String kotlin_getTopEnergeticOmnivores(){
+        return this.name + ":" + this.energy;
     }
 
     //FUNCTIONS RELATED WITH THE METHOD - eat()
@@ -150,16 +157,19 @@ public class Player {
             if(specie.eat('c', energy, turn)!=0){
                 addEnergy(specie.eat('c', energy, turn));
                 foodEaten++;
+                food.addTimesEaten();
                 return true;
             }
             return false;
         }
 
         else if(food.getIdentifier()=='b'){
+            food.addTimesEaten();
             return eatBanana((Banana) food);
         }
 
         else if(food.getIdentifier()=='m'){
+            food.addTimesEaten();
             eatMushroom((Mushrooms) food, turn);
             foodEaten++;
             return true;
