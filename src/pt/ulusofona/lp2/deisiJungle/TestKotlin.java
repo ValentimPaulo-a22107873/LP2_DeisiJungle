@@ -113,4 +113,16 @@ public class TestKotlin {
         Assert.assertEquals("Bananas\nCarne", FunctionsKt.getConsumedFood(game));
         Assert.assertEquals("Bananas\nCarne", FunctionsKt.getConsumedFood(game));
     }
+
+    @org.junit.Test
+    public void kotlin_getConsumedFood_2() {
+        GameManager game = new GameManager();
+
+        String[][] foodsInfo = {{"c", "3"}, {"b", "6"}};
+        String[][] players = {{"0", "Pedro", "T"}, {"1", "Valentim", "P"}};
+
+        game.createInitialJungle(40, players, foodsInfo);
+
+        Assert.assertEquals("", FunctionsKt.getConsumedFood(game));
+    }
 }
