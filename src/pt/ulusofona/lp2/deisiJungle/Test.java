@@ -134,7 +134,7 @@ public class Test {
 
 
     @org.junit.Test
-    public void testGetPlayerInitialEnergy(){
+    public void testGetPlayerInitialEnergy() throws InvalidInitialJungleException {
 
         GameManager game = new GameManager();
 
@@ -148,7 +148,7 @@ public class Test {
 
 
     @org.junit.Test
-    public void testGetPlayerInfo(){
+    public void testGetPlayerInfo() throws InvalidInitialJungleException {
 
         GameManager game = new GameManager();
 
@@ -169,7 +169,7 @@ public class Test {
 
 
     @org.junit.Test
-    public void testGetSquareInfo(){
+    public void testGetSquareInfo() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
@@ -406,7 +406,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testgetSquareInfo(){
+    public void testgetSquareInfo() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
@@ -452,86 +452,9 @@ public class Test {
 
     }
 
-    @org.junit.Test
-    public void testCreateInitalJungle_sucessfull(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
-        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
-
-        InitializationError expected = null;
-        Assert.assertEquals(expected, game.createInitialJungle(40, players, foodsInfo));
-    }
 
     @org.junit.Test
-    public void testCreateInitalJungle_invalidNumberOfPlayers(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
-        String[][] players = {{"0", "Pedro", "L"}};
-
-        InitializationError expected = new InitializationError("numero de jogadores invalidos");
-        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
-    }
-
-    @org.junit.Test
-    public void testCreateInitalJungle_invalidNumberOfSquares(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
-        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
-
-        InitializationError expected = new InitializationError("O mapa tem de ter, pelo menos, duas posições por cada jogador que esteja em jogo");
-        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(3, players, foodsInfo).getMessage());
-    }
-
-    @org.junit.Test
-    public void testCreateInitalJungle_repeatedPlayerId(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "10"}, {"m", "30"}};
-        String[][] players = {{"0", "Pedro", "L"}, {"0", "Valentim", "T"}};
-
-        InitializationError expected = new InitializationError("id de jgador invalido");
-        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
-    }
-
-    @org.junit.Test
-    public void testCreateInitalJungle_invalidSpecieId(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "1"}, {"m", "30"}};
-        String[][] players = {{"0", "Pedro", "Z"}, {"1", "Valentim", "T"}};
-
-        InitializationError expected = new InitializationError("posição de comida inválida");
-        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
-    }
-
-    @org.junit.Test
-    public void testCreateInitalJungle_invalidFoodId(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"k", "10"}, {"m", "30"}};
-        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
-
-        InitializationError expected = new InitializationError("id de comida inválido");
-        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
-    }
-
-    @org.junit.Test
-    public void testCreateInitalJungle_invalidFoodPosition(){
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "10"}, {"m", "40"}};
-        String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
-
-        InitializationError expected = new InitializationError("posição de comida inválida");
-        Assert.assertEquals(expected.getMessage(), game.createInitialJungle(40, players, foodsInfo).getMessage());
-    }
-
-
-    @org.junit.Test
-    public void testEatFood(){
+    public void testEatFood() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "10"}, {"m", "40"}};
@@ -562,7 +485,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testMovePlayer(){
+    public void testMovePlayer() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "5"}, {"m", "10"}};
@@ -634,7 +557,7 @@ public class Test {
 
 
     @org.junit.Test
-    public void testMovePlayer2(){
+    public void testMovePlayer2() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "5"}, {"m", "10"}};
@@ -659,7 +582,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testMovePlayer3(){
+    public void testMovePlayer3() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "5"}, {"m", "10"}};
@@ -688,7 +611,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testMovePlayer_eat(){
+    public void testMovePlayer_eat() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "5"}, {"m", "10"}, {"b", "15"}};
@@ -741,7 +664,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testRandomTests(){
+    public void testRandomTests() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "10"}, {"m", "15"}, {"b", "5"}};
@@ -801,7 +724,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testRandomTests2(){
+    public void testRandomTests2() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"b", "3"}, {"b", "6"}};
@@ -840,7 +763,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void drinkWater(){
+    public void drinkWater() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"a", "3"}, {"b", "6"}};
@@ -854,7 +777,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void eatMushroom(){
+    public void eatMushroom() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"m", "3"}, {"b", "6"}};
@@ -875,7 +798,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void eatMeat(){
+    public void eatMeat() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "3"}, {"b", "6"}};
@@ -965,7 +888,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void moveWith3Players(){
+    public void moveWith3Players() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "15"}, {"b", "20"}};
@@ -1024,7 +947,7 @@ public class Test {
     }
 
     @org.junit.Test
-    public void test_checkEnergy() {
+    public void test_checkEnergy() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "5"}, {"b", "20"}};
@@ -1050,7 +973,7 @@ public class Test {
 
 
     @org.junit.Test
-    public void test_moveWithBypass() {
+    public void test_moveWithBypass() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
         String[][] foodsInfo = {{"c", "5"}, {"b", "20"}};
@@ -1075,7 +998,7 @@ public class Test {
 
 
     @org.junit.Test
-    public void test_testTimesEaten(){
+    public void test_testTimesEaten() throws InvalidInitialJungleException {
 
         GameManager game = new GameManager();
 

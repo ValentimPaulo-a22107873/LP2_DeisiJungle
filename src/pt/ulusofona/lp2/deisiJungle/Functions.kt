@@ -2,6 +2,39 @@ package pt.ulusofona.lp2.deisiJungle
 
 enum class CommandType {GET, POST}
 
+
+fun router() : (CommandType) -> Function2<GameManager,List<String>,String>{
+    return ::callFunction
+}
+
+fun callFunction(comand : CommandType) : Function2<GameManager,List<String>,String>{
+    if(comand==CommandType.GET){
+        return ::getFunction
+    }
+    else{
+        return ::postFunction
+    }
+}
+
+fun getFunction(gameManager: GameManager, p2 : List<String>) : String{
+
+    val function = p2[0]
+    val parameter = p2[1]
+
+    when(function){
+        "PLAYER_INFO" -> return getPlayerInfo(gameManager, parameter)
+        "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(gameManager, parameter)
+        "MOST_TRAVELED" -> return getMostTraveled(gameManager, parameter)
+        "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager, parameter)
+        "CONSUMED_FOODS" -> return getConsumedFood(gameManager, parameter)
+    }
+    return ""
+}
+
+fun postFunction(gameManager: GameManager, p2 : List<String>) : String{
+    return postMove(gameManager, p2.toString())
+}
+
 fun getPlayerInfo(manager: GameManager, name : String) : String{
 
     if(manager.getPlayerByName(name)==null){
@@ -11,20 +44,23 @@ fun getPlayerInfo(manager: GameManager, name : String) : String{
             .kotlin_getPlayerInfo()
 }
 
-fun getPlayersBySpecie(manager: GameManager, specieId : Char) : String{
+fun getPlayersBySpecie(manager: GameManager, specieId : String) : String{
 
-    if(!manager.isSpecieValid(specieId)){
+    val id = specieId[0]
+
+    if(!manager.isSpecieValid(id)){
         return ""
     }
-    if(manager.getPlayerBySpecieId(specieId).size==0){
+    if(!manager.getPlayerBySpecieId(id)){
         return "";
     }
-    return manager.getPlayerBySpecieId(specieId)
+    return manager.getPlayers()
+            .filter { it.specie.identifier == id }
             .map { it.name }
             .joinToString (",")
 }
 
-fun getMostTraveled(manager: GameManager) : String{
+fun getMostTraveled(manager: GameManager, nothing : String) : String{
     val total = manager.getPlayers()
             .map { it.distanceWalked }
             .sum()
@@ -35,17 +71,19 @@ fun getMostTraveled(manager: GameManager) : String{
             .joinToString("\n") + "\n" +"Total:"+total
 }
 
-fun getTopEnergeticOmnivores(manager : GameManager, maxResults: Int) : String{
+fun getTopEnergeticOmnivores(manager : GameManager, maxResults: String) : String{
+    val num = maxResults.toInt()
+
     return manager.getPlayers()
             .filter { it.specie.type == 'o'}
             .sortedWith{i , j -> j.energy - i.energy}
-            .take(maxResults)
             .map{it.kotlin_getTopEnergeticOmnivores()}
+            .take(num)
             .joinToString("\n")
 
 }
 
-fun getConsumedFood(manager: GameManager) : String{
+fun getConsumedFood(manager: GameManager, nothing : String) : String{
     return manager.getMap().getMap()
             .filter { it.food != null }
             .map { it.food }
@@ -54,6 +92,27 @@ fun getConsumedFood(manager: GameManager) : String{
             .map { it.name }
             .sortedWith{i, j -> i.compareTo(j)}
             .joinToString ("\n")
+}
+
+fun postMove(manager: GameManager, number : String) : String{
+    val num = number.toInt()
+
+    var bypass = false
+    if(num<-6||num>6){
+        bypass=true
+    }
+
+    val move = manager.moveCurrentPlayer(num, bypass)
+    if(move.code==MovementResultCode.CAUGHT_FOOD){
+        return "POST MOVE $number\nApanhou comida"
+    }
+    if(move.code==MovementResultCode.INVALID_MOVEMENT){
+        return "POST MOVE $number\nMovimento invalido"
+    }
+    if(move.code==MovementResultCode.NO_ENERGY){
+        return "POST MOVE $number\nSem energia"
+    }
+    return "POST MOVE $number\nOK"
 }
 
 
