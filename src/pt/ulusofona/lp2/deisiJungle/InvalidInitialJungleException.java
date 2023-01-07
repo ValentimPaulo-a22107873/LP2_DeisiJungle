@@ -2,24 +2,24 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class InvalidInitialJungleException extends Exception {
     String message;
-    boolean playerInvalid;
-    boolean foodInvalid;
+    boolean isInvalidPlayer;
+    boolean isInvalidFood;
 
-    public InvalidInitialJungleException(String message, boolean playerInvalid, boolean foodInvalid) {
+    public InvalidInitialJungleException(String message, boolean isInvalidPlayer, boolean isInvalidFood) {
         this.message = message;
-        this.playerInvalid = playerInvalid;
-        this.foodInvalid = foodInvalid;
+        this.isInvalidPlayer = isInvalidPlayer;
+        this.isInvalidFood = isInvalidFood;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public boolean isPlayerValid() {
-        return playerInvalid;
+    public boolean isInvalidPlayer() {
+        return isInvalidPlayer;
     }
 
-    public boolean isFood() {
-        return foodInvalid;
+    public boolean isInvalidFood() {
+        return isInvalidFood;
     }
 }

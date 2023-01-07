@@ -32,7 +32,7 @@ fun getFunction(gameManager: GameManager, p2 : List<String>) : String{
 }
 
 fun postFunction(gameManager: GameManager, p2 : List<String>) : String{
-    return postMove(gameManager, p2.toString())
+    return postMove(gameManager, p2[0])
 }
 
 fun getPlayerInfo(manager: GameManager, name : String) : String{
