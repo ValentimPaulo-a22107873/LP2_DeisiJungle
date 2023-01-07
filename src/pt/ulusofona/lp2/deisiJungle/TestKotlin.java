@@ -42,7 +42,7 @@ public class TestKotlin {
         game.createInitialJungle(40, players, foodsInfo);
 
 
-        Assert.assertEquals("Pedro,Valentim", FunctionsKt.getPlayersBySpecie(game, "E"));
+        Assert.assertEquals("Valentim,Pedro", FunctionsKt.getPlayersBySpecie(game, "E"));
     }
 
     @org.junit.Test
@@ -144,7 +144,7 @@ public class TestKotlin {
     public void kotlin_getConsumedFood_1() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
-        String[][] foodsInfo = {{"c", "3"}, {"b", "6"}};
+        String[][] foodsInfo = {{"b", "6"}, {"c", "3"}};
         String[][] players = {{"0", "Pedro", "T"}, {"1", "Valentim", "P"}};
 
         game.createInitialJungle(40, players, foodsInfo);

@@ -32,7 +32,7 @@ fun getFunction(gameManager: GameManager, p2 : List<String>) : String{
 }
 
 fun postFunction(gameManager: GameManager, p2 : List<String>) : String{
-    return postMove(gameManager, p2[0])
+    return postMove(gameManager, p2[1])
 }
 
 fun getPlayerInfo(manager: GameManager, name : String) : String{
@@ -57,6 +57,7 @@ fun getPlayersBySpecie(manager: GameManager, specieId : String) : String{
     return manager.getPlayers()
             .filter { it.specie.identifier == id }
             .map { it.name }
+            .sortedWith{i, j -> j.compareTo(i)}
             .joinToString (",")
 }
 
