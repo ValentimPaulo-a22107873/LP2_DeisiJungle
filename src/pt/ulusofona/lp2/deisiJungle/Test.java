@@ -457,7 +457,7 @@ public class Test {
     public void testEatFood() throws InvalidInitialJungleException {
         GameManager game = new GameManager();
 
-        String[][] foodsInfo = {{"c", "10"}, {"m", "40"}};
+        String[][] foodsInfo = {{"c", "10"}, {"m", "39"}};
         String[][] players = {{"0", "Pedro", "L"}, {"1", "Valentim", "T"}};
 
         game.createInitialJungle(40, players, foodsInfo);
