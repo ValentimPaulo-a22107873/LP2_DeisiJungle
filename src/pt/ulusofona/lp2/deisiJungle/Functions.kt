@@ -24,9 +24,9 @@ fun getFunction(gameManager: GameManager, p2 : List<String>) : String{
     when(function){
         "PLAYER_INFO" -> return getPlayerInfo(gameManager, parameter)
         "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(gameManager, parameter)
-        "MOST_TRAVELED" -> return getMostTraveled(gameManager)
+        "MOST_TRAVELED" -> return getMostTraveled(gameManager, "")
         "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager, parameter)
-        "CONSUMED_FOODS" -> return getConsumedFood(gameManager)
+        "CONSUMED_FOODS" -> return getConsumedFood(gameManager, "")
     }
     return ""
 }
@@ -63,7 +63,7 @@ fun getPlayersBySpecie(manager: GameManager, specieId : String) : String{
             .joinToString (",")
 }
 
-fun getMostTraveled(manager: GameManager) : String{
+fun getMostTraveled(manager: GameManager, nothing : String) : String{
     if(manager.getPlayers().size==0){
         return ""
     }
@@ -90,7 +90,7 @@ fun getTopEnergeticOmnivores(manager : GameManager, maxResults: String) : String
 
 }
 
-fun getConsumedFood(manager: GameManager) : String{
+fun getConsumedFood(manager: GameManager, nothing : String) : String{
     if(manager.getMap().map.size ==0){
         return ""
     }
