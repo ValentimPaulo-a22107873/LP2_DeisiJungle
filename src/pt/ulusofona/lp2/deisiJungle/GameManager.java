@@ -316,7 +316,7 @@ public class GameManager {
 
 
     //////TENTH FUNCTION - moveCurrentPlayer()
-    public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations, boolean post){
+    public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
         Player currentPlayer = players.get(turn);
         Square initialSquare = map.getSquare(currentPlayer.getPosition());
@@ -342,7 +342,7 @@ public class GameManager {
             currentPlayer.rest();
         }else{
 
-            int valid = currentPlayer.move(nrSquares, map.getSize(), !bypassValidations, post);
+            int valid = currentPlayer.move(nrSquares, map.getSize(), !bypassValidations);
 
             if(valid == 3){
                 numberOfPlays++;

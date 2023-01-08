@@ -25,8 +25,8 @@ public class TestKotlin {
         String[][] players = {{"0", "Pedro", "E"}, {"1", "Valentim", "P"}};
 
         game.createInitialJungle(40, players, foodsInfo);
-        game.moveCurrentPlayer(4, false, false);
-        game.moveCurrentPlayer(6,false, false);
+        game.moveCurrentPlayer(4, true);
+        game.moveCurrentPlayer(6,true);
 
         Assert.assertEquals("0 | Pedro | Elefante | 164 | 5", FunctionsKt.getPlayerInfo(game, "Pedro"));
         Assert.assertEquals("1 | Valentim | Passaro | 46 | 7", FunctionsKt.getPlayerInfo(game, "Valentim"));
@@ -79,8 +79,8 @@ public class TestKotlin {
         String[][] players = {{"0", "Pedro", "E"}, {"1", "Valentim", "P"}};
 
         game.createInitialJungle(40, players, foodsInfo);
-        game.moveCurrentPlayer(4, false, false);
-        game.moveCurrentPlayer(6,false, false);
+        game.moveCurrentPlayer(4, true);
+        game.moveCurrentPlayer(6,true);
 
 
         Assert.assertEquals("Valentim:P:6\n" + "Pedro:E:4\n" + "Total:10", FunctionsKt.getMostTraveled(game, ""));
@@ -107,7 +107,7 @@ public class TestKotlin {
         String[][] players = {{"0", "Pedro", "Z"}, {"1", "Valentim", "P"}};
 
         game.createInitialJungle(40, players, foodsInfo);
-        game.moveCurrentPlayer(4, false, false);
+        game.moveCurrentPlayer(4, true);
 
         Assert.assertEquals("Valentim:70\nPedro:62", FunctionsKt.getTopEnergeticOmnivores(game,"5"));
     }
@@ -120,8 +120,8 @@ public class TestKotlin {
         String[][] players = {{"0", "Pedro", "Z"}, {"1", "Valentim", "P"}};
 
         game.createInitialJungle(40, players, foodsInfo);
-        game.moveCurrentPlayer(4, false, false);
-        game.moveCurrentPlayer(6, false, false);
+        game.moveCurrentPlayer(4, true);
+        game.moveCurrentPlayer(6, true);
 
         Assert.assertEquals("Pedro:62", FunctionsKt.getTopEnergeticOmnivores(game,"1"));
     }
@@ -134,8 +134,8 @@ public class TestKotlin {
         String[][] players = {{"0", "Pedro", "Z"}, {"1", "Valentim", "P"}};
 
         game.createInitialJungle(40, players, foodsInfo);
-        game.moveCurrentPlayer(4, false, false);
-        game.moveCurrentPlayer(6, false, false);
+        game.moveCurrentPlayer(4, true);
+        game.moveCurrentPlayer(6, true);
 
         Assert.assertEquals("", FunctionsKt.getTopEnergeticOmnivores(game,"0"));
     }
@@ -148,8 +148,8 @@ public class TestKotlin {
         String[][] players = {{"0", "Pedro", "T"}, {"1", "Valentim", "P"}};
 
         game.createInitialJungle(40, players, foodsInfo);
-        game.moveCurrentPlayer(2,false, false);
-        game.moveCurrentPlayer(5,false, false);
+        game.moveCurrentPlayer(2,true);
+        game.moveCurrentPlayer(5,true);
 
         Assert.assertEquals("Bananas\nCarne", FunctionsKt.getConsumedFood(game, ""));
         Assert.assertEquals("Bananas\nCarne", FunctionsKt.getConsumedFood(game, ""));
@@ -214,11 +214,11 @@ public class TestKotlin {
         String[][] players = {{"0", "Pedro", "T"}, {"1", "Valentim", "P"}};
 
         game.createInitialJungle(40, players, foodsInfo);
-        game.moveCurrentPlayer(1,false, true);
-        game.moveCurrentPlayer(6,false, true);
-        game.moveCurrentPlayer(1,false, true);
-        game.moveCurrentPlayer(6,false, true);
-        game.moveCurrentPlayer(1,false, true);
+        game.moveCurrentPlayer(1,false);
+        game.moveCurrentPlayer(6,false);
+        game.moveCurrentPlayer(1,false);
+        game.moveCurrentPlayer(6,false);
+        game.moveCurrentPlayer(1,false);
         String result = FunctionsKt.postMove(game,"6");
 
 

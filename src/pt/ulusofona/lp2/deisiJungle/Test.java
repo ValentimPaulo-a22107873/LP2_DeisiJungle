@@ -425,7 +425,7 @@ public class Test {
         String i = game.map.getSquare(30).getFood().getTooltip();
 
         for(int x = 0; x<15;x++){
-            game.moveCurrentPlayer(0, false, false);
+            game.moveCurrentPlayer(0, false);
         }
 
         String[] stuff = game.getSquareInfo(10);
@@ -441,8 +441,8 @@ public class Test {
         Assert.assertEquals(vazio2, stuff2);
         Assert.assertEquals(vazio3, stuff3);
 
-        game.moveCurrentPlayer(6,false, false);
-        game.moveCurrentPlayer(6,false, false);
+        game.moveCurrentPlayer(6,false);
+        game.moveCurrentPlayer(6,false);
 
         String[] stuff4 = game.getSquareInfo(7);
         String[] vazio4 = new String[]{"blank.png", "Vazio", "1,0"};
@@ -504,19 +504,19 @@ public class Test {
 
 
         //move pedro - 0 / 80 / 1
-        MovementResult move = game.moveCurrentPlayer(-8,false, false); // plays 1
+        MovementResult move = game.moveCurrentPlayer(-8,false); // plays 1
         Assert.assertEquals(MovementResultCode.INVALID_MOVEMENT, move.code());
         //move pedro - 0 / 80 / 1
 
 
         //move valentim - 1 / 150 / 1
-        move = game.moveCurrentPlayer(-2,false, false); // plays 2
+        move = game.moveCurrentPlayer(-2,false); // plays 2
         Assert.assertEquals(MovementResultCode.INVALID_MOVEMENT, move.code());
         //move valentim - 1 / 150 / 1
 
 
         //move pedro - 0 / 80 / 1
-        move = game.moveCurrentPlayer(0, false, false); // plays 3
+        move = game.moveCurrentPlayer(0, false); // plays 3
         Assert.assertEquals(MovementResultCode.VALID_MOVEMENT, move.code());
         Assert.assertEquals(1, game.players.get(0).getPosition());
         Assert.assertEquals(90, game.players.get(0).getEnergy());
@@ -524,7 +524,7 @@ public class Test {
 
 
         //move valentim - 1 / 150 / 1
-        move = game.moveCurrentPlayer(2, false, false); // plays 4
+        move = game.moveCurrentPlayer(2, false); // plays 4
         Assert.assertEquals(MovementResultCode.VALID_MOVEMENT, move.code());
         Assert.assertEquals(3, game.players.get(1).getPosition());
         Assert.assertEquals(148, game.players.get(1).getEnergy());
@@ -532,7 +532,7 @@ public class Test {
 
 
         //move pedro - 0 / 90 / 1
-        move = game.moveCurrentPlayer(4, false, false); // plays 5
+        move = game.moveCurrentPlayer(4, false); // plays 5
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(5, game.players.get(0).getPosition());
         Assert.assertEquals(132, game.players.get(0).getEnergy());
@@ -540,7 +540,7 @@ public class Test {
 
 
         //move valentim - 1 / 148 / 3
-        move = game.moveCurrentPlayer(2, false, false); // plays 6
+        move = game.moveCurrentPlayer(2, false); // plays 6
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(5, game.players.get(1).getPosition());
         Assert.assertEquals(196, game.players.get(1).getEnergy());
@@ -548,7 +548,7 @@ public class Test {
 
 
         //move pedro - 0 / 132 / 5
-        move = game.moveCurrentPlayer(5, false, false); // plays 7
+        move = game.moveCurrentPlayer(5, false); // plays 7
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(10, game.players.get(0).getPosition());
         Assert.assertEquals(1, 1);
@@ -574,7 +574,7 @@ public class Test {
          */
 
         //move pedro - 0 / 180 / 1
-        MovementResult move = game.moveCurrentPlayer(0,true, false); // plays 1
+        MovementResult move = game.moveCurrentPlayer(0,true); // plays 1
         Assert.assertEquals(MovementResultCode.VALID_MOVEMENT, move.code());
         Assert.assertEquals(1, game.players.get(0).getPosition());
         Assert.assertEquals(190, game.players.get(0).getEnergy());
@@ -592,20 +592,20 @@ public class Test {
 
         String[] expected = new String[]{"1","Valentim","Z","112","1..6"};
 
-        MovementResult move = game.moveCurrentPlayer(4,false, false); // plays 1
+        MovementResult move = game.moveCurrentPlayer(4,false); // plays 1
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(122,game.players.get(0).getEnergy());
 
-        move = game.moveCurrentPlayer(4,false, false); //plays 2
+        move = game.moveCurrentPlayer(4,false); //plays 2
         String[] obtained = game.getPlayerInfo(game.players.get(1).getId());
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(expected, obtained);
 
-        move = game.moveCurrentPlayer(0,false, false); //plays 3
+        move = game.moveCurrentPlayer(0,false); //plays 3
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(182, game.players.get(0).getEnergy());
 
-        move = game.moveCurrentPlayer(0,false, false); //plays 2
+        move = game.moveCurrentPlayer(0,false); //plays 2
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(182, game.players.get(1).getEnergy());
     }
@@ -620,43 +620,43 @@ public class Test {
         game.createInitialJungle(40, players, foodsInfo);
 
 
-        game.moveCurrentPlayer(0,false, false); // plays 1
+        game.moveCurrentPlayer(0,false); // plays 1
         //Pedro energy - 90
 
-        game.moveCurrentPlayer(0,false, false); //plays 2
+        game.moveCurrentPlayer(0,false); //plays 2
         //Valentim energy - 90
 
-        game.moveCurrentPlayer(0,false, false); // plays 3
+        game.moveCurrentPlayer(0,false); // plays 3
         //Pedro energy - 100
 
-        game.moveCurrentPlayer(0,false, false); //plays 4
+        game.moveCurrentPlayer(0,false); //plays 4
         //Valentim energy - 110
 
-        game.moveCurrentPlayer(0,false, false); // plays 5
+        game.moveCurrentPlayer(0,false); // plays 5
         //Pedro energy - 110
 
-        game.moveCurrentPlayer(0,false, false); //plays 6
+        game.moveCurrentPlayer(0,false); //plays 6
         //Valentim energy - 130
 
-        game.moveCurrentPlayer(0,false, false); // plays 7
+        game.moveCurrentPlayer(0,false); // plays 7
         //Pedro energy - 120
 
-        game.moveCurrentPlayer(0,false, false); //plays 8
+        game.moveCurrentPlayer(0,false); //plays 8
         //Valentim energy - 150
 
-        game.moveCurrentPlayer(0,false, false); // plays 9
+        game.moveCurrentPlayer(0,false); // plays 9
         //Pedro energy - 130
 
-        game.moveCurrentPlayer(0,false, false); //plays 10
+        game.moveCurrentPlayer(0,false); //plays 10
         //Valentim energy - 170
 
-        game.moveCurrentPlayer(0,false, false); // plays 11
+        game.moveCurrentPlayer(0,false); // plays 11
         //Pedro energy - 140
 
-        game.moveCurrentPlayer(0,false, false); //plays 12
+        game.moveCurrentPlayer(0,false); //plays 12
         //Valentim energy - 190
 
-        MovementResult move = game.moveCurrentPlayer(4,false, false); // plays 13
+        MovementResult move = game.moveCurrentPlayer(4,false); // plays 13
         //Pedro energy - 90
 
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
@@ -687,7 +687,7 @@ public class Test {
         Assert.assertEquals(expected3,game.getSquareInfo(10));
 
 
-        game.moveCurrentPlayer(4, false, false); //play 1
+        game.moveCurrentPlayer(4, false); //play 1
         String[] expected2 = new String[3];
         expected2[0] = "bananas.png";
         expected2[1] = "Bananas : 2 : + 40 energia";
@@ -695,7 +695,7 @@ public class Test {
         Assert.assertEquals(expected2,game.getSquareInfo(5));
 
         for(int i=0; i<11; i++){
-            game.moveCurrentPlayer(0,false, false);
+            game.moveCurrentPlayer(0,false);
         }
         //play 2
         //play 3
@@ -711,7 +711,7 @@ public class Test {
 
         Assert.assertEquals(82, game.players.get(0).getEnergy());
 
-        game.moveCurrentPlayer(5,false, false); //play 13
+        game.moveCurrentPlayer(5,false); //play 13
 
         Assert.assertEquals(36, game.players.get(0).getEnergy());
 
@@ -744,7 +744,7 @@ public class Test {
         expected2[2] = "";
         Assert.assertEquals(expected2,game.getSquareInfo(6));
 
-        MovementResult move = game.moveCurrentPlayer(2, false, false); //play 1
+        MovementResult move = game.moveCurrentPlayer(2, false); //play 1
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
 
         String[] expected3 = new String[3];
@@ -759,7 +759,7 @@ public class Test {
         expected4[2] = "";
         Assert.assertEquals(expected4,game.getSquareInfo(6));
 
-        game.moveCurrentPlayer(5, false, false); //play 1
+        game.moveCurrentPlayer(5, false); //play 1
     }
 
     @org.junit.Test
@@ -771,7 +771,7 @@ public class Test {
 
         game.createInitialJungle(40, players, foodsInfo);
 
-        MovementResult move = game.moveCurrentPlayer(2,false, false);
+        MovementResult move = game.moveCurrentPlayer(2,false);
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(79, game.players.get(0).getEnergy());
     }
@@ -785,12 +785,12 @@ public class Test {
 
         game.createInitialJungle(40, players, foodsInfo);
 
-        MovementResult move = game.moveCurrentPlayer(2,false, false); //play
+        MovementResult move = game.moveCurrentPlayer(2,false); //play
         //energy 66
         Assert.assertEquals(MovementResultCode.CAUGHT_FOOD, move.code());
         Assert.assertEquals(1, 1);
 
-        game.moveCurrentPlayer(2,false, false); //play 2
+        game.moveCurrentPlayer(2,false); //play 2
         //energy 66
         Assert.assertEquals(1, 1);
 
@@ -807,7 +807,7 @@ public class Test {
         game.createInitialJungle(40, players, foodsInfo);
 
         for(int i=0; i<12; i++){
-            game.moveCurrentPlayer(0,false, false);
+            game.moveCurrentPlayer(0,false);
         }
         //play 1
         //play 2
@@ -822,7 +822,7 @@ public class Test {
         //play 11
         //play 12
 
-        game.moveCurrentPlayer(2,false, false); //play 13
+        game.moveCurrentPlayer(2,false); //play 13
         String[] expected = new String[3];
         expected[0] = "meat.png";
         expected[1] = "Carne toxica";
@@ -900,47 +900,47 @@ public class Test {
         //Valentim - 70 energy / 2 consume
         //Joao - 70 energy / 4 consume
 
-        game.moveCurrentPlayer(4,false, false); //play 1 - turn 0
+        game.moveCurrentPlayer(4,false); //play 1 - turn 0
 
         Assert.assertEquals(72, game.players.get(0).getEnergy());//check energy
         Assert.assertEquals(5, game.players.get(0).getPosition());//check energy
 
-        game.moveCurrentPlayer(2,false, false); //play 2 - turn 1
+        game.moveCurrentPlayer(2,false); //play 2 - turn 1
 
         Assert.assertEquals(66, game.players.get(1).getEnergy());//check energy
         Assert.assertEquals(3, game.players.get(1).getPosition());//check energy
 
-        game.moveCurrentPlayer(6,false, false); //play 3 - turn 2
+        game.moveCurrentPlayer(6,false); //play 3 - turn 2
 
         Assert.assertEquals(46, game.players.get(2).getEnergy());//check energy
         Assert.assertEquals(7, game.players.get(2).getPosition());//check energy
 
-        game.moveCurrentPlayer(6,false, false); //play 4 - turn 0
+        game.moveCurrentPlayer(6,false); //play 4 - turn 0
 
         Assert.assertEquals(60, game.players.get(0).getEnergy());//check energy
         Assert.assertEquals(11, game.players.get(0).getPosition());//check energy
 
-        game.moveCurrentPlayer(6,false, false); //play 5 - turn 1
+        game.moveCurrentPlayer(6,false); //play 5 - turn 1
 
         Assert.assertEquals(54, game.players.get(1).getEnergy());//check energy
         Assert.assertEquals(9, game.players.get(1).getPosition());//check energy
 
-        game.moveCurrentPlayer(0,false, false); //play 6 - turn 2
+        game.moveCurrentPlayer(0,false); //play 6 - turn 2
 
         Assert.assertEquals(96, game.players.get(2).getEnergy());//check energy
         Assert.assertEquals(7, game.players.get(2).getPosition());//check energy
 
-        game.moveCurrentPlayer(4,false, false); //play 7 - turn 0
+        game.moveCurrentPlayer(4,false); //play 7 - turn 0
 
         Assert.assertEquals(102, game.players.get(0).getEnergy());//check energy
         Assert.assertEquals(15, game.players.get(0).getPosition());//check energy
 
-        game.moveCurrentPlayer(6,false, false); //play 8 - turn 1
+        game.moveCurrentPlayer(6,false); //play 8 - turn 1
 
         Assert.assertEquals(92, game.players.get(1).getEnergy());//check energy
         Assert.assertEquals(15, game.players.get(1).getPosition());//check energy
 
-        game.moveCurrentPlayer(6,false, false); //play 9 - turn 2
+        game.moveCurrentPlayer(6,false); //play 9 - turn 2
 
         Assert.assertEquals(72, game.players.get(2).getEnergy());//check energy
         Assert.assertEquals(13, game.players.get(2).getPosition());//check energy
@@ -960,14 +960,14 @@ public class Test {
         //Joao - 70 energy / 4 consume
 
         for(int i=0; i<12; i++){
-            game.moveCurrentPlayer(0, false, false);
+            game.moveCurrentPlayer(0, false);
         }
 
         game.players.get(0).removeEnergy(59);
 
         Assert.assertEquals(2, game.players.get(0).getEnergy());
 
-        MovementResult move = game.moveCurrentPlayer(4,false, false);
+        MovementResult move = game.moveCurrentPlayer(4,false);
         Assert.assertEquals(MovementResultCode.NO_ENERGY, move.code());
     }
 
@@ -985,12 +985,12 @@ public class Test {
         //Valentim - 70 energy / 2 consume
         //Joao - 70 energy / 4 consume
 
-        MovementResult move = game.moveCurrentPlayer(-10, true, false);
+        MovementResult move = game.moveCurrentPlayer(-10, true);
 
         Assert.assertEquals(MovementResultCode.INVALID_MOVEMENT, move.code());
         Assert.assertEquals(1, game.players.get(0).getPosition());
 
-        move = game.moveCurrentPlayer(16, true, false);
+        move = game.moveCurrentPlayer(16, true);
 
         Assert.assertEquals(MovementResultCode.VALID_MOVEMENT, move.code());
         Assert.assertEquals(17, game.players.get(1).getPosition());

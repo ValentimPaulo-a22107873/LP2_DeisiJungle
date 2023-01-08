@@ -113,12 +113,7 @@ fun getConsumedFood(manager: GameManager, nothing : String) : String{
 fun postMove(manager: GameManager, number : String) : String{
     val num = number.toInt()
 
-    var bypass = false
-    if(num<-6||num>6){
-        bypass=true
-    }
-
-    val move = manager.moveCurrentPlayer(num, bypass, true)
+    val move = manager.moveCurrentPlayer(num, true)
     if(move.code==MovementResultCode.CAUGHT_FOOD){
         return "Apanhou comida"
     }
