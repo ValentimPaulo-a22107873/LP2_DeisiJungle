@@ -3,11 +3,11 @@ package pt.ulusofona.lp2.deisiJungle
 enum class CommandType {GET, POST}
 
 
-fun router() : (CommandType) -> Function2<GameManager,List<String>,String>{
+fun router() : (CommandType) -> Function2<GameManager,List<String>,String?>{
     return ::callFunction
 }
 
-fun callFunction(comand : CommandType) : Function2<GameManager,List<String>,String>{
+fun callFunction(comand : CommandType) : Function2<GameManager,List<String>,String?>{
     if(comand==CommandType.GET){
         return ::getFunction
     }
@@ -16,7 +16,7 @@ fun callFunction(comand : CommandType) : Function2<GameManager,List<String>,Stri
     }
 }
 
-fun getFunction(gameManager: GameManager, p2 : List<String>) : String{
+fun getFunction(gameManager: GameManager, p2 : List<String>) : String? {
 
     val function = p2[0]
     val parameter = p2[1]
@@ -28,14 +28,14 @@ fun getFunction(gameManager: GameManager, p2 : List<String>) : String{
         "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager, parameter)
         "CONSUMED_FOODS" -> return getConsumedFood(gameManager, "")
     }
-    return ""
+    return null
 }
 
-fun postFunction(gameManager: GameManager, p2 : List<String>) : String{
+fun postFunction(gameManager: GameManager, p2 : List<String>) : String? {
     if(p2[0] == "MOVE"){
         return postMove(gameManager, p2[1])
     }
-    return ""
+    return null
 }
 
 fun getPlayerInfo(manager: GameManager, name : String) : String{

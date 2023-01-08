@@ -177,7 +177,7 @@ public class TestKotlin {
         game.createInitialJungle(40, players, foodsInfo);
         String result = FunctionsKt.postMove(game,"-2");
         Assert.assertEquals(1, game.getPlayers().get(0).getPosition());
-        Assert.assertEquals("POST MOVE -2\nMovimento invalido", result);
+        Assert.assertEquals("Movimento invalido", result);
     }
 
     @org.junit.Test
@@ -190,7 +190,7 @@ public class TestKotlin {
         game.createInitialJungle(40, players, foodsInfo);
         String result = FunctionsKt.postMove(game,"3");
         Assert.assertEquals(4, game.getPlayers().get(0).getPosition());
-        Assert.assertEquals("POST MOVE 3\nOK", result);
+        Assert.assertEquals("OK", result);
     }
 
     @org.junit.Test
@@ -203,7 +203,7 @@ public class TestKotlin {
         game.createInitialJungle(40, players, foodsInfo);
         String result = FunctionsKt.postMove(game,"2");
         Assert.assertEquals(3, game.getPlayers().get(0).getPosition());
-        Assert.assertEquals("POST MOVE 2\nApanhou comida", result);
+        Assert.assertEquals("Apanhou comida", result);
     }
 
     @org.junit.Test
@@ -224,7 +224,7 @@ public class TestKotlin {
 
         Assert.assertEquals(4, game.getPlayers().get(0).getPosition());
         Assert.assertEquals(13, game.getPlayers().get(1).getPosition());
-        Assert.assertEquals("POST MOVE 6\nSem energia", result);
+        Assert.assertEquals("Sem energia", result);
     }
 
     @org.junit.Test
@@ -237,7 +237,7 @@ public class TestKotlin {
         game.createInitialJungle(40, players, foodsInfo);
         String result = FunctionsKt.postMove(game,"-7");
         Assert.assertEquals(1, game.getPlayers().get(0).getPosition());
-        Assert.assertEquals("POST MOVE -7\nMovimento invalido", result);
+        Assert.assertEquals("Movimento invalido", result);
     }
 
     @org.junit.Test
@@ -250,16 +250,6 @@ public class TestKotlin {
         game.createInitialJungle(40, players, foodsInfo);
         String result = FunctionsKt.postMove(game,"10");
         Assert.assertEquals(11, game.getPlayers().get(0).getPosition());
-        Assert.assertEquals("POST MOVE 10\nOK", result);
-    }
-
-    @org.junit.Test
-    public void kotlin_router_1() throws InvalidInitialJungleException {
-        GameManager game = new GameManager();
-
-        String[][] foodsInfo = {{"c", "3"}, {"b", "6"}};
-        String[][] players = {{"0", "Pedro", "T"}, {"1", "Valentim", "P"}};
-
-        game.createInitialJungle(40, players, foodsInfo);
+        Assert.assertEquals("OK", result);
     }
 }
