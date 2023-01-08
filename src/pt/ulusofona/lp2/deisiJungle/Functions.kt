@@ -64,6 +64,10 @@ fun getPlayersBySpecie(manager: GameManager, specieId : String) : String{
 }
 
 fun getMostTraveled(manager: GameManager, nothing : String) : String{
+    if(manager.getMap().getMap().size ==0){
+        return ""
+    }
+
     if(manager.getPlayers().size==0){
         return ""
     }
@@ -92,6 +96,10 @@ fun getTopEnergeticOmnivores(manager : GameManager, maxResults: String) : String
 
 fun getConsumedFood(manager: GameManager, nothing : String) : String{
     if(manager.getMap().map.size ==0){
+        return ""
+    }
+
+    if(!manager.anyEatenFood()){
         return ""
     }
 

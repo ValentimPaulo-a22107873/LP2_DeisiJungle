@@ -806,5 +806,14 @@ public class GameManager {
         return new Banana();
     }
 
+    public boolean anyEatenFood(){
+        for (Square square : getMap().getMap()){
+            if(square.getFood()!=null && square.getFood().getTimesEaten()!=0){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
