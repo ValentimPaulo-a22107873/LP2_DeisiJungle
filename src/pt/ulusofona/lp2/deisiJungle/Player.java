@@ -99,7 +99,7 @@ public class Player {
 
     int move(int distance, int mapSize, boolean bypass){
 
-        if(energy < specie.getEnergyConsume()*distance){
+        if(energy < specie.getEnergyConsume()*Math.abs(distance)){
             return 3;
         }
         if((Math.abs(distance)<specie.getSpeed()[0] || Math.abs(distance)>specie.getSpeed()[1]) && bypass){
