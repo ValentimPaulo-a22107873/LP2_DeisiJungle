@@ -45,7 +45,6 @@ fun getPlayerInfo(manager: GameManager, name : String) : String{
 }
 
 fun getPlayersBySpecie(manager: GameManager, specieId : String) : String{
-
     val id = specieId[0]
 
     if(!manager.isSpecieValid(id)){
