@@ -118,7 +118,7 @@ fun postMove(manager: GameManager, number : String) : String{
         bypass=true
     }
 
-    val move = manager.moveCurrentPlayer(num, bypass)
+    val move = manager.moveCurrentPlayer(num, bypass, true)
     if(move.code==MovementResultCode.CAUGHT_FOOD){
         return "Apanhou comida"
     }
