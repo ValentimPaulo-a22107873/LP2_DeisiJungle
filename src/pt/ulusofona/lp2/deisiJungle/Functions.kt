@@ -18,14 +18,11 @@ fun callFunction(comand : CommandType) : Function2<GameManager,List<String>,Stri
 
 fun getFunction(gameManager: GameManager, p2 : List<String>) : String? {
 
-    val function = p2[0]
-    val parameter = p2[1]
-
-    when(function){
-        "PLAYER_INFO" -> return getPlayerInfo(gameManager, parameter)
-        "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(gameManager, parameter)
+    when(p2[0]){
+        "PLAYER_INFO" -> return getPlayerInfo(gameManager, p2[1])
+        "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(gameManager, p2[1])
         "MOST_TRAVELED" -> return getMostTraveled(gameManager, "")
-        "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager, parameter)
+        "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager, p2[1])
         "CONSUMED_FOODS" -> return getConsumedFood(gameManager, "")
     }
     return null
