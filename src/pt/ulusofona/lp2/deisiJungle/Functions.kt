@@ -24,15 +24,18 @@ fun getFunction(gameManager: GameManager, p2 : List<String>) : String{
     when(function){
         "PLAYER_INFO" -> return getPlayerInfo(gameManager, parameter)
         "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(gameManager, parameter)
-        "MOST_TRAVELED" -> return getMostTraveled(gameManager, parameter)
+        "MOST_TRAVELED" -> return getMostTraveled(gameManager)
         "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmnivores(gameManager, parameter)
-        "CONSUMED_FOODS" -> return getConsumedFood(gameManager, parameter)
+        "CONSUMED_FOODS" -> return getConsumedFood(gameManager)
     }
     return ""
 }
 
 fun postFunction(gameManager: GameManager, p2 : List<String>) : String{
-    return postMove(gameManager, p2[1])
+    if(p2[0] == "MOVE"){
+        return postMove(gameManager, p2[1])
+    }
+    return ""
 }
 
 fun getPlayerInfo(manager: GameManager, name : String) : String{
@@ -60,7 +63,7 @@ fun getPlayersBySpecie(manager: GameManager, specieId : String) : String{
             .joinToString (",")
 }
 
-fun getMostTraveled(manager: GameManager, nothing : String) : String{
+fun getMostTraveled(manager: GameManager) : String{
     if(manager.getPlayers().size==0){
         return ""
     }
@@ -87,7 +90,7 @@ fun getTopEnergeticOmnivores(manager : GameManager, maxResults: String) : String
 
 }
 
-fun getConsumedFood(manager: GameManager, nothing : String) : String{
+fun getConsumedFood(manager: GameManager) : String{
     if(manager.getMap().map.size ==0){
         return ""
     }
@@ -112,15 +115,15 @@ fun postMove(manager: GameManager, number : String) : String{
 
     val move = manager.moveCurrentPlayer(num, bypass)
     if(move.code==MovementResultCode.CAUGHT_FOOD){
-        return "POST MOVE $number\nApanhou comida"
+        return "Apanhou comida"
     }
     if(move.code==MovementResultCode.INVALID_MOVEMENT){
-        return "POST MOVE $number\nMovimento invalido"
+        return "Movimento invalido"
     }
     if(move.code==MovementResultCode.NO_ENERGY){
-        return "POST MOVE $number\nSem energia"
+        return "Sem energia"
     }
-    return "POST MOVE $number\nOK"
+    return "OK"
 }
 
 
