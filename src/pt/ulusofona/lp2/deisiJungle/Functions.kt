@@ -37,10 +37,12 @@ fun postFunction(gameManager: GameManager, p2 : List<String>) : String? {
 
 fun getPlayerInfo(manager: GameManager, name : String) : String{
 
-    if(manager.getPlayerByName(name)==null){
+    val players = manager.getPlayers().filter { it.name.equals(name) }
+
+    if(players.toString() == ""){
         return "Inexistent player"
     }
-    return manager.getPlayerByName(name)
+    return players[0]
             .kotlin_getPlayerInfo()
 }
 
