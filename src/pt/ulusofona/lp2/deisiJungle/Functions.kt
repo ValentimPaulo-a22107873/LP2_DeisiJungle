@@ -39,12 +39,12 @@ fun getPlayerInfo(manager: GameManager, name : String) : String{
     if(name == ""){
         return "Inexistent player"
     }
-    val player = manager.getPlayers().filter { it.name.equals(name) }[0]
+    val player = manager.getPlayers().filter { it.name.equals(name) }
 
-    if(player.toString() == ""){
+    if(player.isEmpty()){
         return "Inexistent player"
     }
-    return player.kotlin_getPlayerInfo()
+    return player[0].kotlin_getPlayerInfo()
 }
 
 fun getPlayersBySpecie(manager: GameManager, specieId : String) : String{
