@@ -816,11 +816,4 @@ public class GameManager {
     }
 
 
-    public ArrayList<Food> getFoods() {
-        return foods;
-    }
-
-    public ArrayList<Specie> getSpecie() {
-        return species;
-    }
 }
