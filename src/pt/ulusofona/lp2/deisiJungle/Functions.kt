@@ -36,26 +36,29 @@ fun postFunction(gameManager: GameManager, p2 : List<String>) : String? {
 }
 
 fun getPlayerInfo(manager: GameManager, name : String) : String{
-
-    if(manager.getPlayerByName(name)==null){
+    if(name == ""){
         return "Inexistent player"
     }
-    return manager.getPlayers()
-            .filter { it.name.equals(name) }[0]
-            .kotlin_getPlayerInfo()
+    val player = manager.getPlayers().filter { it.name.equals(name) }[0]
+
+    if(player.toString() == ""){
+        return "Inexistent player"
+    }
+    return player.kotlin_getPlayerInfo()
 }
 
 fun getPlayersBySpecie(manager: GameManager, specieId : String) : String{
-    val id = specieId[0]
-
-    if(!manager.isSpecieValid(id)){
+    if(specieId==""){
         return ""
     }
-    if(!manager.getPlayerBySpecieId(id)){
-        return "";
+    val id = specieId[0]
+    val players = manager.getPlayers().filter { it.specie.identifier == id }
+
+    if(players.isEmpty()){
+        return ""
     }
-    return manager.getPlayers()
-            .filter { it.specie.identifier == id }
+
+    return players
             .map { it.name }
             .sortedWith{i, j -> j.compareTo(i)}
             .joinToString (",")
@@ -96,15 +99,16 @@ fun getConsumedFood(manager: GameManager, nothing : String) : String{
     if(manager.getMap().map.size ==0){
         return ""
     }
-
-    if(!manager.anyEatenFood()){
-        return ""
-    }
-
-    return manager.getMap().getMap()
+    val foods = manager.getMap().getMap()
             .filter { it.food != null }
             .map { it.food }
             .filter { it.timesEaten >= 1 }
+
+    if(foods.isEmpty()){
+        return ""
+    }
+
+    return foods
             .distinct()
             .map { it.name }
             .sortedWith{i, j -> i.compareTo(j)}
