@@ -36,9 +36,6 @@ fun postFunction(gameManager: GameManager, p2 : List<String>) : String? {
 }
 
 fun getPlayerInfo(manager: GameManager, name : String) : String{
-    if(name == ""){
-        return "Inexistent player"
-    }
     val player = manager.getPlayers().filter { it.name.equals(name) }
 
     if(player.isEmpty()){
