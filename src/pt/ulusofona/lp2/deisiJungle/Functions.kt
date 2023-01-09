@@ -39,7 +39,7 @@ fun getPlayerInfo(manager: GameManager, name : String) : String{
 
     val players = manager.getPlayers().filter { it.name.equals(name) }
 
-    if(players.toString() == ""){
+    if(players[0].name.toString() == ""){
         return "Inexistent player"
     }
     return players[0]
