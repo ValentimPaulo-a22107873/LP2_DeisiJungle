@@ -1,15 +1,12 @@
 # LP2_DeisiJungle
 
-Welcome to Deisi Jungle.
-Este é um jogo de tabuleiro, onde cada player escolhe um animal e joga com este mesmo.
-Tendo em conta que cada animal tem as suas características, terão um grande desafio pela frente.
+Welcome to Deisi Jungle. This is a board game where your objetive is to get to finishing line without running out of energy. During the game you will find food wich will have different behaviors, depending on the animal that you chose to be.
 
-Código:
-Através da realização desta segunda parte do projeto, apercebemo-nos da importancia da utilização
-das heranças, visto que nos permitem uma realização bem mais simples e mais organizada.
 
+
+
+This is the UML Class Diagram that we used in order to develop the project.
+![](Diagrama.png?raw=true "Diagrama UML")
 
 
 Here is a quick video where you can see the game working: https://youtu.be/A_YvBNyKYCU
-
-![](Diagrama.png?raw=true "Diagrama UML")
