@@ -1,9 +1,4 @@
-# projetoLP2Parte1
-
-Trabalho realizado por:
-Pedro Lopes
-Valentim Paulo
-
+# LP2_DeisiJungle
 
 Welcome to Deisi Jungle.
 Este é um jogo de tabuleiro, onde cada player escolhe um animal e joga com este mesmo.
@@ -15,6 +10,6 @@ das heranças, visto que nos permitem uma realização bem mais simples e mais o
 
 
 
-video da demonstraçao do funcionamento do jogo no visualizador: https://youtu.be/A_YvBNyKYCU
+Here is a quick video where you can see the game working: https://youtu.be/A_YvBNyKYCU
 
 ![](Diagrama.png?raw=true "Diagrama UML")
